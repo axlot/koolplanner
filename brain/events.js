@@ -179,14 +179,15 @@ module.exports.init = function(controller) {
                                 }
                                 convo.next();
                             }
-                            convo.next();
+                            //convo.next();
                         });
                     } else {
                         bot.startConversation(message, function(err, convo) {
                             bot.api.users.info({user: message.user}, function(err, user) {
                                 convo.say('Hey, ' + user.user.real_name + ' there is no event with that ID!');
-                                convo.next();
+                                //convo.next();
                             });
+                            convo.next();
                         });
                     }
                 });
