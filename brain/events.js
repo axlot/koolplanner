@@ -309,29 +309,41 @@ module.exports.init = function(controller) {
         var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'');
         //Check If Event Exist
         controller.storage.events.get('event_' + eventId, function(err, event_data){
-            if(event_data == null) {
-                bot.startConversation(message, function(err, convo) {
-                    bot.api.users.info({user: message.user}, function(err, user) {
-                        convo.say('Hey, ' + user.user.real_name + ' there is no event with that ID!');
-                    });
-                    convo.next();
-                });
-            } else {
-                //Get User
-                var user = message.user;
-                //Get Attenddes List
-                controller.storage.rsvp.get('event_' + eventId, function(err, attend_data) {
-                    console.log(attend_data);
-                    var attend = {};
-                    //Check If Attend's Already Exists
-                    if (attend_data != null && typeof attend_data.attend != "undefined") {
-                        attend = attend_data.attend;
+            //Check Team's Id
+            bot.identifyTeam(function(err,team_id) {
+                if(event_data.team_id == team_id) {
+                    if(event_data == null) {
+                        bot.startConversation(message, function(err, convo) {
+                            bot.api.users.info({user: message.user}, function(err, user) {
+                                convo.say('Hey, ' + user.user.real_name + ' there is no event with that ID!');
+                            });
+                            convo.next();
+                        });
+                    } else {
+                        //Get User
+                        var user = message.user;
+                        //Get Attenddes List
+                        controller.storage.rsvp.get('event_' + eventId, function(err, attend_data) {
+                            console.log(attend_data);
+                            var attend = {};
+                            //Check If Attend's Already Exists
+                            if (attend_data != null && typeof attend_data.attend != "undefined") {
+                                attend = attend_data.attend;
+                            }
+                            attend[user] = true;
+                            //Save Attend
+                            controller.storage.rsvp.save({id: 'event_' + eventId, attend:attend}, function(err) {});
+                        });
                     }
-                    attend[user] = true;
-                    //Save Attend
-                    controller.storage.rsvp.save({id: 'event_' + eventId, attend:attend}, function(err) {});
-                });
-            }
+                } else {
+                    bot.startConversation(message, function(err, convo) {
+                        bot.api.users.info({user: message.user}, function(err, user) {
+                            convo.say('Hey, ' + user.user.real_name + ' there is no event with that ID!');
+                        });
+                        convo.next();
+                    });
+                }
+            });
         });
     });
     //Conversation Controller "LIST ATTENDS"
