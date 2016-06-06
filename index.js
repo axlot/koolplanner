@@ -9,7 +9,7 @@ var controller = Botkit.slackbot({
     storage: firebaseStorage
 });
 
-require('beepboop-botkit').start(controller);
+var beepboop = require('beepboop-botkit').start(controller);
 
 beepboop.on('add_resource', function (message) {
   Object.keys(beepboop.workers).forEach(function (id) {
