@@ -309,10 +309,13 @@ module.exports.init = function(controller) {
         var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'');
         //Check If Event Exist
         controller.storage.events.get('event_' + eventId, function(err, event_data){
+            if(event_data != null) {
+                console.log('EL EVENTO EXISTE');
+            }
             //Check Team's Id
             bot.identifyTeam(function(err,teamId) {
                 if(event_data.team_id == teamId) {
-                    console.log('EL EVENTO EXISTE, MATENME');
+                    console.log('EL EVENTO EXISTE');
                     //Get User
                     var user = message.user;
                     //Get Attenddes List
