@@ -25,7 +25,7 @@ module.exports.init = function(controller) {
         });
     }
     //Event Constructor
-    var Event = function(name, description, date, time, location, mTimeStamp, mChannel) {
+    var Event = function(name, description, date, time, location, mTimeStamp, mChannel, teamId) {
         this.title = name;
         this.description = description;
         this.date = date;
@@ -33,6 +33,7 @@ module.exports.init = function(controller) {
         this.location = location;
         this.mTimeStamp = mTimeStamp;
         this.mChannel = mChannel;
+        this.team_id = teamId;
     };
     //Creation, Editing and Attend Conversation
     var conversation = function (bot, message, eventId) {
@@ -115,17 +116,20 @@ module.exports.init = function(controller) {
                         });
 
                     });
-                    //Code to create and store the new event
-                    controller.storage.events.all(function(err, all_team_data) {
-                        var newId = all_team_data.length + 1,
-                            event = new Event(eTitle, eDescription, eDate, eTime, eLocation, message.ts, message.channel);
-                        //Botkit Method To Storage
-                        if(!eventId) {
-                            controller.storage.events.save({id: 'event_' + newId, event_data: event}, function(err) {});
-                        } else {
-                            controller.storage.events.save({id: eventId, event_data: event}, function(err) {});
-                        }
+                    bot.identifyTeam(function(err,team_id) {
+                        //Code to create and store the new event
+                        var teamId = team_id;
+                        controller.storage.events.all(function(err, all_team_data) {
+                            var newId = all_team_data.length + 1,
+                                event = new Event(eTitle, eDescription, eDate, eTime, eLocation, message.ts, message.channel, teamId);
+                            //Botkit Method To Storage
+                            if(!eventId) {
+                                controller.storage.events.save({id: 'event_' + newId, event_data: event}, function(err) {});
+                            } else {
+                                controller.storage.events.save({id: eventId, event_data: event}, function(err) {});
+                            }
 
+                        });
                     });
                 } else {
                     //Handle Error
