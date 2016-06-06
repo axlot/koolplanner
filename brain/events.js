@@ -310,8 +310,8 @@ module.exports.init = function(controller) {
         //Check If Event Exist
         controller.storage.events.get('event_' + eventId, function(err, event_data){
             //Check Team's Id
-            bot.identifyTeam(function(err,team_id) {
-                if(event_data.team_id == team_id) {
+            bot.identifyTeam(function(err,teamId) {
+                if(event_data.team_id == teamId) {
                     //Get User
                     var user = message.user;
                     //Get Attenddes List
