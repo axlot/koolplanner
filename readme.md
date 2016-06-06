@@ -31,3 +31,5 @@ token=[bot-token] node index.js
 cd [bot-folder]
 oken=[bot-token] pm2 stop index.js
 ```
+
+new commit
