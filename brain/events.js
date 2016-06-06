@@ -312,6 +312,7 @@ module.exports.init = function(controller) {
             //Check Team's Id
             bot.identifyTeam(function(err,teamId) {
                 if(event_data.team_id == teamId) {
+                    console.log('EL EVENTO EXISTE, MATENME');
                     //Get User
                     var user = message.user;
                     //Get Attenddes List
