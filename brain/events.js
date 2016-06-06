@@ -179,6 +179,7 @@ module.exports.init = function(controller) {
                                 }
                                 convo.next();
                             }
+                            convo.next();
                         });
                     } else {
                         bot.startConversation(message, function(err, convo) {
