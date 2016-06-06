@@ -310,10 +310,12 @@ module.exports.init = function(controller) {
         //Check If Event Exist
         controller.storage.events.get('event_' + eventId, function(err, event_data){
             if(event_data != null) {
-                console.log('EL EVENTO EXISTE');
+                console.log('==================EL EVENTO EXISTE========================');
+                console.log('El event ID es: ' + event_data.team_id);
             }
             //Check Team's Id
             bot.identifyTeam(function(err,teamId) {
+                console.log('El team id es: ' +  teamId);
                 if(event_data.team_id == teamId) {
                     console.log('EL EVENTO EXISTE');
                     //Get User
