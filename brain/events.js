@@ -139,41 +139,56 @@ module.exports.init = function(controller) {
     };
     //Listing Conversation
     var listing = function(bot, message, eventId) {
-        //Start Conversation
-        bot.startConversation(message, function(err, convo) {
-            controller.storage.rsvp.get(eventId, function(err, attend_data) {
-                if(attend_data == null) {
-                    //Reply
-                    var reply_with_attachments = {
-                        'attachments': [
-                            {
-                                'title': 'There is no attendees for ' + eventId,
-                                'color': '#7CD197'
+        //Check Team's Id
+        bot.identifyTeam(function(err,team_id) {
+            var teamId = team_id;
+            //Start Conversation
+            bot.startConversation(message, function(err, convo) {
+                controller.storage.events.get(eventId, function(err, event_data) {
+                    if(event_data.event_data.team_id == teamId) {
+                        controller.storage.rsvp.get(eventId, function(err, attend_data) {
+                            if(attend_data == null) {
+                                //Reply
+                                var reply_with_attachments = {
+                                    'attachments': [
+                                        {
+                                            'title': 'There is no attendees for ' + eventId,
+                                            'color': '#7CD197'
+                                        }
+                                    ]
+                                };
+                                bot.reply(message, reply_with_attachments);
+                                convo.stop();
+                            } else {
+                                //Reply
+                                console.log(attend_data);
+                                var reply_with_attachments = {
+                                    'attachments': [
+                                        {
+                                            'title': 'Here are the attendees for ' + eventId,
+                                            'color': '#7CD197'
+                                        }
+                                    ]
+                                };
+                                bot.reply(message, reply_with_attachments);
+                                //Iterate Over Attend Data
+                                for(var prop in attend_data.attend){
+                                    bot.api.users.info({user: prop}, function(err, user) {
+                                        convo.say(user.user.real_name);
+                                    });
+                                }
+                                convo.next();
                             }
-                        ]
-                    };
-                    bot.reply(message, reply_with_attachments);
-                    convo.stop();
-                } else {
-                    //Reply
-                    console.log(attend_data);
-                    var reply_with_attachments = {
-                        'attachments': [
-                            {
-                                'title': 'Here are the attendees for ' + eventId,
-                                'color': '#7CD197'
-                            }
-                        ]
-                    };
-                    bot.reply(message, reply_with_attachments);
-                    //Iterate Over Attend Data
-                    for(var prop in attend_data.attend){
-                        bot.api.users.info({user: prop}, function(err, user) {
-                            convo.say(user.user.real_name);
+                        });
+                    } else {
+                        bot.startConversation(message, function(err, convo) {
+                            bot.api.users.info({user: message.user}, function(err, user) {
+                                convo.say('Hey, ' + user.user.real_name + ' there is no event with that ID!');
+                            });
+                            convo.next();
                         });
                     }
-                    convo.next();
-                }
+                });
             });
         });
     };
