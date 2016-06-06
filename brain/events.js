@@ -197,7 +197,7 @@ module.exports.init = function(controller) {
                     for(var i=0;i<eventsLength;i++) {
                         var eventDate = all_events_data[i].event_data.date;
                         //Push Future Events Into List
-                        if(new Date(eventDate) > new Date(formatDate) && all_events_data.event_data.team_id == teamID) {
+                        if(new Date(eventDate) > new Date(formatDate) && all_events_data[i].event_data.team_id == teamID) {
                             futureEvents.push(all_events_data[i]);
                         }
                     }
