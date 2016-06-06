@@ -181,69 +181,72 @@ module.exports.init = function(controller) {
     var listEvents = function(bot, message) {
         //Start Conversation
         bot.startConversation(message, function(err, convo) {
-            //Get List Of Attenddes
-            controller.storage.events.all(function(err, all_events_data) {
-                //Get Today's Date
-                var date = new Date(),
-                    day = date.getDate(),
-                    month = date.getMonth() + 1,
-                    year = date.getFullYear(),
-                    formatDate = month + '/' + day + '/' + year;
-                //Iterate Over All Events
-                var eventsLength = all_events_data.length;
-                futureEvents = [];
-                for(var i=0;i<eventsLength;i++) {
-                    var eventDate = all_events_data[i].event_data.date;
-                    //Push Future Events Into List
-                    if(new Date(eventDate) > new Date(formatDate)) {
-                        futureEvents.push(all_events_data[i]);
-                    }
-                }
-                //Reply With Future Events
-                bot.startConversation(message, function(err,convo) {
-                    bot.say(
-                        {
-                            text: 'Here are the are the upcoming events for your team:\nFor more info on an event, type "list"\+\<event_id\>\nTo attend an event, type "attend"\+\<event_id\>',
-                            channel: message.channel
+            bot.identifyTeam(function(err,team_id) {
+                var teamID = team_id;
+                //Get List Of Attenddes
+                controller.storage.events.all(function(err, all_events_data) {
+                    //Get Today's Date
+                    var date = new Date(),
+                        day = date.getDate(),
+                        month = date.getMonth() + 1,
+                        year = date.getFullYear(),
+                        formatDate = month + '/' + day + '/' + year;
+                    //Iterate Over All Events
+                    var eventsLength = all_events_data.length;
+                    futureEvents = [];
+                    for(var i=0;i<eventsLength;i++) {
+                        var eventDate = all_events_data[i].event_data.date;
+                        //Push Future Events Into List
+                        if(new Date(eventDate) > new Date(formatDate) && all_events_data.event_data.team_id == teamID) {
+                            futureEvents.push(all_events_data[i]);
                         }
-                    );
-                    //List
-                    var futureLength = futureEvents.length;
-                    for(var j=0;j<futureLength;j++) {
-                        console.log(futureEvents[j].event_data.title);
-                        bot.reply(message, {
-                            "attachments": [
-                                {
-                                    "pretext": 'Event ID: ' + futureEvents[j].id,
-                                    "title": futureEvents[j].event_data.title,
-                                    "color": '#3498db',
-                                    "fields": [
-                                        {
-                                            "title": 'Date',
-                                            "value": futureEvents[j].event_data.date,
-                                            "short": true
-                                        },
-                                        {
-                                            "title": 'Time',
-                                            "value": futureEvents[j].event_data.time + 'hs',
-                                            "short": true
-                                        },
-                                        {
-                                            "title": 'Location',
-                                            "value": futureEvents[j].event_data.location,
-                                            "short": true
-                                        }
-                                    ]
-                                }
-                            ]
-                        });
                     }
-                    //Offer More Events
-                    //End Conversation
-                    convo.stop();
+                    //Reply With Future Events
+                    bot.startConversation(message, function(err,convo) {
+                        bot.say(
+                            {
+                                text: 'Here are the are the upcoming events for your team:\nFor more info on an event, type "list"\+\<event_id\>\nTo attend an event, type "attend"\+\<event_id\>',
+                                channel: message.channel
+                            }
+                        );
+                        //List
+                        var futureLength = futureEvents.length;
+                        for(var j=0;j<futureLength;j++) {
+                            console.log(futureEvents[j].event_data.title);
+                            bot.reply(message, {
+                                "attachments": [
+                                    {
+                                        "pretext": 'Event ID: ' + futureEvents[j].id,
+                                        "title": futureEvents[j].event_data.title,
+                                        "color": '#3498db',
+                                        "fields": [
+                                            {
+                                                "title": 'Date',
+                                                "value": futureEvents[j].event_data.date,
+                                                "short": true
+                                            },
+                                            {
+                                                "title": 'Time',
+                                                "value": futureEvents[j].event_data.time + 'hs',
+                                                "short": true
+                                            },
+                                            {
+                                                "title": 'Location',
+                                                "value": futureEvents[j].event_data.location,
+                                                "short": true
+                                            }
+                                        ]
+                                    }
+                                ]
+                            });
+                        }
+                        //Offer More Events
+                        //End Conversation
+                        convo.stop();
+                    });
                 });
+                convo.stop();
             });
-            convo.stop();
         });
     };
     //Notify Upcoming Events
