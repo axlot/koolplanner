@@ -1,11 +1,5 @@
 name: KoolPlanner
 description: Easily plan small company events
-config:
-  - name: token
-    friendly_name: token
-    info: This is a secret token
-    default: the default value
-    global: false
 slackscopes:
   - bot
   - commands

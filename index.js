@@ -1,9 +1,4 @@
 
-if (!process.env.token) {
-    console.log('Error: Specify token in environment');
-    process.exit(1);
-}
-
 var Botkit = require('./node_modules/botkit/lib/Botkit.js');
 var os = require('os');
 
@@ -16,13 +11,16 @@ var controller = Botkit.slackbot({
 
 require('beepboop-botkit').start(controller);
 
-var bot = controller.spawn({
-    token: process.env.token
-}).startRTM();
+beepboop.on('add_resource', function (message) {
+  Object.keys(beepboop.workers).forEach(function (id) {
+    // this is an instance of a botkit worker
+    var bot = beepboop.workers[id]
+  })
+})
 
 
-var greetingBot = require('./brain/greetings.js');
-greetingBot.init(controller); 
+//var greetingBot = require('./brain/greetings.js');
+//greetingBot.init(controller); 
 
 var events = require('./brain/events.js');
 events.init(controller);
