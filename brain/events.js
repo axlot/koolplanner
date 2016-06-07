@@ -266,18 +266,19 @@ module.exports.init = function(controller) {
     //Notify Upcoming Events
     var notifyUpcoming = function(bot, message, convo) {
         //Get Actual Date
-        var date = new Date(),
-            day = date.getDate(),
-            month = date.getMonth() + 1,
-            year = date.getFullYear(),
-            tHour = date.getHours() + ':' + date.getMinutes(),
-            today = month + '/' + day + '/' + year;
+        //var date = new Date(),
+        //    day = date.getDate(),
+        //    month = date.getMonth() + 1,
+        //    year = date.getFullYear(),
+        //    tHour = date.getHours() + ':' + date.getMinutes(),
+        //    today = month + '/' + day + '/' + year;
         //Retrieve All Events
         bot.identifyTeam(function(err,team_id) {
             var teamID = team_id;
             //Get List Of Attenddes
-            controller.storage.events.all(function(err, all_events_data) {
-                bot.startConversation(message, function(err, convo) {
+            bot.startConversation(message, function(err, convo) {
+                convo.say('Start Check');
+                controller.storage.events.all(function(err, all_events_data) {
                     var length = all_events_data.length,
                         futureEvents = [];
                     for(var i=0;i<length;i++) {
