@@ -315,6 +315,7 @@ module.exports.init = function(controller) {
                         }
                     }
                 }
+                convo.next();
             });
         });
     };
