@@ -458,12 +458,42 @@ module.exports.init = function(controller) {
         bot.reply(message, {
             "attachments": [
                 {
-                    "title": "The KoolPlanner",
+                    "title": "The KoolPlanner - Commands",
                     "color": '#3498db',
                     "fields": [
                         {
-                            "title": 'Commands',
-                            "value": "Type ```new event``` to **create** a new event",
+                            "title": "new event",
+                            "value": "To **create** a new event",
+                            "short": false
+                        },
+                        {
+                            "title": ":date:",
+                            "value": "Use this **emoji** to view all the **upcoming events**",
+                            "short": false
+                        },
+                        {
+                            "title": "list [event_id]",
+                            "value": "To view the **attendees** of an event",
+                            "short": false
+                        },
+                        {
+                            "title": "attend [event_id]",
+                            "value": "To **attend** an event",
+                            "short": false
+                        },
+                        {
+                            "title": "maybe [event_id]",
+                            "value": "To say that you **might attend** an event",
+                            "short": false
+                        },
+                        {
+                            "title": "no [event_id]",
+                            "value": "To say that you **cannot attend** an event",
+                            "short": false
+                        },
+                        {
+                            "title": "edit [event_id]",
+                            "value": "To **edit** the info of an event",
                             "short": false
                         }
                     ]
