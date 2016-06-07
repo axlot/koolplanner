@@ -19,8 +19,9 @@ module.exports.init = function(controller) {
                     bot.api.users.info({user: convo.source_message.user}, function(err, user) {
                         convo.say('Hey ' + user.user.real_name + '!\n' + customMessage);
                     });
+                    convo.next();
                 });
-                convo.next();
+                //convo.next();
             }
         });
     }
