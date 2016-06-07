@@ -501,6 +501,59 @@ module.exports.init = function(controller) {
             ]
         });
     });
+    //Conversation Contoller "DETAILS"
+    controller.hears('details',['direct_message','direct_mention'],function(bot,message) {
+        bot.reply(message, {
+            "attachments": [
+                {
+                    "fallback": "How it works",
+                    "color": "#36a64f",
+                    "pretext": "Hey there!:wave: Here is how it works! :nerd_face:\n*1- Create/Edit an event*",
+                    "author_name": "Create an event",
+                    "text": "Type `new event` in *Direct Message* to start the process of creating an event.\nI will ask you a title, a description, date&time and a location.\nThe event will be created with a _unique_ *event_id*. I will broadcast a message here to notify the team. :loudspeaker:",
+                    "mrkdwn_in": ["text", "pretext"]
+                },
+                {
+                    "fallback": "Required plain-text summary of the attachment.",
+                    "color": "#36a64f",
+                    "pretext": " ",
+                    "author_name": "Edit an event",
+                    "text": "Type `edit <event_id>` to edit the info of an event. :gear:",
+                    "mrkdwn_in": ["text", "pretext"]
+                },
+                {
+                    "fallback": "Required plain-text summary of the attachment.",
+                    "color": "#70cadb",
+                    "pretext": "*2- Respond to an invitation*",
+                    "text": "Answer directly by clicking on the *Emoji Reaction* below a message :white_check_mark: :question: :x:\nor:  Type `attend <event_id>` to attend an event :white_check_mark:\n\t\tType `maybe <event_id>` to say that you might go to an event :question:\n\t\tType `no <event_id>` if you cannot go :x:\n",
+                    "mrkdwn_in": ["text", "pretext"]
+                },
+                {
+                    "fallback": "Required plain-text summary of the attachment.",
+                    "color": "#443642",
+                    "pretext": "*3- Lists*",
+                    "author_name": "See the list of events",
+                    "text": "Use the :date: emoji (`:date:`) to view all upcoming events from your team. :date:",
+                    "mrkdwn_in": ["text", "pretext"]
+                },
+                {
+                    "fallback": "Required plain-text summary of the attachment.",
+                    "color": "#443642",
+                    "pretext": " ",
+                    "author_name": "View the list of attendees",
+                    "text": "Type `list <event_id>` to view the list of attendees of an event. :clipboard:",
+                    "mrkdwn_in": ["text", "pretext"]
+                },
+                {
+                    "fallback": "Required plain-text summary of the attachment.",
+                    "color": "#e8a723",
+                    "pretext": "Type `help` for the list of commands.\n:tada::spiral_calendar_pad::calendar:Start planning awesome events!:calendar::spiral_calendar_pad::tada:",
+                    "text": "",
+                    "mrkdwn_in": ["text", "pretext"]
+                }
+            ]
+        });
+    });
     //Scheduled Function To Notify Users For An Upcoming Event
     controller.hears('notify',['direct_message','direct_mention'],function(bot,message) {
         bot.startConversation(message, function(err, convo) {
