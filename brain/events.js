@@ -282,6 +282,7 @@ module.exports.init = function(controller) {
                 for(var i=0;i<length;i++) {
                     if(all_events_data[i].event_data.team_id == teamID) {
                         teamEvents.push(all_events_data[i]);
+                        convo.say(all_events_data[i].event_data.title);
                     }
                 }
                 //Get Future Events
