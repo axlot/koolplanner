@@ -453,6 +453,24 @@ module.exports.init = function(controller) {
     controller.hears(':date:',['direct_message','direct_mention'],function(bot,message) {
         listEvents(bot, message);
     });
+    //Conversation Contoller "HELP"
+    controller.hears('help',['direct_message','direct_mention'],function(bot,message) {
+        bot.reply(message, {
+            "attachments": [
+                {
+                    "title": "The KoolPlanner",
+                    "color": '#3498db',
+                    "fields": [
+                        {
+                            "title": 'Commands',
+                            "value": "Type ```new event``` to **create** a new event",
+                            "short": false
+                        }
+                    ]
+                }
+            ]
+        });
+    });
     //Scheduled Function To Notify Users For An Upcoming Event
     controller.hears('notify',['direct_message','direct_mention'],function(bot,message) {
         bot.startConversation(message, function(err, convo) {
