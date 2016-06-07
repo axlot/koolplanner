@@ -273,38 +273,55 @@ module.exports.init = function(controller) {
             tHour = date.getHours() + ':' + date.getMinutes(),
             today = month + '/' + day + '/' + year;
         //Retrieve All Events
-        controller.storage.events.all(function(err, all_events_data) {
-            var length = all_events_data.length;
-            for(var i=0;i<length;i++) {
-                var eHour = all_events_data[i].event_data.time,
-                    eDate = all_events_data[i].event_data.date,
-                    todayFormatted = new Date(today),
-                    dateFormatted =  new Date(eDate);
-                //Compare Year And Month
-                if((todayFormatted.getFullYear() == dateFormatted.getFullYear()) && (todayFormatted.getMonth()+1 == dateFormatted.getMonth()+1)) {
-                    //var daysLeft = dateFormatted.getDate() - todayFormatted.getDate();
-                    var daysLeft = 7;
-                    //If *daysLeft results negative it means that the event already past(ex: yesterday).
-                    switch (daysLeft) {
-                        case 7:
-                            //Code to notify users
-                            alertAttendees(bot, convo, 'The event "' + all_events_data[i].event_data.title + '" is next week!\nIt will take place on ' + all_events_data[i].event_data.date + ' ' + all_events_data[i].event_data.time + 'hs, at ' + all_events_data[i].event_data.location, all_events_data[i].id);
-                            break;
-                        case 1:
-                            eHour = eHour.replace(':','');
-                            tHour = tHour.replace(':','');
-                            //var timeLeft = parseInt(parseFloat(eHour) - parseFloat(tHour));
-                            var timeLeft = 100;
-                            if(timeLeft == 100) {
-                                alertAttendees(bot, convo, 'Just a little reminder.\nThe event "' + all_events_data[i].event_data.title + '" starts in an hour!\nHave fun!!!', all_events_data[i].id);
-                            } else {
-                                alertAttendees(bot, convo, 'Ready for tomorrow?\n"' + all_events_data[i].event_data.title + '" starts on ' + all_events_data[i].event_data.date + ' ' + all_events_data[i].event_data.time + 'hs', all_events_data[i].id);
-                            }
-                            break;
+        bot.identifyTeam(function(err,team_id) {
+            var teamID = team_id;
+            //Get List Of Attenddes
+            controller.storage.events.all(function(err, all_events_data) {
+                bot.startConversation(message, function(err, convo) {
+                    var length = all_events_data.length,
+                        futureEvents = [];
+                    for(var i=0;i<length;i++) {
+                        if(all_events_data[i].event_data.event_data.team_id == teamID) {
+                            futureEvents.push(all_events_data[i]);
+                            convo.say('One future event');
+                        }
                     }
-                }
-            }
+                });
+            });
         });
+
+        //controller.storage.events.all(function(err, all_events_data) {
+        //    var length = all_events_data.length;
+        //    for(var i=0;i<length;i++) {
+        //        var eHour = all_events_data[i].event_data.time,
+        //            eDate = all_events_data[i].event_data.date,
+        //            todayFormatted = new Date(today),
+        //            dateFormatted =  new Date(eDate);
+        //        //Compare Year And Month
+        //        if((todayFormatted.getFullYear() == dateFormatted.getFullYear()) && (todayFormatted.getMonth()+1 == dateFormatted.getMonth()+1)) {
+        //            //var daysLeft = dateFormatted.getDate() - todayFormatted.getDate();
+        //            var daysLeft = 7;
+        //            //If *daysLeft results negative it means that the event already past(ex: yesterday).
+        //            switch (daysLeft) {
+        //                case 7:
+        //                    //Code to notify users
+        //                    alertAttendees(bot, convo, 'The event "' + all_events_data[i].event_data.title + '" is next week!\nIt will take place on ' + all_events_data[i].event_data.date + ' ' + all_events_data[i].event_data.time + 'hs, at ' + all_events_data[i].event_data.location, all_events_data[i].id);
+        //                    break;
+        //                case 1:
+        //                    eHour = eHour.replace(':','');
+        //                    tHour = tHour.replace(':','');
+        //                    //var timeLeft = parseInt(parseFloat(eHour) - parseFloat(tHour));
+        //                    var timeLeft = 100;
+        //                    if(timeLeft == 100) {
+        //                        alertAttendees(bot, convo, 'Just a little reminder.\nThe event "' + all_events_data[i].event_data.title + '" starts in an hour!\nHave fun!!!', all_events_data[i].id);
+        //                    } else {
+        //                        alertAttendees(bot, convo, 'Ready for tomorrow?\n"' + all_events_data[i].event_data.title + '" starts on ' + all_events_data[i].event_data.date + ' ' + all_events_data[i].event_data.time + 'hs', all_events_data[i].id);
+        //                    }
+        //                    break;
+        //            }
+        //        }
+        //    }
+        //});
 
     };
     //Conversation Controller "NEW EVENT"
