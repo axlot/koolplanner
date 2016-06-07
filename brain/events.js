@@ -467,7 +467,7 @@ module.exports.init = function(controller) {
                             "short": false
                         },
                         {
-                            "title": ":date:",
+                            "title": ":date: - (: date :)",
                             "value": "Use this **emoji** to view all the **upcoming events**",
                             "short": false
                         },
