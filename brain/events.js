@@ -276,18 +276,16 @@ module.exports.init = function(controller) {
         bot.identifyTeam(function(err,team_id) {
             var teamID = team_id;
             //Get List Of Attenddes
-            bot.startConversation(message, function(err, convo) {
-                convo.say('Start Check');
-                controller.storage.events.all(function(err, all_events_data) {
-                    var length = all_events_data.length,
-                        futureEvents = [];
-                    for(var i=0;i<length;i++) {
-                        if(all_events_data[i].event_data.event_data.team_id == teamID) {
-                            futureEvents.push(all_events_data[i]);
-                            convo.say('One future event');
-                        }
+            convo.say('Start Check');
+            controller.storage.events.all(function(err, all_events_data) {
+                var length = all_events_data.length,
+                    futureEvents = [];
+                for(var i=0;i<length;i++) {
+                    if(all_events_data[i].event_data.event_data.team_id == teamID) {
+                        futureEvents.push(all_events_data[i]);
+                        convo.say('One future event');
                     }
-                });
+                }
             });
         });
 
