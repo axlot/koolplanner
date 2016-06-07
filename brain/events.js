@@ -21,7 +21,6 @@ module.exports.init = function(controller) {
                 });
             }
         });
-        convo.say('llega');
         convo.next();
     }
     //Event Constructor
