@@ -502,7 +502,7 @@ module.exports.init = function(controller) {
         });
     });
     //Conversation Contoller "DETAILS"
-    controller.hears('details',['direct_message','direct_mention'],function(bot,message) {
+    controller.hears('details',['direct_message','direct_mention', 'mention'],function(bot,message) {
         bot.reply(message, {
             "attachments": [
                 {
