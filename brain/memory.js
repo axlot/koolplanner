@@ -19,7 +19,8 @@ module.exports = function(config) {
         eventsRef = rootRef.child('events'),
         rsvpRef = rootRef.child('rsvp'),
         attendRef = rsvpRef.child('attend'),
-        maybeRef = rsvpRef.child('maybe');
+        maybeRef = rsvpRef.child('maybe'),
+        noAttendRef = rsvpRef.child('noAttend');
 
 
     return {
@@ -57,6 +58,11 @@ module.exports = function(config) {
             get: get(maybeRef),
             save: save(maybeRef),
             all: all(maybeRef)
+        },
+        noAttend: {
+            get: get(noAttendRef),
+            save: save(noAttendRef),
+            all: all(noAttendRef)
         }
     };
 };

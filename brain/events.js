@@ -393,6 +393,39 @@ module.exports.init = function(controller) {
             });
         });
     });
+    //Conversation Controller "NO EVENT"
+    controller.hears('no (.*)',['direct_message','direct_mention'],function(bot,message) {
+        //Get Event Id
+        var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'');
+        //Check If Event Exist
+        controller.storage.events.get('event_' + eventId, function(err, event_data){
+            //Check Team's Id
+            bot.identifyTeam(function(err,teamId) {
+                if(event_data.event_data.team_id == teamId) {
+                    //Get User
+                    var user = message.user;
+                    //Get Attenddes List
+                    controller.storage.noAttend.get('event_' + eventId, function(err, event_data) {
+                        var maybe = {};
+                        //Check If Attend's Already Exists
+                        if (event_data != null && typeof event_data.maybe != "undefined") {
+                            maybe = event_data.maybe;
+                        }
+                        maybe[user] = true;
+                        //Save Attend
+                        controller.storage.noAttend.save({id: 'event_' + eventId, maybe:maybe}, function(err) {});
+                    });
+                } else {
+                    bot.startConversation(message, function(err, convo) {
+                        bot.api.users.info({user: message.user}, function(err, user) {
+                            convo.say('Hey, ' + user.user.real_name + ' there is no event with that ID!');
+                        });
+                        convo.next();
+                    });
+                }
+            });
+        });
+    });
     //Conversation Controller "LIST ATTENDS"
     controller.hears('list (.*)',['direct_message','direct_mention'],function(bot,message) {
         var eventId = message.match[1];
