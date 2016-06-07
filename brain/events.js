@@ -380,7 +380,7 @@ module.exports.init = function(controller) {
                         }
                         maybe[user] = true;
                         //Save Attend
-                        controller.storage.rsvp.save({id: 'event_' + eventId, maybe:maybe}, function(err) {});
+                        controller.storage.rsvp.maybe.save({id: 'event_' + eventId, maybe:maybe}, function(err) {});
                     });
                 } else {
                     bot.startConversation(message, function(err, convo) {
