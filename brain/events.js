@@ -314,8 +314,10 @@ module.exports.init = function(controller) {
                             break;
                         }
                     }
+                    convo.next();
                 }
             });
+            convo.next();
         });
         convo.next();
     };
