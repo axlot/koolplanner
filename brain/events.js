@@ -145,7 +145,7 @@ module.exports.init = function(controller) {
             bot.startConversation(message, function(err, convo) {
                 controller.storage.events.get(eventId, function(err, event_data) {
                     if(event_data != null && event_data.event_data.team_id == teamId) {
-                        controller.storage.rsvp.get(eventId, function(err, attend_data) {
+                        controller.storage.attend.get(eventId, function(err, attend_data) {
                             if(attend_data == null) {
                                 //Reply
                                 var reply_with_attachments = {
