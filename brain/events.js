@@ -399,7 +399,8 @@ module.exports.init = function(controller) {
     //Scheduled Function To Notify Users For An Upcoming Event
     controller.hears('notify',['direct_message','direct_mention'],function(bot,message) {
         bot.startConversation(message, function(err, convo) {
-            notifyUpcoming(bot, message, convo);
+            convo.say('Start Check');
+            //notifyUpcoming(bot, message, convo);
         });
     });
 };
