@@ -21,10 +21,9 @@ module.exports.init = function(controller) {
                     });
                     convo.next();
                 });
-                convo.next();
             }
-            convo.next();
         });
+        convo.next();
     }
     //Event Constructor
     var Event = function(name, description, date, time, location, mTimeStamp, mChannel, teamId) {
@@ -318,7 +317,6 @@ module.exports.init = function(controller) {
                     }
                 }
             });
-            convo.next();
         });
     };
     //Conversation Controller "NEW EVENT"
