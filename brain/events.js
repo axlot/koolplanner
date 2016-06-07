@@ -23,7 +23,6 @@ module.exports.init = function(controller) {
                 });
             }
         });
-        convo.next();
     }
     //Event Constructor
     var Event = function(name, description, date, time, location, mTimeStamp, mChannel, teamId) {
@@ -284,7 +283,7 @@ module.exports.init = function(controller) {
                     if(all_events_data[i].event_data.team_id == teamID) {
                         teamEvents.push(all_events_data[i]);
                     }
-                }
+                };
                 //Get Future Events
                 var upLength = teamEvents.length;
                 for(var j=0;j<upLength;j++) {
@@ -315,7 +314,8 @@ module.exports.init = function(controller) {
                             break;
                         }
                     }
-                }
+                };
+                convo.next();
             });
         });
     };
