@@ -335,14 +335,11 @@ module.exports.init = function(controller) {
         controller.storage.events.get('event_' + eventId, function(err, event_data){
             //Check Team's Id
             bot.identifyTeam(function(err,teamId) {
-                console.log('El team id es: ' +  teamId);
                 if(event_data.event_data.team_id == teamId) {
-                    console.log('EL EVENTO EXISTE');
                     //Get User
                     var user = message.user;
                     //Get Attenddes List
                     controller.storage.rsvp.get('event_' + eventId, function(err, attend_data) {
-                        console.log(attend_data);
                         var attend = {};
                         //Check If Attend's Already Exists
                         if (attend_data != null && typeof attend_data.attend != "undefined") {
@@ -351,6 +348,39 @@ module.exports.init = function(controller) {
                         attend[user] = true;
                         //Save Attend
                         controller.storage.rsvp.save({id: 'event_' + eventId, attend:attend}, function(err) {});
+                    });
+                } else {
+                    bot.startConversation(message, function(err, convo) {
+                        bot.api.users.info({user: message.user}, function(err, user) {
+                            convo.say('Hey, ' + user.user.real_name + ' there is no event with that ID!');
+                        });
+                        convo.next();
+                    });
+                }
+            });
+        });
+    });
+    //Conversation Controller "MAYBE EVENT"
+    controller.hears('maybe (.*)',['direct_message','direct_mention'],function(bot,message) {
+        //Get Event Id
+        var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'');
+        //Check If Event Exist
+        controller.storage.events.get('event_' + eventId, function(err, event_data){
+            //Check Team's Id
+            bot.identifyTeam(function(err,teamId) {
+                if(event_data.event_data.team_id == teamId) {
+                    //Get User
+                    var user = message.user;
+                    //Get Attenddes List
+                    controller.storage.rsvp.get('event_' + eventId, function(err, maybe_data) {
+                        var maybe = {};
+                        //Check If Attend's Already Exists
+                        if (maybe_data != null && typeof maybe_data.attend != "undefined") {
+                            maybe = maybe_data.attend;
+                        }
+                        maybe[user] = true;
+                        //Save Attend
+                        controller.storage.rsvp.save({id: 'event_' + eventId, maybe:maybe}, function(err) {});
                     });
                 } else {
                     bot.startConversation(message, function(err, convo) {
