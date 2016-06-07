@@ -21,7 +21,9 @@ module.exports.init = function(controller) {
                     });
                     convo.next();
                 });
+                convo.next();
             }
+            convo.next();
         });
     }
     //Event Constructor
@@ -396,7 +398,6 @@ module.exports.init = function(controller) {
     controller.hears('notify',['direct_message','direct_mention'],function(bot,message) {
         bot.startConversation(message, function(err, convo) {
             notifyUpcoming(bot, message, convo);
-            convo.next();
         });
     });
 };
