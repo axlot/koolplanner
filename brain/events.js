@@ -314,12 +314,10 @@ module.exports.init = function(controller) {
                             break;
                         }
                     }
-                    convo.next();
                 }
             });
             convo.next();
         });
-        convo.next();
     };
     //Conversation Controller "NEW EVENT"
     controller.hears('new event',['direct_message','direct_mention'],function(bot,message) {
@@ -398,6 +396,7 @@ module.exports.init = function(controller) {
     controller.hears('notify',['direct_message','direct_mention'],function(bot,message) {
         bot.startConversation(message, function(err, convo) {
             notifyUpcoming(bot, message, convo);
+            convo.next();
         });
     });
 };
