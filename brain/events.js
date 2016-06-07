@@ -21,6 +21,8 @@ module.exports.init = function(controller) {
                 });
             }
         });
+        convo.say('llega');
+        convo.next();
     }
     //Event Constructor
     var Event = function(name, description, date, time, location, mTimeStamp, mChannel, teamId) {
