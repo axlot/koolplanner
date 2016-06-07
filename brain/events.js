@@ -279,13 +279,13 @@ module.exports.init = function(controller) {
             controller.storage.events.all(function(err, all_events_data) {
                 var length = all_events_data.length,
                     futureEvents = [];
-                convo.say('Start Check' + length);
-                //for(var i=0;i<length;i++) {
-                //    if(all_events_data[i].event_data.event_data.team_id == teamID) {
-                //        futureEvents.push(all_events_data[i]);
-                //        convo.say('One future event');
-                //    }
-                //}
+                for(var i=0;i<length;i++) {
+                    if(all_events_data[i].event_data.team_id == teamID) {
+                        futureEvents.push(all_events_data[i]);
+                        convo.say('One future event');
+                    }
+                }
+                convo.say('Start Check' + futureEvents);
             });
         });
 
