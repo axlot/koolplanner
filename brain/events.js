@@ -372,11 +372,11 @@ module.exports.init = function(controller) {
                     //Get User
                     var user = message.user;
                     //Get Attenddes List
-                    controller.storage.rsvp.get('event_' + eventId, function(err, maybe_data) {
+                    controller.storage.rsvp.get('event_' + eventId, function(err, event_data) {
                         var maybe = {};
                         //Check If Attend's Already Exists
-                        if (maybe_data != null && typeof maybe_data.maybe != "undefined") {
-                            maybe = maybe_data.maybe;
+                        if (event_data != null && typeof event_data.maybe != "undefined") {
+                            maybe = event_data.maybe;
                         }
                         maybe[user] = true;
                         //Save Attend
