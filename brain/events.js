@@ -21,7 +21,6 @@ module.exports.init = function(controller) {
                     });
                     convo.next();
                 });
-                //convo.next();
             }
         });
     }
@@ -316,9 +315,9 @@ module.exports.init = function(controller) {
                         }
                     }
                 }
-                convo.next();
             });
         });
+        convo.next();
     };
     //Conversation Controller "NEW EVENT"
     controller.hears('new event',['direct_message','direct_mention'],function(bot,message) {
