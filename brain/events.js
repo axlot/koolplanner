@@ -387,7 +387,7 @@ module.exports.init = function(controller) {
         });
     });
     //Conversation Contoller "LIST FUTURE EVENTS"
-    controller.hears('events',['direct_message','direct_mention'],function(bot,message) {
+    controller.hears(':date:',['direct_message','direct_mention'],function(bot,message) {
         listEvents(bot, message);
     });
     //Scheduled Function To Notify Users For An Upcoming Event
