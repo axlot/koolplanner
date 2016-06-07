@@ -18,6 +18,7 @@ module.exports = function(config) {
         channelsRef = rootRef.child('channels'),
         eventsRef = rootRef.child('events'),
         rsvpRef = rootRef.child('rsvp'),
+        attendRef = rsvpRef.child('attend'),
         maybeRef = rsvpRef.child('maybe');
 
 
@@ -46,6 +47,11 @@ module.exports = function(config) {
             get: get(rsvpRef),
             save: save(rsvpRef),
             all: all(rsvpRef)
+        },
+        attend: {
+            get: get(attendRef),
+            save: save(attendRef),
+            all: all(attendRef)
         },
         maybe: {
             get: get(maybeRef),

@@ -339,7 +339,7 @@ module.exports.init = function(controller) {
                     //Get User
                     var user = message.user;
                     //Get Attenddes List
-                    controller.storage.rsvp.get('event_' + eventId, function(err, attend_data) {
+                    controller.storage.attend.get('event_' + eventId, function(err, attend_data) {
                         var attend = {};
                         //Check If Attend's Already Exists
                         if (attend_data != null && typeof attend_data.attend != "undefined") {
@@ -347,7 +347,7 @@ module.exports.init = function(controller) {
                         }
                         attend[user] = true;
                         //Save Attend
-                        controller.storage.rsvp.save({id: 'event_' + eventId, attend:attend}, function(err) {});
+                        controller.storage.attend.save({id: 'event_' + eventId, attend:attend}, function(err) {});
                     });
                 } else {
                     bot.startConversation(message, function(err, convo) {
