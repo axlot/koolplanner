@@ -462,7 +462,8 @@ module.exports.init = function(controller) {
                     "title": "Network traffic (kb/s)",
                     //"title_link": "https://datadog.com/path/to/event",
                     "text": "*bold*",
-                    "mrkdwn": true
+                    "mrkdwn": true,
+                    "mrkdwn_in": ["text", "pretext"]
                     //"image_url": "https://datadoghq.com/snapshot/path/to/snapshot.png",
                     //"color": "#764FA5"
                 }
