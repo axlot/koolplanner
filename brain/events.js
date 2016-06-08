@@ -456,7 +456,6 @@ module.exports.init = function(controller) {
     //Conversation Contoller "HELP"
     controller.hears('help',['direct_message','direct_mention'],function(bot,message) {
         bot.reply(message, {
-
             "attachments": [
                 {
                     "text": "Here is how to use KoolPlanner",
@@ -464,8 +463,8 @@ module.exports.init = function(controller) {
                 },
                 {
                     "color": "danger",
-                    "pretext": "```new event```",
-                    "text": "To *create* a new event",
+                    "text": "```new event```",
+                    "pretext": "To *create* a new event",
                     "mrkdwn_in": ["text", "pretext"]
                 }
             ]
@@ -474,12 +473,7 @@ module.exports.init = function(controller) {
             //        "title": "Here is how to use KoolPlanner",
             //        "color": "danger",
             //        "fields": [
-            //            {
-            //                "title": "new event",
-            //                "value": "To **create** a new event",
-            //                "short": false
-            //            },
-            //            {
+            //                        //            {
             //                "title": ":date: - (: date :)",
             //                "text": "Text",
             //                "mrkdwn_in": ["text", "pretext", "value"],
