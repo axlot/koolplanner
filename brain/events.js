@@ -459,7 +459,7 @@ module.exports.init = function(controller) {
             "attachments": [
                 {
                     "title": "Here is how to use KoolPlanner",
-                    "color": "warning",
+                    "color": "danger",
                     "fields": [
                         {
                             "title": "new event",
