@@ -330,7 +330,7 @@ module.exports.init = function(controller) {
     //Conversation Controller "ATTEND EVENT"
     controller.hears('attend (.*)',['direct_message','direct_mention'],function(bot,message) {
         //Get Event Id
-        var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'');
+        var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'%20');
         //Check If Event Exist
         controller.storage.events.get('event_' + eventId, function(err, event_data){
             //Check Team's Id
