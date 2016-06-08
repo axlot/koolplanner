@@ -461,7 +461,8 @@ module.exports.init = function(controller) {
                     "fallback": "Network traffic (kb/s): How does this look? @slack-ops - Sent by Julie Dodd - https://datadog.com/path/to/event",
                     "title": "Network traffic (kb/s)",
                     "title_link": "https://datadog.com/path/to/event",
-                    "text": "How does this look? @slack-ops - Sent by Julie Dodd",
+                    "text": "How does *this* **look**? @slack-ops - Sent by Julie Dodd",
+                    "mrkdwn": true,
                     "image_url": "https://datadoghq.com/snapshot/path/to/snapshot.png",
                     "color": "#764FA5"
                 }
@@ -469,7 +470,7 @@ module.exports.init = function(controller) {
             //"attachments": [
             //    {
             //        "title": "Here is how to use KoolPlanner",
-            //        //"color": '#3498db',
+            //        "color": '#3498db',
             //        "fields": [
             //            {
             //                "title": "new event",
