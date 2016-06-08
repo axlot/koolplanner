@@ -123,7 +123,7 @@ module.exports.init = function(controller) {
                                 event = new Event(eTitle, eDescription, eDate, eTime, eLocation, message.ts, message.channel, teamId);
                             //Botkit Method To Storage
                             if(!eventId) {
-                                controller.storage.events.save({id: 'event_' + newId, event_data: event}, function(err) {});
+                                controller.storage.events.save({id: 'event' + newId, event_data: event}, function(err) {});
                             } else {
                                 controller.storage.events.save({id: eventId, event_data: event}, function(err) {});
                             }
@@ -330,16 +330,16 @@ module.exports.init = function(controller) {
     //Conversation Controller "ATTEND EVENT"
     controller.hears('attend (.*)',['direct_message','direct_mention'],function(bot,message) {
         //Get Event Id
-        var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'%20');
+        var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'');
         //Check If Event Exist
-        controller.storage.events.get('event_' + eventId, function(err, event_data){
+        controller.storage.events.get(eventId, function(err, event_data){
             //Check Team's Id
             bot.identifyTeam(function(err,teamId) {
                 if(event_data.event_data.team_id == teamId) {
                     //Get User
                     var user = message.user;
                     //Get Attenddes List
-                    controller.storage.attend.get('event_' + eventId, function(err, attend_data) {
+                    controller.storage.attend.get(eventId, function(err, attend_data) {
                         var attend = {};
                         //Check If Attend's Already Exists
                         if (attend_data != null && typeof attend_data.attend != "undefined") {
@@ -347,7 +347,7 @@ module.exports.init = function(controller) {
                         }
                         attend[user] = true;
                         //Save Attend
-                        controller.storage.attend.save({id: 'event_' + eventId, attend:attend}, function(err) {});
+                        controller.storage.attend.save({id: eventId, attend:attend}, function(err) {});
                     });
                 } else {
                     bot.startConversation(message, function(err, convo) {
