@@ -335,7 +335,7 @@ module.exports.init = function(controller) {
         controller.storage.events.get(eventId, function(err, event_data){
             //Check Team's Id
             bot.identifyTeam(function(err,teamId) {
-                if(event_data.event_data.team_id == teamId) {
+                if(event_data != null && event_data.event_data.team_id == teamId) {
                     //Get User
                     var user = message.user;
                     //Get Attenddes List
@@ -368,7 +368,7 @@ module.exports.init = function(controller) {
         controller.storage.events.get(eventId, function(err, event_data){
             //Check Team's Id
             bot.identifyTeam(function(err,teamId) {
-                if(event_data.event_data.team_id == teamId) {
+                if(event_data != null && event_data.event_data.team_id == teamId) {
                     //Get User
                     var user = message.user;
                     //Get Attenddes List
