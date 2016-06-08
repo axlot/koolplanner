@@ -194,10 +194,13 @@ module.exports.init = function(controller) {
     var listEvents = function(bot, message) {
         //Start Conversation
         bot.startConversation(message, function(err, convo) {
+            convo.say('Entra a la conversacion');
             bot.identifyTeam(function(err,team_id) {
+                convo.say('Identifica el equipo');
                 var teamID = team_id;
                 //Get List Of Attenddes
                 controller.storage.events.all(function(err, all_events_data) {
+                    convo.say('Entra a la base');
                     //Get Today's Date
                     var date = new Date(),
                         day = date.getDate(),
