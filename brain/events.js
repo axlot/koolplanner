@@ -365,14 +365,14 @@ module.exports.init = function(controller) {
         //Get Event Id
         var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'');
         //Check If Event Exist
-        controller.storage.events.get('event_' + eventId, function(err, event_data){
+        controller.storage.events.get(eventId, function(err, event_data){
             //Check Team's Id
             bot.identifyTeam(function(err,teamId) {
                 if(event_data.event_data.team_id == teamId) {
                     //Get User
                     var user = message.user;
                     //Get Attenddes List
-                    controller.storage.rsvp.get('event_' + eventId, function(err, event_data) {
+                    controller.storage.rsvp.get(eventId, function(err, event_data) {
                         var maybe = {};
                         //Check If Attend's Already Exists
                         if (event_data != null && typeof event_data.maybe != "undefined") {
@@ -380,7 +380,7 @@ module.exports.init = function(controller) {
                         }
                         maybe[user] = true;
                         //Save Attend
-                        controller.storage.maybe.save({id: 'event_' + eventId, maybe:maybe}, function(err) {});
+                        controller.storage.maybe.save({id: eventId, maybe:maybe}, function(err) {});
                     });
                 } else {
                     bot.startConversation(message, function(err, convo) {
@@ -398,14 +398,14 @@ module.exports.init = function(controller) {
         //Get Event Id
         var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'');
         //Check If Event Exist
-        controller.storage.events.get('event_' + eventId, function(err, event_data){
+        controller.storage.events.get(eventId, function(err, event_data){
             //Check Team's Id
             bot.identifyTeam(function(err,teamId) {
                 if(event_data.event_data.team_id == teamId) {
                     //Get User
                     var user = message.user;
                     //Get Attenddes List
-                    controller.storage.noAttend.get('event_' + eventId, function(err, event_data) {
+                    controller.storage.noAttend.get(eventId, function(err, event_data) {
                         var maybe = {};
                         //Check If Attend's Already Exists
                         if (event_data != null && typeof event_data.maybe != "undefined") {
@@ -413,7 +413,7 @@ module.exports.init = function(controller) {
                         }
                         maybe[user] = true;
                         //Save Attend
-                        controller.storage.noAttend.save({id: 'event_' + eventId, maybe:maybe}, function(err) {});
+                        controller.storage.noAttend.save({id: eventId, maybe:maybe}, function(err) {});
                     });
                 } else {
                     bot.startConversation(message, function(err, convo) {
