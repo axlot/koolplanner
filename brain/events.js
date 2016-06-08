@@ -562,6 +562,7 @@ module.exports.init = function(controller) {
     });
     //Event "JOIN"
     controller.on('channel_joined',function(bot,message) {
+        console.log(message);
         //Onboarding Message Here
         bot.api.chat.postMessage({
             "attachments": [
@@ -587,7 +588,7 @@ module.exports.init = function(controller) {
                     "mrkdwn_in": ["text", "pretext"]
                 }
             ],
-            channel: '#general'
+            "channel": message.channel.id
         });
     });
     //Scheduled Function To Notify Users For An Upcoming Event
