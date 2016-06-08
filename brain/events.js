@@ -565,29 +565,30 @@ module.exports.init = function(controller) {
         console.log(message);
         //Onboarding Message Here
         bot.api.chat.postMessage({
-            "attachments": [
-                {
-                    "fallback": "Hey there! I'm KoolPlanner.",
-                    "color": "#36a64f",
-                    "pretext": "Hey there!:wave: I’m your KoolPlanner, your event planning assistant. I’m here to help you plan events without hassle. :spiral_calendar_pad:",
-                    "text": "To create an event, type `new event` in ​*Direct Message* with me​ (click on Direct Message on the Slack sidebar then find me ​*@KoolPlanner* and hit ​*Go*​!).",
-                    "mrkdwn_in": ["text", "pretext"]
-                },
-                {
-                    "fallback": "Required plain-text summary of the attachment.",
-                    "color": "#e8a723",
-                    "pretext": "*Tip*: Use the :date: _*emoji*_  to view all upcoming events from your team.",
-                    "text": ":warning: To read more about KoolPlanner, type `@KoolPlanner details` below, or `details` in a *Direct Message*.",
-                    "mrkdwn_in": ["text", "pretext"]
-                },
-                {
-                    "fallback": "Required plain-text summary of the attachment.",
-                    "color": "#e8a723",
-                    "pretext": ":tada::spiral_calendar_pad::calendar:Start planning awesome events!:calendar::spiral_calendar_pad::tada:",
-                    "text": "",
-                    "mrkdwn_in": ["text", "pretext"]
-                }
-            ],
+            //"attachments": [
+            //    {
+            //        "fallback": "Hey there! I'm KoolPlanner.",
+            //        "color": "#36a64f",
+            //        "pretext": "Hey there!:wave: I’m your KoolPlanner, your event planning assistant. I’m here to help you plan events without hassle. :spiral_calendar_pad:",
+            //        "text": "To create an event, type `new event` in ​*Direct Message* with me​ (click on Direct Message on the Slack sidebar then find me ​*@KoolPlanner* and hit ​*Go*​!).",
+            //        "mrkdwn_in": ["text", "pretext"]
+            //    },
+            //    {
+            //        "fallback": "Required plain-text summary of the attachment.",
+            //        "color": "#e8a723",
+            //        "pretext": "*Tip*: Use the :date: _*emoji*_  to view all upcoming events from your team.",
+            //        "text": ":warning: To read more about KoolPlanner, type `@KoolPlanner details` below, or `details` in a *Direct Message*.",
+            //        "mrkdwn_in": ["text", "pretext"]
+            //    },
+            //    {
+            //        "fallback": "Required plain-text summary of the attachment.",
+            //        "color": "#e8a723",
+            //        "pretext": ":tada::spiral_calendar_pad::calendar:Start planning awesome events!:calendar::spiral_calendar_pad::tada:",
+            //        "text": "",
+            //        "mrkdwn_in": ["text", "pretext"]
+            //    }
+            //],
+            "text": "helo",
             "channel": message.channel.id
         });
     });
