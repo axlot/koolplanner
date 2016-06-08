@@ -469,6 +469,7 @@ module.exports.init = function(controller) {
                         },
                         {
                             "title": ":date: - (: date :)",
+                            "text": "Text",
                             "mrkdwn_in": ["text", "pretext", "value"],
                             "value": "Use this **emoji** to view all the **upcoming events**",
                             "short": false
