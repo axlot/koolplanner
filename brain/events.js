@@ -459,12 +459,19 @@ module.exports.init = function(controller) {
             "attachments": [
                 {
                     "text": "Here is how to use KoolPlanner",
-                    "color": "#2980b9"
+                    "color": "#2980b9",
+                    "mrkdwn_in": ["text", "pretext"]
                 },
                 {
                     "color": "danger",
                     "text": "`new event`",
                     "pretext": "To *create* a new event",
+                    "mrkdwn_in": ["text", "pretext"]
+                },
+                {
+                    "color": "danger",
+                    "text": "`:date: - (: date :)`",
+                    "pretext": "Use this *emoji* to view all the **upcoming events**",
                     "mrkdwn_in": ["text", "pretext"]
                 }
             ]
@@ -473,13 +480,7 @@ module.exports.init = function(controller) {
             //        "title": "Here is how to use KoolPlanner",
             //        "color": "danger",
             //        "fields": [
-            //                        //            {
-            //                "title": ":date: - (: date :)",
-            //                "text": "Text",
-            //                "mrkdwn_in": ["text", "pretext", "value"],
-            //                "value": "Use this **emoji** to view all the **upcoming events**",
-            //                "short": false
-            //            },
+            //
             //            {
             //                "title": "list [event_id]",
             //                "value": "To view the **attendees** of an event",
