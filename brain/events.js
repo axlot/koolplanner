@@ -194,13 +194,10 @@ module.exports.init = function(controller) {
     var listEvents = function(bot, message) {
         //Start Conversation
         bot.startConversation(message, function(err, convo) {
-            convo.say('Entra a la conversacion');
             bot.identifyTeam(function(err,team_id) {
-                convo.say('Identifica el equipo');
                 var teamID = team_id;
                 //Get List Of Attenddes
                 controller.storage.events.all(function(err, all_events_data) {
-                    convo.say('Entra a la base');
                     //Get Today's Date
                     var date = new Date(),
                         day = date.getDate(),
@@ -213,7 +210,7 @@ module.exports.init = function(controller) {
                     for(var i=0;i<eventsLength;i++) {
                         var eventDate = all_events_data[i].event_data.date;
                         //Push Future Events Into List
-                        if(new Date(eventDate) > new Date(formatDate) && all_events_data[i].event_data.team_id == teamID) {
+                        if(new Date(eventDate) >= new Date(formatDate) && all_events_data[i].event_data.team_id == teamID) {
                             futureEvents.push(all_events_data[i]);
                         }
                     }
@@ -228,7 +225,6 @@ module.exports.init = function(controller) {
                         //List
                         var futureLength = futureEvents.length;
                         for(var j=0;j<futureLength;j++) {
-                            console.log(futureEvents[j].event_data.title);
                             bot.reply(message, {
                                 "attachments": [
                                     {
