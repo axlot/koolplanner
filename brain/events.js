@@ -464,14 +464,20 @@ module.exports.init = function(controller) {
                 },
                 {
                     "color": "danger",
-                    "text": "`new event`",
                     "pretext": "To *create* a new event",
+                    "text": "`new event`",
                     "mrkdwn_in": ["text", "pretext"]
                 },
                 {
                     "color": "danger",
-                    "text": "`:date: - (: date :)`",
                     "pretext": "Use this *emoji* to view all the **upcoming events**",
+                    "text": ":date: - `(: date :)`",
+                    "mrkdwn_in": ["text", "pretext"]
+                },
+                {
+                    "color": "danger",
+                    "pretext": "To view the *attendees* of an event",
+                    "text": "`list [event_id]`",
                     "mrkdwn_in": ["text", "pretext"]
                 }
             ]
@@ -481,11 +487,6 @@ module.exports.init = function(controller) {
             //        "color": "danger",
             //        "fields": [
             //
-            //            {
-            //                "title": "list [event_id]",
-            //                "value": "To view the **attendees** of an event",
-            //                "short": false
-            //            },
             //            {
             //                "title": "attend [event_id]",
             //                "value": "To **attend** an event",
