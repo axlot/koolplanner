@@ -464,8 +464,8 @@ module.exports.init = function(controller) {
                 },
                 {
                     "color": "danger",
-                    "pretext": "*new event*",
-                    "text": "To **create** a new event",
+                    "pretext": "```new event```",
+                    "text": "To *create* a new event",
                     "mrkdwn_in": ["text", "pretext"]
                 }
             ]
