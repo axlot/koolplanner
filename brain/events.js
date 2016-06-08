@@ -459,7 +459,7 @@ module.exports.init = function(controller) {
             "attachments": [
                 {
                     "title": "Here is how to use KoolPlanner",
-                    "color": '#3498db',
+                    //"color": '#3498db',
                     "fields": [
                         {
                             "title": "new event",
