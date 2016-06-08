@@ -458,16 +458,18 @@ module.exports.init = function(controller) {
         bot.reply(message, {
             "attachments": [
                 {
-                    "title": "The KoolPlanner - Commands",
+                    "title": "Here is how to use KoolPlanner",
                     "color": '#3498db',
                     "fields": [
                         {
                             "title": "new event",
+                            "color": "#c0392b",
                             "value": "To **create** a new event",
                             "short": false
                         },
                         {
                             "title": ":date: - (: date :)",
+                            "mrkdwn_in": ["text", "pretext", "value"],
                             "value": "Use this **emoji** to view all the **upcoming events**",
                             "short": false
                         },
