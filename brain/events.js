@@ -160,11 +160,11 @@ module.exports.init = function(controller) {
                                 convo.stop();
                             } else {
                                 //Reply
-                                console.log(attend_data);
+                                var attendUsers = Object.keys(attend_data.attend).length;
                                 var reply_with_attachments = {
                                     'attachments': [
                                         {
-                                            'title': 'Here are the attendees for ' + event_data.event_data.title + '(' + Object.keys(attend_data.attend).length + ' people attending)',
+                                            'title': 'Here are the attendees for ' + event_data.event_data.title + '(' + attendUsers + ' people attending)',
                                             'color': '#7CD197'
                                         }
                                     ]
