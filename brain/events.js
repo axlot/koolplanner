@@ -333,6 +333,8 @@ module.exports.init = function(controller) {
         var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'');
         //Check If Event Exist
         controller.storage.events.get(eventId, function(err, event_data){
+            convo.say('Aca entra');
+            convo.say(eventId + event_data);
             //Check Team's Id
             bot.identifyTeam(function(err,teamId) {
                 if(event_data.event_data.team_id == teamId) {
@@ -363,7 +365,7 @@ module.exports.init = function(controller) {
     //Conversation Controller "MAYBE EVENT"
     controller.hears('maybe (.*)',['direct_message','direct_mention'],function(bot,message) {
         //Get Event Id
-        //var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'');
+        var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'');
         //Check If Event Exist
         controller.storage.events.get(eventId, function(err, event_data){
             //Check Team's Id
