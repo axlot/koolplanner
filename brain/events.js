@@ -151,7 +151,7 @@ module.exports.init = function(controller) {
                                 var reply_with_attachments = {
                                     'attachments': [
                                         {
-                                            'title': 'There is no attendees for ' + event_data.event_data.event_title,
+                                            'title': 'There is no attendees for ' + event_data.event_data.title,
                                             'color': '#7CD197'
                                         }
                                     ]
@@ -164,7 +164,7 @@ module.exports.init = function(controller) {
                                 var reply_with_attachments = {
                                     'attachments': [
                                         {
-                                            'title': 'Here are the attendees for ' + event_data.event_data.event_title,
+                                            'title': 'Here are the attendees for ' + event_data.event_data.title,
                                             'color': '#7CD197'
                                         }
                                     ]
