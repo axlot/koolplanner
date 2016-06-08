@@ -456,51 +456,64 @@ module.exports.init = function(controller) {
     //Conversation Contoller "HELP"
     controller.hears('help',['direct_message','direct_mention'],function(bot,message) {
         bot.reply(message, {
+
             "attachments": [
                 {
-                    "title": "Here is how to use KoolPlanner",
-                    "color": "danger",
-                    "fields": [
-                        {
-                            "title": "new event",
-                            "value": "To **create** a new event",
-                            "short": false
-                        },
-                        {
-                            "title": ":date: - (: date :)",
-                            "text": "Text",
-                            "mrkdwn_in": ["text", "pretext", "value"],
-                            "value": "Use this **emoji** to view all the **upcoming events**",
-                            "short": false
-                        },
-                        {
-                            "title": "list [event_id]",
-                            "value": "To view the **attendees** of an event",
-                            "short": false
-                        },
-                        {
-                            "title": "attend [event_id]",
-                            "value": "To **attend** an event",
-                            "short": false
-                        },
-                        {
-                            "title": "maybe [event_id]",
-                            "value": "To say that you **might attend** an event",
-                            "short": false
-                        },
-                        {
-                            "title": "no [event_id]",
-                            "value": "To say that you **cannot attend** an event",
-                            "short": false
-                        },
-                        {
-                            "title": "edit [event_id]",
-                            "value": "To **edit** the info of an event",
-                            "short": false
-                        }
-                    ]
+                    "fallback": "Here is how to use KoolPlanner",
+                    "color": "#2980b9",
+                },
+                {
+                    "color": "warning",
+                    "pretext": "new event",
+                    "text": "To **create** a new event",
+                    "mrkdwn_in": ["text", "pretext"]
                 }
             ]
+            //"attachments": [
+            //    {
+            //        "title": "Here is how to use KoolPlanner",
+            //        "color": "danger",
+            //        "fields": [
+            //            {
+            //                "title": "new event",
+            //                "value": "To **create** a new event",
+            //                "short": false
+            //            },
+            //            {
+            //                "title": ":date: - (: date :)",
+            //                "text": "Text",
+            //                "mrkdwn_in": ["text", "pretext", "value"],
+            //                "value": "Use this **emoji** to view all the **upcoming events**",
+            //                "short": false
+            //            },
+            //            {
+            //                "title": "list [event_id]",
+            //                "value": "To view the **attendees** of an event",
+            //                "short": false
+            //            },
+            //            {
+            //                "title": "attend [event_id]",
+            //                "value": "To **attend** an event",
+            //                "short": false
+            //            },
+            //            {
+            //                "title": "maybe [event_id]",
+            //                "value": "To say that you **might attend** an event",
+            //                "short": false
+            //            },
+            //            {
+            //                "title": "no [event_id]",
+            //                "value": "To say that you **cannot attend** an event",
+            //                "short": false
+            //            },
+            //            {
+            //                "title": "edit [event_id]",
+            //                "value": "To **edit** the info of an event",
+            //                "short": false
+            //            }
+            //        ]
+            //    }
+            //]
         });
     });
     //Conversation Contoller "DETAILS"
