@@ -458,62 +458,50 @@ module.exports.init = function(controller) {
         bot.reply(message, {
             "attachments": [
                 {
-                    //"fallback": "Network traffic (kb/s): How does this look? @slack-ops - Sent by Julie Dodd - https://datadog.com/path/to/event",
-                    "title": "Network traffic (kb/s)",
-                    //"title_link": "https://datadog.com/path/to/event",
-                    "text": "*bold*",
-                    "mrkdwn": true,
-                    "mrkdwn_in": ["text", "pretext"]
-                    //"image_url": "https://datadoghq.com/snapshot/path/to/snapshot.png",
-                    //"color": "#764FA5"
+                    "title": "Here is how to use KoolPlanner",
+                    "color": '#3498db',
+                    "fields": [
+                        {
+                            "title": "new event",
+                            "color": "warning",
+                            "value": "To **create** a new event",
+                            "short": false
+                        },
+                        {
+                            "title": ":date: - (: date :)",
+                            "text": "Text",
+                            "mrkdwn_in": ["text", "pretext", "value"],
+                            "value": "Use this **emoji** to view all the **upcoming events**",
+                            "short": false
+                        },
+                        {
+                            "title": "list [event_id]",
+                            "value": "To view the **attendees** of an event",
+                            "short": false
+                        },
+                        {
+                            "title": "attend [event_id]",
+                            "value": "To **attend** an event",
+                            "short": false
+                        },
+                        {
+                            "title": "maybe [event_id]",
+                            "value": "To say that you **might attend** an event",
+                            "short": false
+                        },
+                        {
+                            "title": "no [event_id]",
+                            "value": "To say that you **cannot attend** an event",
+                            "short": false
+                        },
+                        {
+                            "title": "edit [event_id]",
+                            "value": "To **edit** the info of an event",
+                            "short": false
+                        }
+                    ]
                 }
             ]
-            //"attachments": [
-            //    {
-            //        "title": "Here is how to use KoolPlanner",
-            //        "color": '#3498db',
-            //        "fields": [
-            //            {
-            //                "title": "new event",
-            //                "color": "#c0392b",
-            //                "value": "To **create** a new event",
-            //                "short": false
-            //            },
-            //            {
-            //                "title": ":date: - (: date :)",
-            //                "text": "Text",
-            //                "mrkdwn_in": ["text", "pretext", "value"],
-            //                "value": "Use this **emoji** to view all the **upcoming events**",
-            //                "short": false
-            //            },
-            //            {
-            //                "title": "list [event_id]",
-            //                "value": "To view the **attendees** of an event",
-            //                "short": false
-            //            },
-            //            {
-            //                "title": "attend [event_id]",
-            //                "value": "To **attend** an event",
-            //                "short": false
-            //            },
-            //            {
-            //                "title": "maybe [event_id]",
-            //                "value": "To say that you **might attend** an event",
-            //                "short": false
-            //            },
-            //            {
-            //                "title": "no [event_id]",
-            //                "value": "To say that you **cannot attend** an event",
-            //                "short": false
-            //            },
-            //            {
-            //                "title": "edit [event_id]",
-            //                "value": "To **edit** the info of an event",
-            //                "short": false
-            //            }
-            //        ]
-            //    }
-            //]
         });
     });
     //Conversation Contoller "DETAILS"
