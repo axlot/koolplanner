@@ -457,53 +457,94 @@ module.exports.init = function(controller) {
         bot.reply(message, {
             "attachments": [
                 {
-                    "text": "Here is how to use KoolPlanner",
-                    "color": "#2980b9",
+                    "fallback": "How it works",
+                    "color": "#36a64f",
+                    "pretext": "Here is how to use KoolPlanner\n*Create/Edit an event*",
+                    "author_name": "Create an event",
+                    "text": "Type `new event` to start the process of creating an event.",
                     "mrkdwn_in": ["text", "pretext"]
                 },
                 {
-                    "color": "danger",
-                    "pretext": "To *create* a new event",
-                    "text": "`new event`",
+                    "fallback": "Required plain-text summary of the attachment.",
+                    "color": "#36a64f",
+                    "pretext": " ",
+                    "author_name": "Edit an event",
+                    "text": "Type `edit <event_id>` to edit the info of an event. :gear:",
                     "mrkdwn_in": ["text", "pretext"]
                 },
                 {
-                    "color": "danger",
-                    "pretext": "Use this *emoji* to view all the **upcoming events**",
-                    "text": ":date: - `(:date:)`",
+                    "fallback": "Required plain-text summary of the attachment.",
+                    "color": "#70cadb",
+                    "pretext": "*Respond to an invitation*",
+                    "text": "Answer directly by clicking on the *Emoji Reaction* below a message :white_check_mark: :question: :x:\nor:  Type `attend <event_id>` to attend an event :white_check_mark:\n\t\tType `maybe <event_id>` to say that you might go to an event :question:\n\t\tType `no <event_id>` if you cannot go :x:\n",
                     "mrkdwn_in": ["text", "pretext"]
                 },
                 {
-                    "color": "danger",
-                    "pretext": "To view the *attendees* of an event",
-                    "text": "`list [event_id]`",
+                    "fallback": "Required plain-text summary of the attachment.",
+                    "color": "#443642",
+                    "pretext": "*Lists*",
+                    "author_name": "See the list of events",
+                    "text": "Use the :date: emoji (`:date:`) to view all upcoming events from your team. :date:",
                     "mrkdwn_in": ["text", "pretext"]
                 },
                 {
-                    "color": "danger",
-                    "pretext": "To *attend* an event",
-                    "text": "`attend [event_id]`",
-                    "mrkdwn_in": ["text", "pretext"]
-                },
-                {
-                    "color": "danger",
-                    "pretext": "To say that you *might attend* an event",
-                    "text": "`maybe [event_id]`",
-                    "mrkdwn_in": ["text", "pretext"]
-                },
-                {
-                    "color": "danger",
-                    "pretext": "To say that you *cannot attend* an event",
-                    "text": "`no [event_id]`",
-                    "mrkdwn_in": ["text", "pretext"]
-                },
-                {
-                    "color": "danger",
-                    "pretext": "To *edit* the info of an event",
-                    "text": "`edit [event_id]`",
+                    "fallback": "Required plain-text summary of the attachment.",
+                    "color": "#443642",
+                    "pretext": " ",
+                    "author_name": "View the list of attendees",
+                    "text": "Type `list <event_id>` to view the list of attendees of an event. :clipboard:",
                     "mrkdwn_in": ["text", "pretext"]
                 }
             ]
+            //"attachments": [
+            //    {
+            //        "text": "Here is how to use KoolPlanner",
+            //        "color": "#2980b9",
+            //        "mrkdwn_in": ["text", "pretext"]
+            //    },
+            //    {
+            //        "color": "danger",
+            //        "pretext": "To *create* a new event",
+            //        "text": "`new event`",
+            //        "mrkdwn_in": ["text", "pretext"]
+            //    },
+            //    {
+            //        "color": "danger",
+            //        "pretext": "Use this *emoji* to view all the **upcoming events**",
+            //        "text": ":date: - `(:date:)`",
+            //        "mrkdwn_in": ["text", "pretext"]
+            //    },
+            //    {
+            //        "color": "danger",
+            //        "pretext": "To view the *attendees* of an event",
+            //        "text": "`list [event_id]`",
+            //        "mrkdwn_in": ["text", "pretext"]
+            //    },
+            //    {
+            //        "color": "danger",
+            //        "pretext": "To *attend* an event",
+            //        "text": "`attend [event_id]`",
+            //        "mrkdwn_in": ["text", "pretext"]
+            //    },
+            //    {
+            //        "color": "danger",
+            //        "pretext": "To say that you *might attend* an event",
+            //        "text": "`maybe [event_id]`",
+            //        "mrkdwn_in": ["text", "pretext"]
+            //    },
+            //    {
+            //        "color": "danger",
+            //        "pretext": "To say that you *cannot attend* an event",
+            //        "text": "`no [event_id]`",
+            //        "mrkdwn_in": ["text", "pretext"]
+            //    },
+            //    {
+            //        "color": "danger",
+            //        "pretext": "To *edit* the info of an event",
+            //        "text": "`edit [event_id]`",
+            //        "mrkdwn_in": ["text", "pretext"]
+            //    }
+            //]
         });
     });
     //Conversation Contoller "DETAILS"
