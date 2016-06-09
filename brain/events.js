@@ -33,8 +33,7 @@ module.exports.init = function(controller) {
             present = new Date(),
             presentYear = present.getFullYear(),
             presentMonth = present.getMonth()+1,
-            presentDay = present.getDay()+1;
-
+            presentDay = present.getUTCDate();
 
 
         //Check If The Month And Year Has Passed
