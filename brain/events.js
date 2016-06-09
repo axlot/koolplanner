@@ -26,6 +26,7 @@ module.exports.init = function(controller) {
     //Year Of Event
     function yearOfEvent(data, bot, message) {
         //Set Present And Event Date Time
+        //CODEEEEE
         var date = data.replace(/ [0-9]{2}:[0-9]{2}/, ''),
             dateMonth = data.replace(/\/[0-9]{2}/g,''),
             dateDay = data.replace(/[0-9]{2}\//,''),
@@ -33,10 +34,13 @@ module.exports.init = function(controller) {
             presentYear = present.getFullYear(),
             presentMonth = present.getMonth()+1,
             presentDay = present.getDay()+1;
+
+
+
         //Check If The Month And Year Has Passed
         if(dateMonth < presentMonth && dateDay < presentDay) {
             //Return The Year +1 (The Event Is Next Year)
-            bot.reply(message, {"text": dateMonth + ' ' + presentMonth + ' ' + dateDay + ' ' + presentDay});
+            bot.reply(message, {"text": 'Mes del evento: ' + dateMonth + 'Mes actual: ' + presentMonth + 'Dia del evento: ' + dateDay + 'Dia actual: ' + presentDay});
             return date + '/' + presentYear + 1;
         } else if(dateMonth == presentMonth && dateDay < presentDay) {
             bot.reply(message, {"text": dateMonth + ' ' + presentMonth + ' ' + dateDay + ' ' + presentDay});
