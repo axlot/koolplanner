@@ -25,8 +25,25 @@ module.exports.init = function(controller) {
     }
     //Year Of Event
     function yearOfEvent(data) {
-        var date = data.replace(/ [0-9]{2}:[0-9]{2}/, '');
-        return date;
+        //Set Present And Event Date Time
+        var date = data.replace(/ [0-9]{2}:[0-9]{2}/, ''),
+            dateMonth = data.replace(/\/[0-9]{2}/,''),
+            dateDay = data.replace(/[0-9]{2}\//,''),
+            present = new Date(),
+            presentYear = present.getFullYear(),
+            presentMonth = present.getMonth()+1,
+            presentDay = present.getDay()+1;
+        //Check If The Month And Year Has Passed
+        if(dateMonth < presentMonth && dateDay < presentDay) {
+            //Return The Year +1 (The Event Is Next Year)
+            return date + '/' + presentYear + 1;
+        } else if(dateMonth == presentMonth && dateDay < presentDay) {
+            //Return The Year +1 (The Event Is Next Year)
+            return date + '/' + presentYear + 1;
+        } else {
+            //Return The Current Year
+            return date + '/' + presentYear;
+        }
     }
     //Event Constructor
     var Event = function(name, description, date, time, location, mTimeStamp, mChannel, teamId) {
@@ -86,7 +103,7 @@ module.exports.init = function(controller) {
                     var eTitle = convo.extractResponse('title'),
                         eDescription = convo.extractResponse('description'),
                         eLocation = convo.extractResponse('location'),
-                        eDate = yearOfEvent(convo.extractResponse('dateTime')),//convo.extractResponse('dateTime').replace(/ [0-9]{2}:[0-9]{2}/, ''),
+                        eDate = yearOfEvent(convo.extractResponse('dateTime')),
                         eTime = convo.extractResponse('dateTime').replace(/[0-9]{2}\/[0-9]{2} /, ''),
                         createdEventMsg = 'Awesome! Your event *' + eTitle + '* is planned!\n' + eDescription + '\nIt will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation +'*\nI will communicate this to your team on #Events.\n Cheers!';
                     //New Event Message
