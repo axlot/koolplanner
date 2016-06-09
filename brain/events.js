@@ -24,7 +24,7 @@ module.exports.init = function(controller) {
         convo.next();
     }
     //Year Of Event
-    function yearOfEvent(data, bot) {
+    function yearOfEvent(data, bot, message) {
         //Set Present And Event Date Time
         var date = data.replace(/ [0-9]{2}:[0-9]{2}/, ''),
             dateMonth = data.replace(/\/[0-9]{2}/,''),
@@ -107,7 +107,7 @@ module.exports.init = function(controller) {
                     var eTitle = convo.extractResponse('title'),
                         eDescription = convo.extractResponse('description'),
                         eLocation = convo.extractResponse('location'),
-                        eDate = yearOfEvent(convo.extractResponse('dateTime'), bot),
+                        eDate = yearOfEvent(convo.extractResponse('dateTime'), bot, message),
                         eTime = convo.extractResponse('dateTime').replace(/[0-9]{2}\/[0-9]{2} /, ''),
                         createdEventMsg = 'Awesome! Your event *' + eTitle + '* is planned!\n' + eDescription + '\nIt will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation +'*\nI will communicate this to your team on #Events.\n Cheers!';
                     //New Event Message
