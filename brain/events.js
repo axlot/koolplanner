@@ -28,8 +28,8 @@ module.exports.init = function(controller) {
         //Set Present And Event Date Time
         //CODEEEEE
         var date = data.replace(/ [0-9]{2}:[0-9]{2}/, ''),
-            dateMonth = data.replace(/ [0-9]{2}/g,''),
-            dateDay = data.replace(/[0-9]{2} /,''),
+            dateMonth = data.replace(/\/[0-9]{2}/,''),
+            dateDay = data.replace(/[0-9]{2}\//,''),
             present = new Date(),
             presentYear = present.getFullYear(),
             presentMonth = present.getMonth()+1,
