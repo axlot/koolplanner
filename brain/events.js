@@ -47,7 +47,7 @@ module.exports.init = function(controller) {
             return date + '/' + presentYear + 1;
         } else {
             bot.reply(message, {"text": 'ELSE'});
-            bot.reply(message, {"text": 'Mes del evento: ' + dateMonth + 'Mes actual: ' + presentMonth + 'Dia del evento: ' + dateDay + 'Dia actual: ' + presentDay});
+            bot.reply(message, {"text": 'Fehca del evento: ' + dateMonth});
             //Return The Current Year
             return date + '/' + presentYear;
         }
