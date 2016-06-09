@@ -104,60 +104,27 @@ module.exports.init = function(controller) {
                             * CRON PARA SALVAR CADA TANTO LAS REACTIONS Y TAMBIEN HAY QUE SALVAR
                             * LOS DATOS DE LOS REACTIONS EN EL EVENTO
                             * */
-                            //bot.api.reactions.add({
-                            //    timestamp: message.ts,
-                            //    channel: message.channel,
-                            //    name: 'white_check_mark',
-                            //},function(err) {
-                            //    if (err) { console.log(err) }
-                            //});
-                            //bot.api.reactions.add({
-                            //    timestamp: message.ts,
-                            //    channel: message.channel,
-                            //    name: 'question',
-                            //},function(err) {
-                            //    if (err) { console.log(err) }
-                            //});
-                            //bot.api.reactions.add({
-                            //    timestamp: message.ts,
-                            //    channel: message.channel,
-                            //    name: 'x',
-                            //},function(err) {
-                            //    if (err) { console.log(err) }
-                            //});
-
-                            bot.startConversation(message,function(err,convo) {
-                                convo.ask(':white_check_mark: :question: :x:',[
-                                    {
-                                        pattern: ':white_check_mark:',
-                                        callback: function(response,convo) {
-                                            convo.say('You say YES');
-                                            convo.next();
-                                        }
-                                    },
-                                    {
-                                        pattern: ':question:',
-                                        callback: function(response,convo) {
-                                            convo.say('You say NO');
-                                            convo.next();
-                                        }
-                                    },
-                                    {
-                                        pattern: ':question:',
-                                        callback: function(response,convo) {
-                                            convo.say('You say MAYBE');
-                                            convo.next();
-                                        }
-                                    },
-                                    {
-                                        pattern: 'x',
-                                        callback: function(response,convo) {
-                                            convo.next();
-                                        }
-                                    }
-                                ]);
-                            })
-
+                            bot.api.reactions.add({
+                                timestamp: message.ts,
+                                channel: message.channel,
+                                name: 'white_check_mark',
+                            },function(err) {
+                                if (err) { console.log(err) }
+                            });
+                            bot.api.reactions.add({
+                                timestamp: message.ts,
+                                channel: message.channel,
+                                name: 'question',
+                            },function(err) {
+                                if (err) { console.log(err) }
+                            });
+                            bot.api.reactions.add({
+                                timestamp: message.ts,
+                                channel: message.channel,
+                                name: 'x',
+                            },function(err) {
+                                if (err) { console.log(err) }
+                            });
                         });
 
                     });
