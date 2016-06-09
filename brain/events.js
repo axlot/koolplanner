@@ -131,18 +131,21 @@ module.exports.init = function(controller) {
                                     {
                                         pattern: 'white_check_mark',
                                         callback: function(response,convo) {
+                                            convo.say('You say YES');
                                             convo.next();
                                         }
                                     },
                                     {
                                         pattern: 'question',
                                         callback: function(response,convo) {
+                                            convo.say('You say NO');
                                             convo.next();
                                         }
                                     },
                                     {
                                         pattern: 'question',
                                         callback: function(response,convo) {
+                                            convo.say('You say MAYBE');
                                             convo.next();
                                         }
                                     },
