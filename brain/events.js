@@ -93,7 +93,10 @@ module.exports.init = function(controller) {
                     }, function(err,response) {
                         //Broadcast Event
                         bot.api.chat.postMessage({
-                            text: 'Hey there! the user ' + userName + ' has planned a new event: ' + eTitle +'!\n' + 'Here\'s the description of the event:\n' + eDescription + '\nTo answer, click on the good emoji below.\n You may only choose one option. to answer click on the good emoji below',
+                            "attachments": [{
+                                "text": 'Hey there! the user _' + userName + '_ has planned a new event: *' + eTitle +'*!\n' + '_<< ' + eDescription + ' >>_\n' + 'It will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation + '\nTo answer, click on the good emoji below.\n You may only *choose one option*.',
+                                "mrkdwn_in": ["text", "pretext"]
+                            }],
                             channel: '#general'
                         }, function(err, message) {
                             /*
