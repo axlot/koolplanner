@@ -79,19 +79,18 @@ module.exports.init = function(controller) {
                         eLocation = convo.extractResponse('location'),
                         eDate = convo.extractResponse('dateTime').replace(/ [0-9]{2}:[0-9]{2}/, ''),
                         eTime = convo.extractResponse('dateTime').replace(/[0-9]{2}\/[0-9]{2}\/[0-9]{4} /, ''),
-                        createdEventMsg = 'Awesome! Your event ' + eTitle + ' is planned!\n' + eDescription + '\nIt will take place in ' + eDate + ' ' + eTime + '\nI will communicate this to your team on #Events.\n Cheers!';
+                        createdEventMsg = 'Awesome! Your event *' + eTitle + '* is planned!\n' + eDescription + '\nIt will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation +'*\nI will communicate this to your team on #Events.\n Cheers!';
                     //New Event Message
-                    bot.reply(message, createdEventMsg, function(err,response) {
+                    bot.reply(message, {
+                        "attachments": [{
+                            "text": createdEventMsg,
+                            "mrkdwn_in": ["text", "pretext"]
+                        }]
+                    }, function(err,response) {
                         //Broadcast Event
                         bot.api.chat.postMessage({
-                            "attachments":
-                            [
-                                {
-                                "text": 'Hey there! the user X ' + 'has planned a new event: *' + eTitle +'*!\n' + 'Here\'s the description of the event:\n' + eDescription + '\nTo answer, click on the good emoji below.\n You may only choose one option. to answer click on the good emoji below',
-                                "mrkdwn_in": ["text", "pretext"]
-                                }
-                            ],
-                            "channel": '#general'
+                            text: 'Hey there! the user X ' + 'has planned a new event: ' + eTitle +'!\n' + 'Here\'s the description of the event:\n' + eDescription + '\nTo answer, click on the good emoji below.\n You may only choose one option. to answer click on the good emoji below',
+                            channel: '#general'
                         }, function(err, message) {
                             /*
                             * CRON PARA SALVAR CADA TANTO LAS REACTIONS Y TAMBIEN HAY QUE SALVAR
