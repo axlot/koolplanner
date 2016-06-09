@@ -23,6 +23,11 @@ module.exports.init = function(controller) {
         });
         convo.next();
     }
+    //Year Of Event
+    function yearOfEvent(data) {
+        var date = data.replace(/ [0-9]{2}:[0-9]{2}/, '');
+        return date;
+    }
     //Event Constructor
     var Event = function(name, description, date, time, location, mTimeStamp, mChannel, teamId) {
         this.title = name;
@@ -52,8 +57,8 @@ module.exports.init = function(controller) {
                 convo.next();
             }, {'key': 'description'});
             //Get Event Date And Time
-            var re = '(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\\\d\\\d ([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]';
-            convo.ask('When will take place (format: mm/dd/yyyy hh:mm)?', [
+            var re = '(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01]) ([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]';
+            convo.ask('When will take place (format: mm/dd hh:mm)?', [
                 {
                     //Test The Date Against This RegExp To Match The Format
                     pattern: new RegExp(re, "g"),
@@ -81,7 +86,7 @@ module.exports.init = function(controller) {
                     var eTitle = convo.extractResponse('title'),
                         eDescription = convo.extractResponse('description'),
                         eLocation = convo.extractResponse('location'),
-                        eDate = convo.extractResponse('dateTime').replace(/ [0-9]{2}:[0-9]{2}/, ''),
+                        eDate = yearOfEvent(convo.extractResponse('dateTime')),//convo.extractResponse('dateTime').replace(/ [0-9]{2}:[0-9]{2}/, ''),
                         eTime = convo.extractResponse('dateTime').replace(/[0-9]{2}\/[0-9]{2}\/[0-9]{4} /, ''),
                         createdEventMsg = 'Awesome! Your event *' + eTitle + '* is planned!\n' + eDescription + '\nIt will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation +'*\nI will communicate this to your team on #Events.\n Cheers!';
                     //New Event Message
