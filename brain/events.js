@@ -87,7 +87,7 @@ module.exports.init = function(controller) {
                         eDescription = convo.extractResponse('description'),
                         eLocation = convo.extractResponse('location'),
                         eDate = yearOfEvent(convo.extractResponse('dateTime')),//convo.extractResponse('dateTime').replace(/ [0-9]{2}:[0-9]{2}/, ''),
-                        eTime = convo.extractResponse('dateTime').replace(/[0-9]{2}\/[0-9]{2}\/[0-9]{4} /, ''),
+                        eTime = convo.extractResponse('dateTime').replace(/[0-9]{2}\/[0-9]{2} /, ''),
                         createdEventMsg = 'Awesome! Your event *' + eTitle + '* is planned!\n' + eDescription + '\nIt will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation +'*\nI will communicate this to your team on #Events.\n Cheers!';
                     //New Event Message
                     bot.reply(message, {
