@@ -126,32 +126,35 @@ module.exports.init = function(controller) {
                             //    if (err) { console.log(err) }
                             //});
 
-                            convo.ask('Shall we proceed Say YES, NO or DONE to quit.',[
-                                {
-                                    pattern: 'white_check_mark',
-                                    callback: function(response,convo) {
-                                        convo.next();
+                            bot.startConversation(message,function(err,convo) {
+                                convo.ask('white_check_mark question x',[
+                                    {
+                                        pattern: 'white_check_mark',
+                                        callback: function(response,convo) {
+                                            convo.next();
+                                        }
+                                    },
+                                    {
+                                        pattern: 'question',
+                                        callback: function(response,convo) {
+                                            convo.next();
+                                        }
+                                    },
+                                    {
+                                        pattern: 'question',
+                                        callback: function(response,convo) {
+                                            convo.next();
+                                        }
+                                    },
+                                    {
+                                        pattern: 'x',
+                                        callback: function(response,convo) {
+                                            convo.next();
+                                        }
                                     }
-                                },
-                                {
-                                    pattern: 'question',
-                                    callback: function(response,convo) {
-                                        convo.next();
-                                    }
-                                },
-                                {
-                                    pattern: 'question',
-                                    callback: function(response,convo) {
-                                        convo.next();
-                                    }
-                                },
-                                {
-                                    pattern: 'x',
-                                    callback: function(response,convo) {
-                                        convo.next();
-                                    }
-                                }
-                            ]);
+                                ]);
+                            })
+
                         });
 
                     });
