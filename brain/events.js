@@ -104,27 +104,54 @@ module.exports.init = function(controller) {
                             * CRON PARA SALVAR CADA TANTO LAS REACTIONS Y TAMBIEN HAY QUE SALVAR
                             * LOS DATOS DE LOS REACTIONS EN EL EVENTO
                             * */
-                            bot.api.reactions.add({
-                                timestamp: message.ts,
-                                channel: message.channel,
-                                name: 'white_check_mark',
-                            },function(err) {
-                                if (err) { console.log(err) }
-                            });
-                            bot.api.reactions.add({
-                                timestamp: message.ts,
-                                channel: message.channel,
-                                name: 'question',
-                            },function(err) {
-                                if (err) { console.log(err) }
-                            });
-                            bot.api.reactions.add({
-                                timestamp: message.ts,
-                                channel: message.channel,
-                                name: 'x',
-                            },function(err) {
-                                if (err) { console.log(err) }
-                            });
+                            //bot.api.reactions.add({
+                            //    timestamp: message.ts,
+                            //    channel: message.channel,
+                            //    name: 'white_check_mark',
+                            //},function(err) {
+                            //    if (err) { console.log(err) }
+                            //});
+                            //bot.api.reactions.add({
+                            //    timestamp: message.ts,
+                            //    channel: message.channel,
+                            //    name: 'question',
+                            //},function(err) {
+                            //    if (err) { console.log(err) }
+                            //});
+                            //bot.api.reactions.add({
+                            //    timestamp: message.ts,
+                            //    channel: message.channel,
+                            //    name: 'x',
+                            //},function(err) {
+                            //    if (err) { console.log(err) }
+                            //});
+
+                            convo.ask('Shall we proceed Say YES, NO or DONE to quit.',[
+                                {
+                                    pattern: 'white_check_mark',
+                                    callback: function(response,convo) {
+                                        convo.next();
+                                    }
+                                },
+                                {
+                                    pattern: 'question',
+                                    callback: function(response,convo) {
+                                        convo.next();
+                                    }
+                                },
+                                {
+                                    pattern: 'question',
+                                    callback: function(response,convo) {
+                                        convo.next();
+                                    }
+                                },
+                                {
+                                    pattern: 'x',
+                                    callback: function(response,convo) {
+                                        convo.next();
+                                    }
+                                }
+                            ]);
                         });
 
                     });
