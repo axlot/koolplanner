@@ -24,7 +24,7 @@ module.exports.init = function(controller) {
         convo.next();
     }
     //Year Of Event
-    function yearOfEvent(data) {
+    function yearOfEvent(data, bot) {
         //Set Present And Event Date Time
         var date = data.replace(/ [0-9]{2}:[0-9]{2}/, ''),
             dateMonth = data.replace(/\/[0-9]{2}/,''),
@@ -36,15 +36,15 @@ module.exports.init = function(controller) {
         //Check If The Month And Year Has Passed
         if(dateMonth < presentMonth && dateDay < presentDay) {
             //Return The Year +1 (The Event Is Next Year)
-            convo.say(dateMonth + ' ' + presentMonth + ' ' + dateDay + ' ' + presentDay);
+            bot.reply(message, {"text": dateMonth + ' ' + presentMonth + ' ' + dateDay + ' ' + presentDay});
             return date + '/' + presentYear + 1;
         } else if(dateMonth == presentMonth && dateDay < presentDay) {
-            convo.say(dateMonth + ' ' + presentMonth + ' ' + dateDay + ' ' + presentDay);
+            bot.reply(message, {"text": dateMonth + ' ' + presentMonth + ' ' + dateDay + ' ' + presentDay});
             //Return The Year +1 (The Event Is Next Year)
             return date + '/' + presentYear + 1;
         } else {
-            convo.say('ELSE');
-            convo.say(dateMonth + ' ' + presentMonth + ' ' + dateDay + ' ' + presentDay);
+            bot.reply(message, {"text": 'ELSE'});
+            bot.reply(message, {"text": dateMonth + ' ' + presentMonth + ' ' + dateDay + ' ' + presentDay});
             //Return The Current Year
             return date + '/' + presentYear;
         }
@@ -107,7 +107,7 @@ module.exports.init = function(controller) {
                     var eTitle = convo.extractResponse('title'),
                         eDescription = convo.extractResponse('description'),
                         eLocation = convo.extractResponse('location'),
-                        eDate = yearOfEvent(convo.extractResponse('dateTime')),
+                        eDate = yearOfEvent(convo.extractResponse('dateTime'), bot),
                         eTime = convo.extractResponse('dateTime').replace(/[0-9]{2}\/[0-9]{2} /, ''),
                         createdEventMsg = 'Awesome! Your event *' + eTitle + '* is planned!\n' + eDescription + '\nIt will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation +'*\nI will communicate this to your team on #Events.\n Cheers!';
                     //New Event Message
