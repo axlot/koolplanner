@@ -28,7 +28,7 @@ module.exports.init = function(controller) {
         //Set Present And Event Date Time
         var date = data.replace(/ [0-9]{2}:[0-9]{2}/, ''),
             dateMonth = data.replace(/\/[0-9]{2}/,''),
-            dateDay = data.replace(/[0-9]{2}\/ /,''),
+            dateDay = data.replace(/[0-9]{2}\//,''),
             present = new Date(),
             presentYear = present.getFullYear(),
             presentMonth = present.getMonth()+1,
@@ -36,12 +36,15 @@ module.exports.init = function(controller) {
         //Check If The Month And Year Has Passed
         if(dateMonth < presentMonth && dateDay < presentDay) {
             //Return The Year +1 (The Event Is Next Year)
-            convo.say('ES EL AÑO QUE VIENE');
+            convo.say(dateMonth + ' ' + presentMonth + ' ' + dateDay + ' ' + presentDay);
             return date + '/' + presentYear + 1;
         } else if(dateMonth == presentMonth && dateDay < presentDay) {
+            convo.say(dateMonth + ' ' + presentMonth + ' ' + dateDay + ' ' + presentDay);
             //Return The Year +1 (The Event Is Next Year)
             return date + '/' + presentYear + 1;
         } else {
+            convo.say('ELSE');
+            convo.say(dateMonth + ' ' + presentMonth + ' ' + dateDay + ' ' + presentDay);
             //Return The Current Year
             return date + '/' + presentYear;
         }
