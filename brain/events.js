@@ -127,7 +127,7 @@ module.exports.init = function(controller) {
                             //});
 
                             bot.startConversation(message,function(err,convo) {
-                                convo.ask('white_check_mark question x',[
+                                convo.ask(':white_check_mark: :question: :x:',[
                                     {
                                         pattern: 'white_check_mark',
                                         callback: function(response,convo) {
