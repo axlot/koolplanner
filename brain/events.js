@@ -129,21 +129,21 @@ module.exports.init = function(controller) {
                             bot.startConversation(message,function(err,convo) {
                                 convo.ask(':white_check_mark: :question: :x:',[
                                     {
-                                        pattern: 'white_check_mark',
+                                        pattern: ':white_check_mark:',
                                         callback: function(response,convo) {
                                             convo.say('You say YES');
                                             convo.next();
                                         }
                                     },
                                     {
-                                        pattern: 'question',
+                                        pattern: ':question:',
                                         callback: function(response,convo) {
                                             convo.say('You say NO');
                                             convo.next();
                                         }
                                     },
                                     {
-                                        pattern: 'question',
+                                        pattern: ':question:',
                                         callback: function(response,convo) {
                                             convo.say('You say MAYBE');
                                             convo.next();
