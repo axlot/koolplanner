@@ -38,6 +38,10 @@ module.exports.init = function(controller) {
     var conversation = function (bot, message, eventId) {
         //Start Conversation
         bot.startConversation(message, function(err, convo) {
+            var userName = '';
+            bot.api.users.info({user: message.user}, function(err, user) {
+                userName = user.user.real_name;
+            });
             //Get Event Title
             convo.say('Hey! Let\'s plan this event together!');
             convo.ask('First, what is the title of the event?', function(response, convo) {
@@ -89,7 +93,7 @@ module.exports.init = function(controller) {
                     }, function(err,response) {
                         //Broadcast Event
                         bot.api.chat.postMessage({
-                            text: 'Hey there! the user X ' + 'has planned a new event: ' + eTitle +'!\n' + 'Here\'s the description of the event:\n' + eDescription + '\nTo answer, click on the good emoji below.\n You may only choose one option. to answer click on the good emoji below',
+                            text: 'Hey there! the user ' + userName + ' has planned a new event: ' + eTitle +'!\n' + 'Here\'s the description of the event:\n' + eDescription + '\nTo answer, click on the good emoji below.\n You may only choose one option. to answer click on the good emoji below',
                             channel: '#general'
                         }, function(err, message) {
                             /*
