@@ -84,8 +84,14 @@ module.exports.init = function(controller) {
                     bot.reply(message, createdEventMsg, function(err,response) {
                         //Broadcast Event
                         bot.api.chat.postMessage({
-                            text: 'Hey there! the user X ' + 'has planned a new event: ' + eTitle +'!\n' + 'Here\'s the description of the event:\n' + eDescription + '\nTo answer, click on the good emoji below.\n You may only choose one option. to answer click on the good emoji below',
-                            channel: '#general'
+                            "attachments":
+                            [
+                                {
+                                "text": 'Hey there! the user X ' + 'has planned a new event: *' + eTitle +'*!\n' + 'Here\'s the description of the event:\n' + eDescription + '\nTo answer, click on the good emoji below.\n You may only choose one option. to answer click on the good emoji below',
+                                "mrkdwn_in": ["text", "pretext"]
+                                }
+                            ],
+                            "channel": '#general'
                         }, function(err, message) {
                             /*
                             * CRON PARA SALVAR CADA TANTO LAS REACTIONS Y TAMBIEN HAY QUE SALVAR
