@@ -34,20 +34,16 @@ module.exports.init = function(controller) {
             presentYear = present.getFullYear(),
             presentMonth = present.getMonth()+1,
             presentDay = present.getUTCDate();
-
-
         //Check If The Month And Year Has Passed
         if(dateMonth < presentMonth && dateDay < presentDay) {
             //Return The Year +1 (The Event Is Next Year)
-            bot.reply(message, {"text": 'Mes del evento: ' + dateMonth + 'Mes actual: ' + presentMonth + 'Dia del evento: ' + dateDay + 'Dia actual: ' + presentDay});
-            return date + '/' + presentYear + 1;
+            presentYear++;
+            return date + '/' + presentYear;
         } else if(dateMonth == presentMonth && dateDay < presentDay) {
-            bot.reply(message, {"text": dateMonth + ' ' + presentMonth + ' ' + dateDay + ' ' + presentDay});
             //Return The Year +1 (The Event Is Next Year)
-            return date + '/' + presentYear + 1;
+            presentYear++;
+            return date + '/' + presentYear;
         } else {
-            bot.reply(message, {"text": 'ELSE'});
-            bot.reply(message, {"text": 'Fecha del evento: ' + date});
             bot.reply(message, {"text": 'Mes del evento: ' + dateMonth + 'Mes actual: ' + presentMonth + 'Dia del evento: ' + dateDay + 'Dia actual: ' + presentDay});
             //Return The Current Year
             return date + '/' + presentYear;
