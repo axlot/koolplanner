@@ -133,7 +133,7 @@ module.exports.init = function(controller) {
                         if (event_data != null && typeof event_data.no_attend != "undefined") {
                             no_attend = event_data.no_attend;
                         }
-                        maybe[user] = true;
+                        no_attend[user] = true;
                         //Save Attend
                         controller.storage.noAttend.save({id: eventId, no_attend:no_attend}, function(err) {});
                     });
