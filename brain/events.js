@@ -142,10 +142,9 @@ module.exports.init = function(controller) {
         });
     }
     //Check User's RSVP Last Action
-    function checkRSVP(userId,desition,bot,message) {
+    function checkRSVP(desition,bot,message) {
         //Get User ID and RSVP Choice
-        var user = userId | null,
-            rsvp = desition;
+        var rsvp = desition;
         //Check Desition
         if(rsvp == 'attend') {
             bot.reply(message, 'You WILL go to this event');
