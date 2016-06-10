@@ -155,9 +155,20 @@ module.exports.init = function(controller) {
             rsvp = desition;
         //Check Desition
         if(rsvp == 'attend') {
-            attend[user] = false;
-            //Delete No And Maybe RSVP
-            controller.storage.maybe.save({id: event, maybe:maybe}, function(err) {});
+            //Set No And Maybe from RSVP to FALSE
+            controller.storage.events.get(eventId, function(err, event_data){
+                //Check Team's Id
+                controller.storage.rsvp.get(eventId, function(err, event_data) {
+                    var maybe = {};
+                    //Check If Attend's Already Exists
+                    if (event_data != null && typeof event_data.maybe != "undefined") {
+                        maybe = event_data.maybe;
+                    }
+                    maybe[user] = false;
+                    //Save Attend
+                    controller.storage.maybe.save({id: eventId, maybe:maybe}, function(err) {});
+                });
+            });
             //Reply With Message
             bot.reply(message, 'Got it, ' + user + '. You\'re now going to this event!');
         } else if(rsvp == 'maybe') {
