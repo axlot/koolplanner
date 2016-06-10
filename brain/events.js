@@ -70,9 +70,10 @@ module.exports.init = function(controller) {
                     });
                     bot.api.users.info({user: message.user}, function(err, user) {
                         //Get User's Name
-                        var userName = user.user.real_name;
+                        var userName = user.user.real_name,
+                            userId = user.id;
                         //Call To Check User's RSVP Last Action
-                        checkRSVP(eventId,userName,'attend',bot,message);
+                        checkRSVP(eventId,userName,userId,'attend',bot,message);
                     });
                 } else {
                     bot.startConversation(message, function(err, convo) {
@@ -148,9 +149,10 @@ module.exports.init = function(controller) {
         });
     }
     //Check User's RSVP Last Action
-    function checkRSVP(eventId,userName,desition,bot,message) {
+    function checkRSVP(eventId,userName,userId,desition,bot,message) {
         //Get User ID and RSVP Choice
         var user = userName,
+            userID = userId,
             eventId = eventId,
             rsvp = desition;
         //Check Desition
@@ -164,7 +166,7 @@ module.exports.init = function(controller) {
                     if (event_data != null && typeof event_data.maybe != "undefined") {
                         maybe = event_data.maybe;
                     }
-                    maybe[user] = false;
+                    maybe[userID] = false;
                     //Save Attend
                     controller.storage.maybe.save({id: eventId, maybe:maybe}, function(err) {});
                 });
