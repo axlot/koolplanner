@@ -41,7 +41,6 @@ module.exports.init = function(controller) {
     function validateUser(bot) {
         //Check Team ID
         return true;
-
     };
     //Year Of Event
     function yearOfEvent(data, bot, message) {
@@ -582,7 +581,7 @@ module.exports.init = function(controller) {
             //Start Conversation
             bot.identifyTeam(function(err,team_id) {
                 //Code to create and store the new event
-                bot.reply(team_id);
+                bot.reply(message, team_id);
                 //var userTeamId = team_id;
                 //controller.storage.events.get(eventId, function(err, event_data){
                 //    if(event_data.event_data.team_id == userTeamId) {
@@ -594,7 +593,7 @@ module.exports.init = function(controller) {
                 //});
 
             });
-            createEvent(bot, message, eventId);
+            //createEvent(bot, message, eventId);
         } else {
             bot.reply(message, 'This is not the event you\'re looking for...');
         }
