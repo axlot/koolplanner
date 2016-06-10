@@ -151,7 +151,7 @@ module.exports.init = function(controller) {
     function checkRSVP(eventId,userName,desition,bot,message) {
         //Get User ID and RSVP Choice
         var user = userName,
-            event = eventId,
+            eventId = eventId,
             rsvp = desition;
         //Check Desition
         if(rsvp == 'attend') {
