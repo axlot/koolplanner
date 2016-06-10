@@ -128,14 +128,14 @@ module.exports.init = function(controller) {
                     var user = message.user;
                     //Get Attenddes List
                     controller.storage.noAttend.get(eventId, function(err, event_data) {
-                        var maybe = {};
+                        var no_attend = {};
                         //Check If Attend's Already Exists
-                        if (event_data != null && typeof event_data.maybe != "undefined") {
-                            maybe = event_data.maybe;
+                        if (event_data != null && typeof event_data.no_attend != "undefined") {
+                            no_attend = event_data.no_attend;
                         }
                         maybe[user] = true;
                         //Save Attend
-                        controller.storage.noAttend.save({id: eventId, maybe:maybe}, function(err) {});
+                        controller.storage.noAttend.save({id: eventId, no_attend:no_attend}, function(err) {});
                     });
                 } else {
                     bot.startConversation(message, function(err, convo) {
@@ -157,7 +157,7 @@ module.exports.init = function(controller) {
             rsvp = desition;
         //Check Desition
         if(rsvp == 'attend') {
-            //Set No And Maybe from RSVP to FALSE
+            //Set RSVP - Maybe User To FALSE
             controller.storage.events.get(eventId, function(err, event_data){
                 //Check Team's Id
                 controller.storage.rsvp.get(eventId, function(err, event_data) {
@@ -169,6 +169,20 @@ module.exports.init = function(controller) {
                     maybe[userID] = false;
                     //Save Attend
                     controller.storage.maybe.save({id: eventId, maybe:maybe}, function(err) {});
+                });
+            });
+            //Set RSVP - noAttend User To FALSE
+            controller.storage.events.get(eventId, function(err, event_data){
+                //Check Team's Id
+                controller.storage.rsvp.get(eventId, function(err, event_data) {
+                    var no_attend = {};
+                    //Check If Attend's Already Exists
+                    if (event_data != null && typeof event_data.maybe != "undefined") {
+                        no_attend = event_data.no_attend;
+                    }
+                    no_attend[userID] = false;
+                    //Save Attend
+                    controller.storage.noAttend.save({id: eventId, no_attend:no_attend}, function(err) {});
                 });
             });
             //Reply With Message
