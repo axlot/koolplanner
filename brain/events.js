@@ -582,8 +582,17 @@ module.exports.init = function(controller) {
     controller.hears('edit (.*)',['direct_message','direct_mention'],function(bot,message) {
         //Get Event ID
         var eventId = message.match[1];
-        //Call To Validate User Function
-        validateUser(bot,message,eventId)
+        controller.storage.events.get(eventId, function(err, event_data) {
+            if(event_data != null) {
+                //Call To Validate User Function
+                validateUser(bot,message,eventId);
+            } else {
+                bot.api.users.info({user: message.user}, function(err, user) {
+                    convo.say('Hey, ' + user.user.real_name + ' there is no event with that ID!');
+                    convo.next();
+                });
+            }
+        });
     });
     //Conversation Controller "ATTEND EVENT"
     controller.hears('attend (.*)',['direct_message','direct_mention'],function(bot,message) {
