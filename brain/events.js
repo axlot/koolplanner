@@ -206,7 +206,7 @@ module.exports.init = function(controller) {
                 if (attend_data != null && typeof attend_data.attend != "undefined") {
                     attend = attend_data.attend;
                 }
-                attend[user] = false;
+                attend[userID] = false;
                 //Save Attend
                 controller.storage.attend.save({id: eventId, attend:attend}, function(err) {});
             });
