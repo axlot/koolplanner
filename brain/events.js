@@ -40,6 +40,7 @@ module.exports.init = function(controller) {
     //Validate User
     function validateUser() {
         //Code
+        return true;
     }
     //Year Of Event
     function yearOfEvent(data, bot, message) {
@@ -575,14 +576,13 @@ module.exports.init = function(controller) {
     controller.hears('edit (.*)',['direct_message','direct_mention'],function(bot,message) {
         //Get Event ID
         var eventId = message.match[1];
-        createEvent(bot, message, eventId);
         //Call To Validate User Function
-        //if(validateUser()) {
-        //    //Start Conversation
-        //    createEvent(bot, message, eventId);
-        //} else {
-        //    bot.reply(message, 'This is not the event you\'re looking for...');
-        //}
+        if(validateUser()) {
+            //Start Conversation
+            createEvent(bot, message, eventId);
+        } else {
+            bot.reply(message, 'This is not the event you\'re looking for...');
+        }
     });
     //Conversation Controller "ATTEND EVENT"
     controller.hears('attend (.*)',['direct_message','direct_mention'],function(bot,message) {
