@@ -84,7 +84,36 @@ module.exports.init = function(controller) {
         });
     }
     //Maybe Function
-
+    function maybe(eventId,bot,message) {
+        //Check If Event Exist
+        controller.storage.events.get(eventId, function(err, event_data){
+            //Check Team's Id
+            bot.identifyTeam(function(err,teamId) {
+                if(event_data != null && event_data.event_data.team_id == teamId) {
+                    //Get User
+                    var user = message.user;
+                    //Get Attenddes List
+                    controller.storage.rsvp.get(eventId, function(err, event_data) {
+                        var maybe = {};
+                        //Check If Attend's Already Exists
+                        if (event_data != null && typeof event_data.maybe != "undefined") {
+                            maybe = event_data.maybe;
+                        }
+                        maybe[user] = true;
+                        //Save Attend
+                        controller.storage.maybe.save({id: eventId, maybe:maybe}, function(err) {});
+                    });
+                } else {
+                    bot.startConversation(message, function(err, convo) {
+                        bot.api.users.info({user: message.user}, function(err, user) {
+                            convo.say('Hey, ' + user.user.real_name + ' there is no event with that ID!');
+                        });
+                        convo.next();
+                    });
+                }
+            });
+        });
+    }
     //No Function
 
     //Event Constructor
@@ -407,40 +436,15 @@ module.exports.init = function(controller) {
     controller.hears('attend (.*)',['direct_message','direct_mention'],function(bot,message) {
         //Get Event Id
         var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'');
+        //Call To Attend Function
         attend(eventId,bot,message);
     });
     //Conversation Controller "MAYBE EVENT"
     controller.hears('maybe (.*)',['direct_message','direct_mention'],function(bot,message) {
         //Get Event Id
         var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'');
-        //Check If Event Exist
-        controller.storage.events.get(eventId, function(err, event_data){
-            //Check Team's Id
-            bot.identifyTeam(function(err,teamId) {
-                if(event_data != null && event_data.event_data.team_id == teamId) {
-                    //Get User
-                    var user = message.user;
-                    //Get Attenddes List
-                    controller.storage.rsvp.get(eventId, function(err, event_data) {
-                        var maybe = {};
-                        //Check If Attend's Already Exists
-                        if (event_data != null && typeof event_data.maybe != "undefined") {
-                            maybe = event_data.maybe;
-                        }
-                        maybe[user] = true;
-                        //Save Attend
-                        controller.storage.maybe.save({id: eventId, maybe:maybe}, function(err) {});
-                    });
-                } else {
-                    bot.startConversation(message, function(err, convo) {
-                        bot.api.users.info({user: message.user}, function(err, user) {
-                            convo.say('Hey, ' + user.user.real_name + ' there is no event with that ID!');
-                        });
-                        convo.next();
-                    });
-                }
-            });
-        });
+        //Call To Maybe Function
+        maybe(eventId,bot,message);
     });
     //Conversation Controller "NO EVENT"
     controller.hears('no (.*)',['direct_message','direct_mention'],function(bot,message) {
