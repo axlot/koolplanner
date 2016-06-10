@@ -68,6 +68,8 @@ module.exports.init = function(controller) {
                         //Save Attend
                         controller.storage.attend.save({id: eventId, attend:attend}, function(err) {});
                     });
+                    //Call To Check User's RSVP Last Action
+                    checkRSVP('attend',bot,message)
                 } else {
                     bot.startConversation(message, function(err, convo) {
                         bot.api.users.info({user: message.user}, function(err, user) {
@@ -476,8 +478,6 @@ module.exports.init = function(controller) {
         var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'');
         //Call To Attend Function
         attend(eventId,bot,message);
-        //Call To Check User's RSVP Last Action
-        checkRSVP(userId,'attend',bot,message)
     });
     //Conversation Controller "MAYBE EVENT"
     controller.hears('maybe (.*)',['direct_message','direct_mention'],function(bot,message) {
