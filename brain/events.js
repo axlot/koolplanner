@@ -71,7 +71,7 @@ module.exports.init = function(controller) {
                     bot.api.users.info({user: message.user}, function(err, user) {
                         //Get User's Name
                         var userName = user.user.real_name,
-                            userId = user.id;
+                            userId = user.user.id;
                         //Call To Check User's RSVP Last Action
                         checkRSVP(eventId,userName,userId,'attend',bot,message);
                     });
