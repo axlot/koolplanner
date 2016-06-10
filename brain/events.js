@@ -39,8 +39,19 @@ module.exports.init = function(controller) {
     }
     //Validate User
     function validateUser() {
-        //Code
-        return false;
+        //Check Team ID
+        bot.identifyTeam(function(err,team_id) {
+            //Code to create and store the new event
+            var userTeamId = team_id;
+            controller.storage.events.get(eventId, function(err, event_data){
+                if(event_data.event_data.team_id == userTeamId) {
+                    //Code To Chek User's Id
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        });
     }
     //Year Of Event
     function yearOfEvent(data, bot, message) {
