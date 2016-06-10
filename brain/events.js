@@ -579,12 +579,13 @@ module.exports.init = function(controller) {
         //Get Event ID
         var eventId = message.match[1];
         //Call To Validate User Function
-        if(validateUser(message,eventId)) {
-            //Start Conversation
-            createEvent(bot, message, eventId);
-        } else {
-            bot.reply(message, 'This is not the event you\'re looking for...');
-        }
+        validateUser(message,eventId);
+        //if(validateUser(message,eventId)) {
+        //    //Start Conversation
+        //    createEvent(bot, message, eventId);
+        //} else {
+        //    bot.reply(message, 'This is not the event you\'re looking for...');
+        //}
     });
     //Conversation Controller "ATTEND EVENT"
     controller.hears('attend (.*)',['direct_message','direct_mention'],function(bot,message) {
