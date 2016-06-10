@@ -222,7 +222,7 @@ module.exports.init = function(controller) {
                 });
             });
             //Reply With Message
-            bot.reply(message, 'Got it, ' + user + '. You\'re now going to this event!');
+            bot.reply(message, 'Got it, you’re attending ' + eventId);
         } else if(rsvp == 'maybe') {
             //Set RSVP - Attend User To FALSE
             controller.storage.attend.get(eventId, function(err, attend_data) {
@@ -247,7 +247,7 @@ module.exports.init = function(controller) {
                 controller.storage.noAttend.save({id: eventId, no_attend:no_attend}, function(err) {});
             });
             //Reply With Message
-            bot.reply(message, 'Alright, ' + user + ', i will take that as a "maybe"!');
+            bot.reply(message, 'Ok, don’t forget to update your participation.');
         } else if(rsvp == 'no') {
             //Set RSVP - Attend User To FALSE
             controller.storage.attend.get(eventId, function(err, attend_data) {
@@ -272,7 +272,7 @@ module.exports.init = function(controller) {
                 controller.storage.maybe.save({id: eventId, maybe:maybe}, function(err) {});
             });
             //Reply With Message
-            bot.reply(message,'Ok, ' + user + ', you\'ll not go to this event.');
+            bot.reply(message,'Too bad, you will miss a hell of an event!');
         }
     }
     /* === BOT CONVERSATIONS === */
