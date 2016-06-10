@@ -30,7 +30,7 @@ module.exports.init = function(controller) {
             for(var userID in attendees){
                 bot.startPrivateConversation({user: userID}, function(err, convo){
                     bot.api.users.info({user: convo.source_message.user}, function(err, user) {
-                        convo.say('Hey ' + user.user.real_name + '!\n' + customMessage);
+                        convo.say('Hey ' + user.user.name + '!\n' + customMessage);
                     });
                 });
             }
@@ -95,7 +95,7 @@ module.exports.init = function(controller) {
                     });
                     bot.api.users.info({user: message.user}, function(err, user) {
                         //Get User's Name
-                        var userName = user.user.real_name,
+                        var userName = user.user.name,
                             userId = user.user.id;
                         //Call To Check User's RSVP Last Action
                         checkRSVP(eventId,userName,userId,'attend',bot,message);
@@ -103,7 +103,7 @@ module.exports.init = function(controller) {
                 } else {
                     bot.startConversation(message, function(err, convo) {
                         bot.api.users.info({user: message.user}, function(err, user) {
-                            convo.say('Hey, ' + user.user.real_name + ' there is no event with that ID!');
+                            convo.say('Hey, ' + user.user.name + ' there is no event with that ID!');
                         });
                         convo.next();
                     });
@@ -133,7 +133,7 @@ module.exports.init = function(controller) {
                     });
                     bot.api.users.info({user: message.user}, function(err, user) {
                         //Get User's Name
-                        var userName = user.user.real_name,
+                        var userName = user.user.name,
                             userId = user.user.id;
                         //Call To Check User's RSVP Last Action
                         checkRSVP(eventId,userName,userId,'maybe',bot,message);
@@ -141,7 +141,7 @@ module.exports.init = function(controller) {
                 } else {
                     bot.startConversation(message, function(err, convo) {
                         bot.api.users.info({user: message.user}, function(err, user) {
-                            convo.say('Hey, ' + user.user.real_name + ' there is no event with that ID!');
+                            convo.say('Hey, ' + user.user.name + ' there is no event with that ID!');
                         });
                         convo.next();
                     });
@@ -171,7 +171,7 @@ module.exports.init = function(controller) {
                     });
                     bot.api.users.info({user: message.user}, function(err, user) {
                         //Get User's Name
-                        var userName = user.user.real_name,
+                        var userName = user.user.name,
                             userId = user.user.id;
                         //Call To Check User's RSVP Last Action
                         checkRSVP(eventId,userName,userId,'no',bot,message);
@@ -179,7 +179,7 @@ module.exports.init = function(controller) {
                 } else {
                     bot.startConversation(message, function(err, convo) {
                         bot.api.users.info({user: message.user}, function(err, user) {
-                            convo.say('Hey, ' + user.user.real_name + ' there is no event with that ID!');
+                            convo.say('Hey, ' + user.user.name + ' there is no event with that ID!');
                         });
                         convo.next();
                     });
@@ -283,7 +283,7 @@ module.exports.init = function(controller) {
             var userName = '',
                 userId = '';
             bot.api.users.info({user: message.user}, function(err, user) {
-                userName = user.user.real_name;
+                userName = user.user.name;
                 userId = user.user.id;
             });
             //Get Event Title
@@ -430,7 +430,7 @@ module.exports.init = function(controller) {
                                 //Iterate Over Attend Data
                                 for(var prop in attend_data.attend){
                                     bot.api.users.info({user: prop}, function(err, user) {
-                                        convo.say(user.user.real_name);
+                                        convo.say(user.user.name);
                                     });
                                 }
                                 convo.next();
@@ -439,7 +439,7 @@ module.exports.init = function(controller) {
                         });
                     } else {
                         bot.api.users.info({user: message.user}, function(err, user) {
-                            convo.say('Hey, ' + user.user.real_name + ' there is no event with that ID!');
+                            convo.say('Hey, ' + user.user.name + ' there is no event with that ID!');
                             convo.next();
                         });
                     }
@@ -590,7 +590,7 @@ module.exports.init = function(controller) {
             } else {
                 //Reply With Message
                 bot.api.users.info({user: message.user}, function(err, user) {
-                    bot.reply(message, 'Hey, ' + user.user.real_name + ' there is no event with that ID!');
+                    bot.reply(message, 'Hey, ' + user.user.name + ' there is no event with that ID!');
                 });
             }
         });
