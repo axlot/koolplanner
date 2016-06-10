@@ -222,7 +222,7 @@ module.exports.init = function(controller) {
                 });
             });
             //Reply With Message
-            bot.reply(message, 'Got it, you’re attending ' + eventId);
+            bot.reply(message, 'Got it, you’re attending ``' + eventId + '``');
         } else if(rsvp == 'maybe') {
             //Set RSVP - Attend User To FALSE
             controller.storage.attend.get(eventId, function(err, attend_data) {
