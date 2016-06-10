@@ -38,20 +38,15 @@ module.exports.init = function(controller) {
         convo.next();
     }
     //Validate User
-    function validateUser(bot) {
+    function validateUser(message) {
         //Check Team ID
-        bot.identifyTeam(function(err,team_id) {
-            //Code to create and store the new event
-            var userTeamId = team_id;
-            controller.storage.events.get(eventId, function(err, event_data){
-                if(event_data.event_data.team_id == userTeamId) {
-                    //Code To Chek User's Id
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-
+        controller.storage.events.get(eventId, function(err, event_data){
+            if(event_data.event_data.user_id == message.user) {
+                //Code To Chek User's Id
+                return true;
+            } else {
+                return false;
+            }
         });
     };
     //Year Of Event
@@ -589,7 +584,7 @@ module.exports.init = function(controller) {
         //Get Event ID
         var eventId = message.match[1];
         //Call To Validate User Function
-        if(validateUser(bot)) {
+        if(validateUser(message)) {
             //Start Conversation
             createEvent(bot, message, eventId);
         } else {
