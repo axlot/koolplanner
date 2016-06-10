@@ -585,11 +585,9 @@ module.exports.init = function(controller) {
         //Check If Event Exist
         controller.storage.events.get(eventId, function(err, event_data) {
             if(event_data != null) {
-                bot.reply(message, 'Entro al IF');
                 //Call To Validate User Function
                 validateUser(bot,message,eventId);
             } else {
-                bot.reply(message, 'Entro al ELSE');
                 //Reply With Message
                 bot.api.users.info({user: message.user}, function(err, user) {
                     bot.reply(message, 'Hey, ' + user.user.real_name + ' there is no event with that ID!');
