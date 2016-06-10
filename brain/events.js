@@ -44,9 +44,9 @@ module.exports.init = function(controller) {
             bot.reply(message, 'La ID del solicitante es: ' + message.user + ' y la ID del creador es: ' + event_data.event_data.user_id);
             bot.reply(message, message.user == event_data.event_data.user_id);
             if(message.user == event_data.event_data.user_id) {
-                return true;
+                createEvent(bot, message, eventId);
             } else {
-                return false;
+                bot.reply(message, 'This is not the event you\'re looking for...');
             }
         });
     };
@@ -585,22 +585,7 @@ module.exports.init = function(controller) {
         //Get Event ID
         var eventId = message.match[1];
         //Call To Validate User Function
-        //if(validateUser(bot,message,eventId)) {
-        //    //Start Conversation
-        //    createEvent(bot, message, eventId);
-        //} else {
-        //    bot.reply(message, 'This is not the event you\'re looking for...');
-        //}
-
-        controller.storage.events.get(eventId, function(err, event_data){
-            bot.reply(message, 'La ID del solicitante es: ' + message.user + ' y la ID del creador es: ' + event_data.event_data.user_id);
-            bot.reply(message, message.user == event_data.event_data.user_id);
-            if(message.user == event_data.event_data.user_id) {
-                createEvent(bot, message, eventId);
-            } else {
-                bot.reply(message, 'This is not the event you\'re looking for...');
-            }
-        });
+        validateUser(bot,message,eventId)
     });
     //Conversation Controller "ATTEND EVENT"
     controller.hears('attend (.*)',['direct_message','direct_mention'],function(bot,message) {
