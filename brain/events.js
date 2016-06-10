@@ -38,7 +38,7 @@ module.exports.init = function(controller) {
         convo.next();
     }
     //Validate User
-    function validateUser(message) {
+    function validateUser(message, eventId) {
         //Check Team ID
         controller.storage.events.get(eventId, function(err, event_data){
             bot.reply(message, 'La ID del solicitante es: ' + message.user + ' y la ID del creador es: ' + event_data.event_data.user_id);
@@ -582,7 +582,7 @@ module.exports.init = function(controller) {
         //Get Event ID
         var eventId = message.match[1];
         //Call To Validate User Function
-        if(validateUser(message)) {
+        if(validateUser(message,eventId)) {
             //Start Conversation
             createEvent(bot, message, eventId);
         } else {
