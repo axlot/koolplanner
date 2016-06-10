@@ -592,8 +592,7 @@ module.exports.init = function(controller) {
                 bot.reply(message, 'Entro al ELSE');
                 //Reply With Message
                 bot.api.users.info({user: message.user}, function(err, user) {
-                    convo.say('Hey, ' + user.user.real_name + ' there is no event with that ID!');
-                    convo.next();
+                    bot.reply(message, 'Hey, ' + user.user.real_name + ' there is no event with that ID!');
                 });
             }
         });
