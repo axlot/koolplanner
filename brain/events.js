@@ -40,7 +40,7 @@ module.exports.init = function(controller) {
     //Validate User
     function validateUser() {
         //Code
-        return true;
+        return false;
     }
     //Year Of Event
     function yearOfEvent(data, bot, message) {
