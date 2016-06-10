@@ -1,4 +1,18 @@
 module.exports.init = function(controller) {
+    /* === CONSTRUCTORS === */
+    //Event Constructor
+    var Event = function(name, description, date, time, location, mTimeStamp, mChannel, teamId, userId) {
+        this.title = name;
+        this.description = description;
+        this.date = date;
+        this.time = time;
+        this.location = location;
+        this.mTimeStamp = mTimeStamp;
+        this.mChannel = mChannel;
+        this.team_id = teamId;
+        this.user_id = userId;
+    };
+    /* === FUNCTIONS === */
     //Alert Attenddes Users
     function alertAttendees(bot, convo, customMessage, eventId) {
         controller.storage.rsvp.all(function(err, all_attend_data) {
@@ -22,6 +36,10 @@ module.exports.init = function(controller) {
             }
         });
         convo.next();
+    }
+    //Validate User
+    function validateUser() {
+        //Code
     }
     //Year Of Event
     function yearOfEvent(data, bot, message) {
@@ -250,24 +268,16 @@ module.exports.init = function(controller) {
             bot.reply(message,'Ok, ' + user + ', you\'ll not go to this event.');
         }
     }
-    //Event Constructor
-    var Event = function(name, description, date, time, location, mTimeStamp, mChannel, teamId) {
-        this.title = name;
-        this.description = description;
-        this.date = date;
-        this.time = time;
-        this.location = location;
-        this.mTimeStamp = mTimeStamp;
-        this.mChannel = mChannel;
-        this.team_id = teamId;
-    };
+    /* === BOT CONVERSATIONS === */
     //Creation, Editing and Attend Conversation
-    var conversation = function (bot, message, eventId) {
+    var createEvent = function (bot, message, eventId) {
         //Start Conversation
         bot.startConversation(message, function(err, convo) {
-            var userName = '';
+            var userName = '',
+                userId = '';
             bot.api.users.info({user: message.user}, function(err, user) {
                 userName = user.user.real_name;
+                userId = user.user.id;
             });
             //Get Event Title
             convo.say('Hey! Let\'s plan this event together!');
@@ -360,7 +370,7 @@ module.exports.init = function(controller) {
                         var teamId = team_id;
                         controller.storage.events.all(function(err, all_team_data) {
                             var newId = all_team_data.length + 1,
-                                event = new Event(eTitle, eDescription, eDate, eTime, eLocation, message.ts, message.channel, teamId);
+                                event = new Event(eTitle, eDescription, eDate, eTime, eLocation, message.ts, message.channel, teamId, userId);
                             //Botkit Method To Storage
                             if(!eventId) {
                                 controller.storage.events.save({id: 'event' + newId, event_data: event}, function(err) {});
@@ -377,7 +387,7 @@ module.exports.init = function(controller) {
         });
     };
     //Listing Conversation
-    var listing = function(bot, message, eventId) {
+    var listAttends = function(bot, message, eventId) {
         //Check Team's Id
         bot.identifyTeam(function(err,team_id) {
             var teamId = team_id;
@@ -556,15 +566,23 @@ module.exports.init = function(controller) {
             });
         });
     };
+    /* === CONTROLLERS === */
     //Conversation Controller "NEW EVENT"
     controller.hears('new event',['direct_message','direct_mention'],function(bot,message) {
-        conversation(bot, message, false);
+        createEvent(bot, message, false);
     });
     //Conversation Controller "EDIT EVENT"
     controller.hears('edit (.*)',['direct_message','direct_mention'],function(bot,message) {
+        //Get Event ID
         var eventId = message.match[1];
-        //Start Conversation
-        conversation(bot, message, eventId);
+        createEvent(bot, message, eventId);
+        //Call To Validate User Function
+        //if(validateUser()) {
+        //    //Start Conversation
+        //    createEvent(bot, message, eventId);
+        //} else {
+        //    bot.reply(message, 'This is not the event you\'re looking for...');
+        //}
     });
     //Conversation Controller "ATTEND EVENT"
     controller.hears('attend (.*)',['direct_message','direct_mention'],function(bot,message) {
@@ -591,7 +609,7 @@ module.exports.init = function(controller) {
     controller.hears('list (.*)',['direct_message','direct_mention'],function(bot,message) {
         var eventId = message.match[1];
         //Start Conversation
-        listing(bot, message, eventId);
+        listAttends(bot, message, eventId);
     });
     //Conversation Controller "REACTIONS"
     controller.hears('reactions of (.*)',['direct_message','direct_mention'],function(bot,message) {
