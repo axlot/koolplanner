@@ -48,6 +48,45 @@ module.exports.init = function(controller) {
             return date + '/' + presentYear;
         }
     }
+    //Check User's RSVP Last Action
+    function checkRSVP(userId, desition) {
+        //CODE
+    }
+    //Attend Function
+    function attend(eventId,bot,message) {
+        //Check If Event Exist
+        controller.storage.events.get(eventId, function(err, event_data){
+            //Check Team's Id
+            bot.identifyTeam(function(err,teamId) {
+                if(event_data != null && event_data.event_data.team_id == teamId) {
+                    //Get User
+                    var user = message.user;
+                    //Get Attenddes List
+                    controller.storage.attend.get(eventId, function(err, attend_data) {
+                        var attend = {};
+                        //Check If Attend's Already Exists
+                        if (attend_data != null && typeof attend_data.attend != "undefined") {
+                            attend = attend_data.attend;
+                        }
+                        attend[user] = true;
+                        //Save Attend
+                        controller.storage.attend.save({id: eventId, attend:attend}, function(err) {});
+                    });
+                } else {
+                    bot.startConversation(message, function(err, convo) {
+                        bot.api.users.info({user: message.user}, function(err, user) {
+                            convo.say('Hey, ' + user.user.real_name + ' there is no event with that ID!');
+                        });
+                        convo.next();
+                    });
+                }
+            });
+        });
+    }
+    //Maybe Function
+
+    //No Function
+
     //Event Constructor
     var Event = function(name, description, date, time, location, mTimeStamp, mChannel, teamId) {
         this.title = name;
@@ -368,34 +407,7 @@ module.exports.init = function(controller) {
     controller.hears('attend (.*)',['direct_message','direct_mention'],function(bot,message) {
         //Get Event Id
         var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'');
-        //Check If Event Exist
-        controller.storage.events.get(eventId, function(err, event_data){
-            //Check Team's Id
-            bot.identifyTeam(function(err,teamId) {
-                if(event_data != null && event_data.event_data.team_id == teamId) {
-                    //Get User
-                    var user = message.user;
-                    //Get Attenddes List
-                    controller.storage.attend.get(eventId, function(err, attend_data) {
-                        var attend = {};
-                        //Check If Attend's Already Exists
-                        if (attend_data != null && typeof attend_data.attend != "undefined") {
-                            attend = attend_data.attend;
-                        }
-                        attend[user] = true;
-                        //Save Attend
-                        controller.storage.attend.save({id: eventId, attend:attend}, function(err) {});
-                    });
-                } else {
-                    bot.startConversation(message, function(err, convo) {
-                        bot.api.users.info({user: message.user}, function(err, user) {
-                            convo.say('Hey, ' + user.user.real_name + ' there is no event with that ID!');
-                        });
-                        convo.next();
-                    });
-                }
-            });
-        });
+        attend(eventId,bot,message);
     });
     //Conversation Controller "MAYBE EVENT"
     controller.hears('maybe (.*)',['direct_message','direct_mention'],function(bot,message) {
