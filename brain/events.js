@@ -68,8 +68,12 @@ module.exports.init = function(controller) {
                         //Save Attend
                         controller.storage.attend.save({id: eventId, attend:attend}, function(err) {});
                     });
-                    //Call To Check User's RSVP Last Action
-                    checkRSVP('attend',bot,message)
+                    bot.api.users.info({user: message.user}, function(err, user) {
+                        //Get User's Name
+                        var userName = user.user.real_name;
+                        //Call To Check User's RSVP Last Action
+                        checkRSVP(userName,'attend',bot,message);
+                    });
                 } else {
                     bot.startConversation(message, function(err, convo) {
                         bot.api.users.info({user: message.user}, function(err, user) {
@@ -144,16 +148,17 @@ module.exports.init = function(controller) {
         });
     }
     //Check User's RSVP Last Action
-    function checkRSVP(desition,bot,message) {
+    function checkRSVP(userName,desition,bot,message) {
         //Get User ID and RSVP Choice
-        var rsvp = desition;
+        var user = userName,
+            rsvp = desition;
         //Check Desition
         if(rsvp == 'attend') {
-            bot.reply(message, 'You WILL go to this event');
+            bot.reply(message, 'Got it ' + user + '. You\'re now going to this event!');
         } else if(rsvp == 'maybe') {
-            bot.reply(message,'You MAYBE go to this event');
+            bot.reply(message, 'Alright, ' + user + ', i will take that as a "maybe"!');
         } else if(rsvp == 'no') {
-            bot.reply(message,'You will NOT go to this event');
+            bot.reply(message,'Ok ' + user + ', you\'ll not go to this event.');
         }
     }
     //Event Constructor
