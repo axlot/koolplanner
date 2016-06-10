@@ -148,11 +148,11 @@ module.exports.init = function(controller) {
             rsvp = desition;
         //Check Desition
         if(rsvp == 'attend') {
-            bot.reply('You WILL go to this event');
+            bot.reply(message, 'You WILL go to this event');
         } else if(rsvp == 'maybe') {
-            bot.reply('You MAYBE go to this event');
+            bot.reply(message,'You MAYBE go to this event');
         } else if(rsvp == 'no') {
-            bot.reply('You will NOT go to this event');
+            bot.reply(message,'You will NOT go to this event');
         }
     }
     //Event Constructor
