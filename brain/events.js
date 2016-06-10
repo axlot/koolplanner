@@ -42,7 +42,7 @@ module.exports.init = function(controller) {
         //Check Team ID
         controller.storage.events.get(eventId, function(err, event_data){
             bot.reply(message, 'La ID del solicitante es: ' + message.user + ' y la ID del creador es: ' + event_data.event_data.user_id);
-            bot.reply(message, (message.user == event_data.event_data.user_id));
+            bot.reply(message, message.user == event_data.event_data.user_id);
             if(message.user == event_data.event_data.user_id) {
                 return true;
             } else {
