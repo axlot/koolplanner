@@ -590,7 +590,8 @@ module.exports.init = function(controller) {
         //} else {
         //    bot.reply(message, 'This is not the event you\'re looking for...');
         //}
-        bot.reply(message, 'La ID del solicitante es: ' + message.user + ' y la ID del creador es: ' + event_data.event_data.user_id);
+        bot.reply(message, 'Funciona');
+        //bot.reply(message, 'La ID del solicitante es: ' + message.user + ' y la ID del creador es: ' + event_data.event_data.user_id);
         //controller.storage.events.get(eventId, function(err, event_data){
         //    if(event_data.event_data.user_id == message.user) {
         //        //Code To Chek User's Id
