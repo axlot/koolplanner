@@ -584,7 +584,7 @@ module.exports.init = function(controller) {
         //Get Event ID
         var eventId = message.match[1];
         //Call To Validate User Function
-        if(validateUser(bot,message,eventId)) {
+        if(validateUser(bot,message,eventId) == true) {
             //Start Conversation
             createEvent(bot, message, eventId);
         } else {
