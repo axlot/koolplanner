@@ -378,6 +378,45 @@ module.exports.init = function(controller) {
                                 });
                             } else {
                                 controller.storage.events.save({id: eventId, event_data: event}, function(err) {});
+                                //Edit Event Message
+                                bot.reply(message, {
+                                    "attachments": [{
+                                        "text": createdEventMsg,
+                                        "mrkdwn_in": ["text", "pretext"]
+                                    }]
+                                }, function(err,response) {
+                                    //Broadcast Event
+                                    bot.api.chat.postMessage({
+                                        "attachments": [{
+                                            "fallback": 'Hey there! the user _' + userName + '_ has *edited* the event: *' + eTitle +'*!\n',
+                                            "text": 'Hey there! the user _' + userName + '_ has *edited* the event: *' + eTitle +'*!\n' + '_<< ' + eDescription + ' >>_\n' + 'It will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation + '*\nTo answer, click on the good emoji below.\n You may only *choose one option*.',
+                                            "mrkdwn_in": ["text", "pretext"]
+                                        }],
+                                        channel: '#general'
+                                    }, function(err, message) {
+                                        bot.api.reactions.add({
+                                            timestamp: message.ts,
+                                            channel: message.channel,
+                                            name: 'white_check_mark',
+                                        },function(err) {
+                                            if (err) { console.log(err) }
+                                        });
+                                        bot.api.reactions.add({
+                                            timestamp: message.ts,
+                                            channel: message.channel,
+                                            name: 'question',
+                                        },function(err) {
+                                            if (err) { console.log(err) }
+                                        });
+                                        bot.api.reactions.add({
+                                            timestamp: message.ts,
+                                            channel: message.channel,
+                                            name: 'x',
+                                        },function(err) {
+                                            if (err) { console.log(err) }
+                                        });
+                                    });
+                                });
                             }
 
                         });
