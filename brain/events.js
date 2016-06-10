@@ -48,10 +48,6 @@ module.exports.init = function(controller) {
             return date + '/' + presentYear;
         }
     }
-    //Check User's RSVP Last Action
-    function checkRSVP(userId, desition) {
-        //CODE
-    }
     //Attend Function
     function attend(eventId,bot,message) {
         //Check If Event Exist
@@ -144,6 +140,20 @@ module.exports.init = function(controller) {
                 }
             });
         });
+    }
+    //Check User's RSVP Last Action
+    function checkRSVP(userId,desition,bot,message) {
+        //Get User ID and RSVP Choice
+        var user = userId,
+            rsvp = desition;
+        //Check Desition
+        if(rsvp == 'attend') {
+            bot.reply('You WILL go to this event');
+        } else if(rsvp == 'maybe') {
+            bot.reply('You MAYBE go to this event');
+        } else if(rsvp == 'no') {
+            bot.reply('You will NOT go to this event');
+        }
     }
     //Event Constructor
     var Event = function(name, description, date, time, location, mTimeStamp, mChannel, teamId) {
@@ -467,6 +477,8 @@ module.exports.init = function(controller) {
         var eventId = message.match[1].replace(/\$|#|\.|\[|]/g,'');
         //Call To Attend Function
         attend(eventId,bot,message);
+        //Call To Check User's RSVP Last Action
+        checkRSVP(userId,'attend',bot,message)
     });
     //Conversation Controller "MAYBE EVENT"
     controller.hears('maybe (.*)',['direct_message','direct_mention'],function(bot,message) {
