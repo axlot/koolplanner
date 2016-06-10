@@ -590,16 +590,10 @@ module.exports.init = function(controller) {
         //} else {
         //    bot.reply(message, 'This is not the event you\'re looking for...');
         //}
-        bot.reply(message, 'La ID del solicitante es: ' + message.user);
-        // + ' y la ID del creador es: ' + event_data.event_data.user_id
-        //controller.storage.events.get(eventId, function(err, event_data){
-        //    if(event_data.event_data.user_id == message.user) {
-        //        //Code To Chek User's Id
-        //        return true;
-        //    } else {
-        //        return false;
-        //    }
-        //});
+
+        controller.storage.events.get(eventId, function(err, event_data){
+            bot.reply(message, 'La ID del solicitante es: ' + message.user + ' y la ID del creador es: ' + event_data.event_data.user_id);
+        });
     });
     //Conversation Controller "ATTEND EVENT"
     controller.hears('attend (.*)',['direct_message','direct_mention'],function(bot,message) {
