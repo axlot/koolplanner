@@ -328,50 +328,6 @@ module.exports.init = function(controller) {
                         eDate = yearOfEvent(convo.extractResponse('dateTime'), bot, message),
                         eTime = convo.extractResponse('dateTime').replace(/[0-9]{2}\/[0-9]{2} /, ''),
                         createdEventMsg = 'Awesome! Your event *' + eTitle + '* is planned!\n' + eDescription + '\nIt will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation +'*\nI will communicate this to your team on #Events.\n Cheers!';
-                    //New Event Message
-                    bot.reply(message, {
-                        "attachments": [{
-                            "text": createdEventMsg,
-                            "mrkdwn_in": ["text", "pretext"]
-                        }]
-                    }, function(err,response) {
-                        //Broadcast Event
-                        bot.api.chat.postMessage({
-                            "attachments": [{
-                                "fallback": 'Hey there! the user _' + userName + '_ has planned a new event: *' + eTitle +'*!\n',
-                                "text": 'Hey there! the user _' + userName + '_ has planned a new event: *' + eTitle +'*!\n' + '_<< ' + eDescription + ' >>_\n' + 'It will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation + '*\nTo answer, click on the good emoji below.\n You may only *choose one option*.',
-                                "mrkdwn_in": ["text", "pretext"]
-                            }],
-                            channel: '#general'
-                        }, function(err, message) {
-                            /*
-                            * CRON PARA SALVAR CADA TANTO LAS REACTIONS Y TAMBIEN HAY QUE SALVAR
-                            * LOS DATOS DE LOS REACTIONS EN EL EVENTO
-                            * */
-                            bot.api.reactions.add({
-                                timestamp: message.ts,
-                                channel: message.channel,
-                                name: 'white_check_mark',
-                            },function(err) {
-                                if (err) { console.log(err) }
-                            });
-                            bot.api.reactions.add({
-                                timestamp: message.ts,
-                                channel: message.channel,
-                                name: 'question',
-                            },function(err) {
-                                if (err) { console.log(err) }
-                            });
-                            bot.api.reactions.add({
-                                timestamp: message.ts,
-                                channel: message.channel,
-                                name: 'x',
-                            },function(err) {
-                                if (err) { console.log(err) }
-                            });
-                        });
-
-                    });
                     bot.identifyTeam(function(err,team_id) {
                         //Code to create and store the new event
                         var teamId = team_id;
@@ -381,6 +337,45 @@ module.exports.init = function(controller) {
                             //Botkit Method To Storage
                             if(!eventId) {
                                 controller.storage.events.save({id: 'event' + newId, event_data: event}, function(err) {});
+                                //New Event Message
+                                bot.reply(message, {
+                                    "attachments": [{
+                                        "text": createdEventMsg,
+                                        "mrkdwn_in": ["text", "pretext"]
+                                    }]
+                                }, function(err,response) {
+                                    //Broadcast Event
+                                    bot.api.chat.postMessage({
+                                        "attachments": [{
+                                            "fallback": 'Hey there! the user _' + userName + '_ has planned a new event: *' + eTitle +'*!\n',
+                                            "text": 'Hey there! the user _' + userName + '_ has planned a new event: *' + eTitle +'*!\n' + '_<< ' + eDescription + ' >>_\n' + 'It will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation + '*\nTo answer, click on the good emoji below.\n You may only *choose one option*.',
+                                            "mrkdwn_in": ["text", "pretext"]
+                                        }],
+                                        channel: '#general'
+                                    }, function(err, message) {
+                                        bot.api.reactions.add({
+                                            timestamp: message.ts,
+                                            channel: message.channel,
+                                            name: 'white_check_mark',
+                                        },function(err) {
+                                            if (err) { console.log(err) }
+                                        });
+                                        bot.api.reactions.add({
+                                            timestamp: message.ts,
+                                            channel: message.channel,
+                                            name: 'question',
+                                        },function(err) {
+                                            if (err) { console.log(err) }
+                                        });
+                                        bot.api.reactions.add({
+                                            timestamp: message.ts,
+                                            channel: message.channel,
+                                            name: 'x',
+                                        },function(err) {
+                                            if (err) { console.log(err) }
+                                        });
+                                    });
+                                });
                             } else {
                                 controller.storage.events.save({id: eventId, event_data: event}, function(err) {});
                             }
