@@ -144,7 +144,7 @@ module.exports.init = function(controller) {
     //Check User's RSVP Last Action
     function checkRSVP(userId,desition,bot,message) {
         //Get User ID and RSVP Choice
-        var user = userId,
+        var user = userId | null,
             rsvp = desition;
         //Check Desition
         if(rsvp == 'attend') {
