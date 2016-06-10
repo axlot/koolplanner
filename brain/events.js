@@ -157,7 +157,7 @@ module.exports.init = function(controller) {
         if(rsvp == 'attend') {
             attend[user] = false;
             //Delete No And Maybe RSVP
-            controller.storage.maybe.save({id: eventId, maybe:maybe}, function(err) {});
+            controller.storage.maybe.save({id: event, maybe:maybe}, function(err) {});
             //Reply With Message
             bot.reply(message, 'Got it, ' + user + '. You\'re now going to this event!');
         } else if(rsvp == 'maybe') {
