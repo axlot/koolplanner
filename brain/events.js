@@ -377,6 +377,7 @@ module.exports.init = function(controller) {
                                     });
                                 });
                             } else {
+                                //Test
                                 controller.storage.events.save({id: eventId, event_data: event}, function(err) {});
                                 //Edit Event Message
                                 bot.reply(message, {
