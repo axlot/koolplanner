@@ -438,7 +438,14 @@ module.exports.init = function(controller) {
                 controller.storage.events.get(eventId, function(err, event_data) {
                     if(event_data != null && event_data.event_data.team_id == teamId) {
                         controller.storage.attend.get(eventId, function(err, attend_data) {
-                            if(/*attend_data == null || */Object.keys(attend_data.attend == false)) {
+                            //Check No Attend Users
+                            var noAttendees = 0;
+                            for(var prop in attend_data.attend){
+                                if(prop == false) {
+                                    noAttendees++;
+                                }
+                            }
+                            if(attend_data == null || (Object.keys(attend_data.attend).length == noAttendees)) {
                                 //Reply
                                 var reply_with_attachments = {
                                     'attachments': [
