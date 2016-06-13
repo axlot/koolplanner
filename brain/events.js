@@ -849,17 +849,16 @@ module.exports.init = function(controller) {
         //Get User's Reaction
         //RSVP Attend
         if(message.reaction == 'white_check_mark') {
-            console.log('======================EL USUARIO VA A IR=======================');
             //Look For Events With Correct Time Stamp
             controller.storage.events.all(function(err, all_events_data) {
-                console.log('======================ENTRO AL CONTROLADOR DB=======================');
                 //Iterate Over All Events
                 var length = all_events_data.length;
                 for(var i=0; i<length; i++) {
-                    console.log('EL TS DE ' + all_events_data[i].event_data.title + ' ES ' + all_events_data[i].event_data.mTimeStamp);
-                    console.log('EL TS DEL EVENTO REQUERIDO ES: ' + message.item.ts);
+                    //console.log('EL TS DE ' + all_events_data[i].event_data.title + ' ES ' + all_events_data[i].event_data.mTimeStamp);
+                    //console.log('EL TS DEL EVENTO REQUERIDO ES: ' + message.item.ts);
                     if(message.item.ts == all_events_data[i].event_data.mTimeStamp) {
-                        console.log('=============================EVENTO ENCONTRADO===========================');
+                        //Save User's Desition
+                        attend(all_events_data[i].id,bot,message);
                     }
                 }
             });
