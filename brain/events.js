@@ -840,6 +840,6 @@ module.exports.init = function(controller) {
     controller.on('reaction_added', function(bot, message) {
         //Get Reaction
         console.log('============================ACA EMPIEZA LA RESPUESTA==================================');
-        console.dir(message);
+        console.dir(message.item);
     });
 };
