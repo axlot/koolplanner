@@ -332,8 +332,6 @@ module.exports.init = function(controller) {
                         //Code to create and store the new event
                         var teamId = team_id;
                         controller.storage.events.all(function(err, all_team_data) {
-                            var newId = all_team_data.length + 1,
-                                event = new Event(eTitle, eDescription, eDate, eTime, eLocation, message.ts, message.channel, teamId, userId);
                             //Botkit Method To Storage
                             if(!eventId) {
                                 //New Event Message
@@ -373,6 +371,8 @@ module.exports.init = function(controller) {
                                         },function(err) {
                                             if (err) { console.log(err) }
                                         });
+                                        var newId = all_team_data.length + 1,
+                                            event = new Event(eTitle, eDescription, eDate, eTime, eLocation, message.ts, message.channel, teamId, userId);
                                         event.mTimeStamp = message.ts;
                                         controller.storage.events.save({id: 'event' + newId, event_data: event}, function(err) {});
                                     });
@@ -858,7 +858,6 @@ module.exports.init = function(controller) {
                 for(var i=0; i<length; i++) {
                     console.log('EL TS DE ' + all_events_data[i].event_data.title + ' ES ' + all_events_data[i].event_data.mTimeStamp);
                     console.log('EL TS DEL EVENTO REQUERIDO ES: ' + message.item.ts);
-                    console.log('EL EVENT TS ES: ' + message.event_ts);
                 }
             });
         //RSVP Maybe
