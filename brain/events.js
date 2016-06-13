@@ -855,9 +855,9 @@ module.exports.init = function(controller) {
                 var length = all_events_data.length;
                 for(var i=0; i<length; i++) {
                     console.log(all_events_data[i].event_data.mTimeStamp);
-                    if(all_events_data[i].event_data.event_data.mTimeStamp == message.item.ts) {
-                        console.log('======================EVENTO ENCONTRADO=======================');
-                    }
+                    //if(all_events_data[i].event_data.event_data.mTimeStamp == message.item.ts) {
+                    //    console.log('======================EVENTO ENCONTRADO=======================');
+                    //}
                 }
             });
         //RSVP Maybe
