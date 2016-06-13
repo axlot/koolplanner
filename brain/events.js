@@ -441,7 +441,7 @@ module.exports.init = function(controller) {
                             //Check No Attend Users
                             var noAttendees = 0;
                             for(var user in attend_data.attend){
-                                if(user == false) {
+                                if(attend_data.attend[user] === false) {
                                     noAttendees++;
                                     bot.reply(message, user);
                                 }
