@@ -844,5 +844,17 @@ module.exports.init = function(controller) {
         console.log('You are: ' + message.user);
         console.log('You reacted to: ' + message.item.ts);
         console.log('that is a message posted by: ' + message.item_user);
+
+        //Get User's Reaction
+        //RSVP Attend
+        if(message.reaction == 'white_check_mark') {
+            console.log('======================EL USUARIO VA A IR=======================');
+        //RSVP Maybe
+        } else if(message.reaction == 'question') {
+            console.log('======================EL USUARIO TAL VEZ VAYA=======================');
+        //RSVP No
+        } else if(message.reaction == 'x') {
+            console.log('======================EL USUARIO NO VA A ASISTIR=======================');
+        }
     });
 };
