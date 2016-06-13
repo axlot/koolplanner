@@ -445,7 +445,7 @@ module.exports.init = function(controller) {
                                     noAttendees++;
                                 }
                             }
-                            if(attend_data == null || Object.keys(attend_data.attend).length == noAttendees) {
+                            if(attend_data == null /*|| Object.keys(attend_data.attend).length == noAttendees*/) {
                                 //Reply
                                 var reply_with_attachments = {
                                     'attachments': [
@@ -831,8 +831,5 @@ module.exports.init = function(controller) {
                 channel: '#general'
             }
         );
-        //bot.reply(message,reaction, 'Reaction: ' + reaction.reaction);
-        //bot.reply(message,reaction, 'Reaction to: ' + message.reaction.item.message.ts);
-        //bot.reply(message,reaction, 'On channel: ' + message.reaction.item.message.channel);
     });
 };
