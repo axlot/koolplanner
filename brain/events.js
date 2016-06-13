@@ -443,11 +443,9 @@ module.exports.init = function(controller) {
                             for(var user in attend_data.attend){
                                 if(attend_data.attend[user] === false) {
                                     noAttendees++;
-                                    bot.reply(message, user);
                                 }
                             }
-                            bot.reply(message, 'Los que van son:' + noAttendees);
-                            if(/*attend_data == null || */Object.keys(attend_data.attend).length == noAttendees) {
+                            if(attend_data == null || Object.keys(attend_data.attend).length == noAttendees) {
                                 //Reply
                                 var reply_with_attachments = {
                                     'attachments': [
@@ -473,7 +471,7 @@ module.exports.init = function(controller) {
                                 bot.reply(message, reply_with_attachments);
                                 //Iterate Over Attend Data
                                 for(var prop in attend_data.attend){
-                                    if(prop == true) {
+                                    if(attend_data.attend[prop] == true) {
                                         bot.api.users.info({user: prop}, function(err, user) {
                                             convo.say(user.user.name);
                                         });
