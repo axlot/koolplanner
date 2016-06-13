@@ -843,7 +843,6 @@ module.exports.init = function(controller) {
         console.log('You say: ' + message.reaction);
         console.log('You are: ' + message.user);
         console.log('You reacted to: ' + message.item.ts);
-        console.log('that is a message posted by: ' + message.item_user);
 
         //Get User's Reaction
         //RSVP Attend
@@ -851,6 +850,7 @@ module.exports.init = function(controller) {
             console.log('======================EL USUARIO VA A IR=======================');
             //Look For Events With Correct Time Stamp
             controller.storage.events.all(function(err, all_events_data) {
+                console.log('======================ENTRO AL CONTROLADOR DB=======================');
                 //Iterate Over All Events
                 var length = all_events_data.length;
                 for(var i=0; i<length; i++) {
