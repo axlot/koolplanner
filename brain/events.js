@@ -438,9 +438,6 @@ module.exports.init = function(controller) {
                 controller.storage.events.get(eventId, function(err, event_data) {
                     if(event_data != null && event_data.event_data.team_id == teamId) {
                         controller.storage.attend.get(eventId, function(err, attend_data) {
-                            if(attend_data == null) {
-                                bot.reply(message,'el attend es NULL');
-                            }
                             //Check No Attend Users
                             var noAttendees = 0;
                             for(var user in attend_data.attend){
@@ -448,7 +445,7 @@ module.exports.init = function(controller) {
                                     noAttendees++;
                                 }
                             }
-                            if(attend_data == null /*|| Object.keys(attend_data.attend).length == noAttendees*/) {
+                            if(attend_data == null) {
                                 //Reply
                                 var reply_with_attachments = {
                                     'attachments': [
@@ -460,6 +457,8 @@ module.exports.init = function(controller) {
                                 };
                                 bot.reply(message, reply_with_attachments);
                                 convo.stop();
+                            } else if(Object.keys(attend_data.attend).length == noAttendees) {
+                                //code
                             } else {
                                 //Reply
                                 var attendUsers = Object.keys(attend_data.attend == true).length;
