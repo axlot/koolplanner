@@ -440,10 +440,10 @@ module.exports.init = function(controller) {
                         controller.storage.attend.get(eventId, function(err, attend_data) {
                             //Check No Attend Users
                             var noAttendees = 0;
-                            for(var prop in attend_data.attend){
-                                if(prop == false) {
+                            for(var user in attend_data.attend){
+                                if(user == false) {
                                     noAttendees++;
-                                    bot.reply(message, prop);
+                                    bot.reply(message, user);
                                 }
                             }
                             bot.reply(message, 'Los que van son:' + noAttendees);
