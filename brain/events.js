@@ -837,7 +837,7 @@ module.exports.init = function(controller) {
         });
     });
     //User Reactions To Events
-    controller.on('reaction_added', function(bot, event) {
+    controller.on('reaction_added', function(bot, event, message) {
         //Get Reaction
         if(event.reaction != null) {
             bot.reply(message, 'I heard... something!');
