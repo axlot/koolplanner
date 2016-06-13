@@ -823,7 +823,7 @@ module.exports.init = function(controller) {
         });
     });
     //User Reactions To Events
-    controller.on('reaction_added', function(bot, reaction) {
+    controller.on('reaction_added', function(bot, message) {
         //Get Reaction
         bot.reply(message, 'You\'ve reacted!');
         //bot.reply(message, 'Reaction: ' + reaction.reaction);
