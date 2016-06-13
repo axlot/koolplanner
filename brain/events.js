@@ -854,7 +854,7 @@ module.exports.init = function(controller) {
                 //Iterate Over All Events
                 var length = all_events_data.length;
                 for(var i=0; i<length; i++) {
-                    console.log('EL TS DE RANDOM EVENT ES: ' + all_events_data[i].event_data.mTimeStamp);
+                    console.log('EL TS DE RANDOM EVENT ' + all_events_data[i].event_data.title + ' ES ' + all_events_data[i].event_data.mTimeStamp);
                     console.log('EL TS DEL EVENTO REQUERIDO ES: ' + message.item.ts);
                     if(all_events_data[i].event_data.mTimeStamp == message.item.ts) {
                         console.log('======================EVENTO ENCONTRADO=======================');
