@@ -859,7 +859,7 @@ module.exports.init = function(controller) {
             if(message.reaction != 'white_check_mark') {
                 bot.api.reactions.remove({
                     name: message.reaction,
-                    timestamp: all_events_data[i].event_data.mTimeStamp,
+                    timestamp: message.item.ts,
                     channel: message.item.channel
                 },function(err, reaction) {
                     //Some Code
