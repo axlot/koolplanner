@@ -856,7 +856,6 @@ module.exports.init = function(controller) {
                     } else {
                         bot.api.reactions.remove({
                             name: message.reaction,
-                            channel: '#general',
                             timestamp: all_events_data[i].event_data.mTimeStamp
                         },function(err, reaction) {
                             //Some Code
