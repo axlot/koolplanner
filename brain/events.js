@@ -459,30 +459,40 @@ module.exports.init = function(controller) {
                                     }
                                 }
                                 if(Object.keys(attend_data.attend).length == noAttendees) {
-                                    //Some Code
-                                }
-                                //Reply
-                                var attendUsers = Object.keys(attend_data.attend == true).length;
-                                var reply_with_attachments = {
-                                    'attachments': [
-                                        {
-                                            'title': 'Here are the attendees for ' + event_data.event_data.title + ' (' + attendUsers + ' people attending)',
-                                            'color': '#7CD197'
+                                    //Reply
+                                    var reply_with_attachments = {
+                                        'attachments': [
+                                            {
+                                                'title': 'There is no attendees for ' + event_data.event_data.title,
+                                                'color': '#7CD197'
+                                            }
+                                        ]
+                                    };
+                                    bot.reply(message, reply_with_attachments);
+                                    convo.stop();
+                                } else {
+                                    //Reply
+                                    var attendUsers = Object.keys(attend_data.attend == true).length;
+                                    var reply_with_attachments = {
+                                        'attachments': [
+                                            {
+                                                'title': 'Here are the attendees for ' + event_data.event_data.title + ' (' + attendUsers + ' people attending)',
+                                                'color': '#7CD197'
+                                            }
+                                        ]
+                                    };
+                                    bot.reply(message, reply_with_attachments);
+                                    //Iterate Over Attend Data
+                                    for(var prop in attend_data.attend){
+                                        if(attend_data.attend[prop] == true) {
+                                            bot.api.users.info({user: prop}, function(err, user) {
+                                                convo.say(user.user.name);
+                                            });
                                         }
-                                    ]
-                                };
-                                bot.reply(message, reply_with_attachments);
-                                //Iterate Over Attend Data
-                                for(var prop in attend_data.attend){
-                                    if(attend_data.attend[prop] == true) {
-                                        bot.api.users.info({user: prop}, function(err, user) {
-                                            convo.say(user.user.name);
-                                        });
                                     }
+                                    convo.next();
                                 }
-                                convo.next();
                             }
-                            //convo.next();
                         });
                     } else {
                         bot.api.users.info({user: message.user}, function(err, user) {
