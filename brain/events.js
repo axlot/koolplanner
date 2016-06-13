@@ -788,7 +788,6 @@ module.exports.init = function(controller) {
     });
     //Event "JOIN"
     controller.on('channel_joined',function(bot,message) {
-        console.log(message);
         //Onboarding Message Here
         bot.api.chat.postMessage({
             "text": "Hey there!:wave: I’m your KoolPlanner, your event planning assistant. I’m here to help you plan events without hassle. :spiral_calendar_pad:",
@@ -826,7 +825,7 @@ module.exports.init = function(controller) {
     //User Reactions To Events
     controller.on('reaction_added', function(bot, reaction) {
         //Get Reaction
-        bot.reply(message, 'User: ' + reaction.reaction.user);
+        bot.reply(reaction, 'User: ' + reaction.user);
         //bot.reply(message, 'Reaction: ' + reaction.reaction);
         //bot.reply(message, 'Reaction to: ' + reaction.item.message.ts);
         //bot.reply(message, 'On channel: ' + reaction.item.message.channel);
