@@ -859,9 +859,6 @@ module.exports.init = function(controller) {
                     console.log('EL TS DE ' + all_events_data[i].event_data.title + ' ES ' + all_events_data[i].event_data.mTimeStamp);
                     console.log('EL TS DEL EVENTO REQUERIDO ES: ' + message.item.ts);
                     console.log('EL EVENT TS ES: ' + message.event_ts);
-                    if(all_events_data[i].event_data.mTimeStamp == message.item.ts) {
-                        console.log('======================EVENTO ENCONTRADO=======================');
-                    }
                 }
             });
         //RSVP Maybe
