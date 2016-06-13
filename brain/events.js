@@ -826,9 +826,9 @@ module.exports.init = function(controller) {
     //User Reactions To Events
     controller.on('reaction_added', function(bot, reaction) {
         //Get Reaction
-        bot.reply(message, 'El usuario que recciono fue: ' + reaction.user);
-        bot.reply(message, 'Reacciono con: ' + reaction.reaction);
-        bot.reply(message, 'Reacciono a: ' + reaction.item.message.ts);
-        bot.reply(message, 'En el canal: ' + reaction.item.message.channel);
+        bot.reply(message, 'User: ' + reaction.user);
+        //bot.reply(message, 'Reaction: ' + reaction.reaction);
+        //bot.reply(message, 'Reaction to: ' + reaction.item.message.ts);
+        //bot.reply(message, 'On channel: ' + reaction.item.message.channel);
     });
 };
