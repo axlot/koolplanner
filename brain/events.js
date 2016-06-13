@@ -823,4 +823,12 @@ module.exports.init = function(controller) {
             notifyUpcoming(bot, message, convo);
         });
     });
+    //User Reactions To Events
+    controller.on('reaction_added', function(bot, reaction) {
+        //Get Reaction
+        bot.reply(message, 'El usuario que recciono fue: ' + reaction.user);
+        bot.reply(message, 'Reacciono con: ' + reaction.reaction);
+        bot.reply(message, 'Reacciono a: ' + reaction.item.message.ts);
+        bot.reply(message, 'En el canal: ' + reaction.item.message.channel);
+    });
 };
