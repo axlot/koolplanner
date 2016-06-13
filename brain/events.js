@@ -856,15 +856,6 @@ module.exports.init = function(controller) {
                     }
                 }
             }
-            if(message.reaction != 'white_check_mark') {
-                bot.api.reactions.remove({
-                    name: message.reaction,
-                    timestamp: message.item.ts,
-                    channel: message.item.channel
-                },function(err, reaction) {
-                    //Some Code
-                });
-            }
         });
     });
 };
