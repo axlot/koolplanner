@@ -441,6 +441,7 @@ module.exports.init = function(controller) {
                             //Check No Attend Users
                             var noAttendees = 0;
                             for(var prop in attend_data.attend){
+                                bot.reply(message, prop);
                                 if(prop == false) {
                                     noAttendees++;
                                 }
@@ -472,7 +473,7 @@ module.exports.init = function(controller) {
                                 bot.reply(message, reply_with_attachments);
                                 //Iterate Over Attend Data
                                 for(var prop in attend_data.attend){
-                                    if(prop == false) {
+                                    if(prop == true) {
                                         bot.api.users.info({user: prop}, function(err, user) {
                                             convo.say(user.user.name);
                                         });
