@@ -854,7 +854,7 @@ module.exports.init = function(controller) {
                 //Iterate Over All Events
                 var length = all_events_data.length;
                 for(var i=0; i<length; i++) {
-                    console.log(all_events_data[i]);
+                    console.log(all_events_data[i].mTimeStamp);
                     if(all_events_data[i].event_data.mTimeStamp == message.item.ts) {
                         console.log('======================EVENTO ENCONTRADO=======================');
                     }
