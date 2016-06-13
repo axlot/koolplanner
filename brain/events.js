@@ -464,9 +464,11 @@ module.exports.init = function(controller) {
                                 bot.reply(message, reply_with_attachments);
                                 //Iterate Over Attend Data
                                 for(var prop in attend_data.attend){
-                                    bot.api.users.info({user: prop}, function(err, user) {
-                                        convo.say(user.user.name);
-                                    });
+                                    if(prop == true) {
+                                        bot.api.users.info({user: prop}, function(err, user) {
+                                            convo.say(user.user.name);
+                                        });
+                                    }
                                 }
                                 convo.next();
                             }
