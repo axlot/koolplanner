@@ -471,8 +471,17 @@ module.exports.init = function(controller) {
                                     bot.reply(message, reply_with_attachments);
                                     convo.stop();
                                 } else {
+                                    var attendUsers = 0;
+                                    //Iterate Over Attend Data
+                                    for(var prop in attend_data.attend){
+                                        if(attend_data.attend[prop] == true) {
+                                            attendUsers++;
+                                            bot.api.users.info({user: prop}, function(err, user) {
+                                                convo.say(user.user.name);
+                                            });
+                                        }
+                                    }
                                     //Reply
-                                    var attendUsers = Object.keys(attend_data.attend == true).length;
                                     var reply_with_attachments = {
                                         'attachments': [
                                             {
@@ -482,14 +491,6 @@ module.exports.init = function(controller) {
                                         ]
                                     };
                                     bot.reply(message, reply_with_attachments);
-                                    //Iterate Over Attend Data
-                                    for(var prop in attend_data.attend){
-                                        if(attend_data.attend[prop] == true) {
-                                            bot.api.users.info({user: prop}, function(err, user) {
-                                                convo.say(user.user.name);
-                                            });
-                                        }
-                                    }
                                     convo.next();
                                 }
                             }
