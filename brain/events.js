@@ -840,8 +840,6 @@ module.exports.init = function(controller) {
     });
     //User Reactions To Events
     controller.on('reaction_added', function(bot, message) {
-        //Get User's Reaction
-        //RSVP Attend
         //Look For Events With Correct Time Stamp
         controller.storage.events.all(function(err, all_events_data) {
             //Iterate Over All Events
@@ -855,6 +853,14 @@ module.exports.init = function(controller) {
                         maybe(all_events_data[i].id,bot,message);
                     } else if(message.reaction == 'x') {
                         noAttend(all_events_data[i].id,bot,message);
+                    } else {
+                        bot.api.reactions.remove({
+                            name: message.reaction,
+                            channel: message.channel,
+                            timestamp: message.ts
+                        },function(err, reaction) {
+                            //Some Code
+                        });
                     }
                 }
             }
