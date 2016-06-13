@@ -336,7 +336,6 @@ module.exports.init = function(controller) {
                                 event = new Event(eTitle, eDescription, eDate, eTime, eLocation, message.ts, message.channel, teamId, userId);
                             //Botkit Method To Storage
                             if(!eventId) {
-                                controller.storage.events.save({id: 'event' + newId, event_data: event}, function(err) {});
                                 //New Event Message
                                 bot.reply(message, {
                                     "attachments": [{
@@ -374,11 +373,11 @@ module.exports.init = function(controller) {
                                         },function(err) {
                                             if (err) { console.log(err) }
                                         });
+                                        event.mTimeStamp = message.ts;
+                                        controller.storage.events.save({id: 'event' + newId, event_data: event}, function(err) {});
                                     });
                                 });
                             } else {
-                                //Test
-                                controller.storage.events.save({id: eventId, event_data: event}, function(err) {});
                                 //Edit Event Message
                                 bot.reply(message, {
                                     "attachments": [{
@@ -417,6 +416,9 @@ module.exports.init = function(controller) {
                                             if (err) { console.log(err) }
                                         });
                                     });
+                                    //Save
+                                    event.mTimeStamp = message.ts;
+                                    controller.storage.events.save({id: eventId, event_data: event}, function(err) {});
                                 });
                             }
 
@@ -854,7 +856,7 @@ module.exports.init = function(controller) {
                 //Iterate Over All Events
                 var length = all_events_data.length;
                 for(var i=0; i<length; i++) {
-                    console.log('EL TS DE RANDOM EVENT ' + all_events_data[i].event_data.title + ' ES ' + all_events_data[i].event_data.mTimeStamp);
+                    console.log('EL TS DE ' + all_events_data[i].event_data.title + ' ES ' + all_events_data[i].event_data.mTimeStamp);
                     console.log('EL TS DEL EVENTO REQUERIDO ES: ' + message.item.ts);
                     if(all_events_data[i].event_data.mTimeStamp == message.item.ts) {
                         console.log('======================EVENTO ENCONTRADO=======================');
