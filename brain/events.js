@@ -441,9 +441,9 @@ module.exports.init = function(controller) {
                             //Check No Attend Users
                             var noAttendees = 0;
                             for(var prop in attend_data.attend){
-                                bot.reply(message, prop);
                                 if(prop == false) {
                                     noAttendees++;
+                                    bot.reply(message, prop);
                                 }
                             }
                             bot.reply(message, 'Los que van son:' + noAttendees);
