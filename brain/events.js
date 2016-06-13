@@ -823,11 +823,11 @@ module.exports.init = function(controller) {
         });
     });
     //User Reactions To Events
-    controller.on('reaction_added', function(bot, message) {
+    controller.on('reaction_added', function(bot, message, reaction) {
         //Get Reaction
         bot.reply(message, 'You\'ve reacted!');
-        //bot.reply(message, 'Reaction: ' + reaction.reaction);
-        //bot.reply(message, 'Reaction to: ' + reaction.item.message.ts);
-        //bot.reply(message, 'On channel: ' + reaction.item.message.channel);
+        bot.reply(message, 'Reaction: ' + reaction.reaction);
+        bot.reply(message, 'Reaction to: ' + reaction.item.message.ts);
+        bot.reply(message, 'On channel: ' + reaction.item.message.channel);
     });
 };
