@@ -841,5 +841,6 @@ module.exports.init = function(controller) {
         //Get Reaction
         console.log('============================ACA EMPIEZA LA RESPUESTA==================================');
         console.log(message);
+        bot.reply(message, message[1]);
     });
 };
