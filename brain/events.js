@@ -445,6 +445,7 @@ module.exports.init = function(controller) {
                                     noAttendees++;
                                 }
                             }
+                            bot.reply(attend_data);
                             if(attend_data == null /*|| Object.keys(attend_data.attend).length == noAttendees*/) {
                                 //Reply
                                 var reply_with_attachments = {
