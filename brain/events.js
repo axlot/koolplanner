@@ -840,38 +840,24 @@ module.exports.init = function(controller) {
     });
     //User Reactions To Events
     controller.on('reaction_added', function(bot, message) {
-        //Get Reaction
-        console.log('========================ACA LA RESPUESTA=======================');
-        console.log('You say: ' + message.reaction);
-        console.log('You are: ' + message.user);
-        console.log('You reacted to: ' + message.item.ts);
-
         //Get User's Reaction
         //RSVP Attend
-        if(message.reaction == 'white_check_mark') {
-            //Look For Events With Correct Time Stamp
-            controller.storage.events.all(function(err, all_events_data) {
-                //Iterate Over All Events
-                var length = all_events_data.length;
-                for(var i=0; i<length; i++) {
-                    //console.log('EL TS DE ' + all_events_data[i].event_data.title + ' ES ' + all_events_data[i].event_data.mTimeStamp);
-                    //console.log('EL TS DEL EVENTO REQUERIDO ES: ' + message.item.ts);
-                    if(message.item.ts == all_events_data[i].event_data.mTimeStamp) {
-                        //Save User's Desition
-                        attend(all_events_data[i].id,bot,message);
+        //Look For Events With Correct Time Stamp
+        controller.storage.events.all(function(err, all_events_data) {
+            //Iterate Over All Events
+            var length = all_events_data.length;
+            for(var i=0; i<length; i++) {
+                if(message.item.ts == all_events_data[i].event_data.mTimeStamp) {
+                    //Save User's Desition
+                    if(message.reaction == 'white_check_mark') {
+                        attend(all_events_data[i].id, bot, message);
+                    } else if(message.reaction == 'question') {
+                        maybe(all_events_data[i].id,bot,message);
+                    } else if(message.reaction == 'x') {
+                        noAttend(all_events_data[i].id,bot,message);
                     }
                 }
-            });
-        //RSVP Maybe
-        } else if(message.reaction == 'question') {
-            console.log('======================EL USUARIO TAL VEZ VAYA=======================');
-            //Look For Events With Correct Time Stamp
-
-        //RSVP No
-        } else if(message.reaction == 'x') {
-            console.log('======================EL USUARIO NO VA A ASISTIR=======================');
-            //Look For Events With Correct Time Stamp
-
-        }
+            }
+        });
     });
 };
