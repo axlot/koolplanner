@@ -856,8 +856,8 @@ module.exports.init = function(controller) {
                     } else {
                         bot.api.reactions.remove({
                             name: message.reaction,
-                            channel: message.channel,
-                            timestamp: message.ts
+                            channel: message.item.channel,
+                            timestamp: message.item.ts
                         },function(err, reaction) {
                             //Some Code
                         });
