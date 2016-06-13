@@ -445,7 +445,8 @@ module.exports.init = function(controller) {
                                     noAttendees++;
                                 }
                             }
-                            if(/*attend_data == null || */Object.keys(attend_data.attend == false).length == noAttendees) {
+                            bot.reply(message, 'Los que van son:' + noAttendees);
+                            if(/*attend_data == null || */Object.keys(attend_data.attend).length == noAttendees) {
                                 //Reply
                                 var reply_with_attachments = {
                                     'attachments': [
