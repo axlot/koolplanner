@@ -849,12 +849,26 @@ module.exports.init = function(controller) {
         //RSVP Attend
         if(message.reaction == 'white_check_mark') {
             console.log('======================EL USUARIO VA A IR=======================');
+            //Look For Events With Correct Time Stamp
+            controller.storage.events.all(function(err, all_events_data) {
+                //Iterate Over All Events
+                var length = all_events_data.length;
+                for(var i=0; i<length; i++) {
+                    if(all_events_data[i].event_data.mTimeStamp == message.item.ts) {
+                        console.log('======================EVENTO ENCONTRADO=======================');
+                    }
+                }
+            });
         //RSVP Maybe
         } else if(message.reaction == 'question') {
             console.log('======================EL USUARIO TAL VEZ VAYA=======================');
+            //Look For Events With Correct Time Stamp
+
         //RSVP No
         } else if(message.reaction == 'x') {
             console.log('======================EL USUARIO NO VA A ASISTIR=======================');
+            //Look For Events With Correct Time Stamp
+
         }
     });
 };
