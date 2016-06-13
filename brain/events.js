@@ -452,7 +452,7 @@ module.exports.init = function(controller) {
                                 convo.stop();
                             } else {
                                 //Reply
-                                var attendUsers = Object.keys(attend_data.attend).length;
+                                var attendUsers = Object.keys(attend_data.attend == true).length;
                                 var reply_with_attachments = {
                                     'attachments': [
                                         {
