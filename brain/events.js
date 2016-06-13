@@ -853,16 +853,17 @@ module.exports.init = function(controller) {
                         maybe(all_events_data[i].id,bot,message);
                     } else if(message.reaction == 'x') {
                         noAttend(all_events_data[i].id,bot,message);
-                    } else {
-                        bot.api.reactions.remove({
-                            name: message.reaction,
-                            timestamp: all_events_data[i].event_data.mTimeStamp,
-                            channel: all_events_data[i].event_data.mChannel
-                        },function(err, reaction) {
-                            //Some Code
-                        });
                     }
                 }
+            }
+            if(message.reaction != 'white_check_mark') {
+                bot.api.reactions.remove({
+                    name: message.reaction,
+                    timestamp: all_events_data[i].event_data.mTimeStamp,
+                    channel: message.item.channel
+                },function(err, reaction) {
+                    //Some Code
+                });
             }
         });
     });
