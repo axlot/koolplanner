@@ -839,11 +839,6 @@ module.exports.init = function(controller) {
     //User Reactions To Events
     controller.on('reaction_added', function(bot, message) {
         //Get Reaction
-        bot.say(
-            {
-                text: 'You\'ve reacted!',
-                channel: '#general'
-            }
-        );
+        bot.reply(message, 'I heard... something!');
     });
 };
