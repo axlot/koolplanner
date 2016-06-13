@@ -839,9 +839,10 @@ module.exports.init = function(controller) {
     //User Reactions To Events
     controller.on('reaction_added', function(bot, message) {
         //Get Reaction
-        bot.reply(message, 'You say: ' + message.reaction);
-        bot.reply(message, 'You are: ' + message.user);
-        bot.reply(message, 'You reacted to: ' + message.item.ts);
-        bot.reply(message, 'that is a message posted by: ' + message.item_user);
+        console.log('========================ACA LA RESPUESTA=======================');
+        console.log('You say: ' + message.reaction);
+        console.log('You are: ' + message.user);
+        console.log('You reacted to: ' + message.item.ts);
+        console.log('that is a message posted by: ' + message.item_user);
     });
 };
