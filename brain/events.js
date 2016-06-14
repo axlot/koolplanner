@@ -838,9 +838,9 @@ module.exports.notify = function(controller, bot) {
     console.log(bot);
     console.log('==============================');
     console.log('==============================');
-    console.log('============TEaM INFO==================');
+    console.log('============SLACK TEaM INFO==================');
     console.log('==============================');
-    console.log(bot.resource);
+    console.log(bot.resource.SlackTeamID);
     console.log('==============================');
     console.log('==============EL BOT DEL PUEBLO================');
     bot.api.team.info({}, function(err, response) {
