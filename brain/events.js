@@ -840,7 +840,7 @@ module.exports.notify = function(controller, bot) {
     console.log('==============================');
     console.log('============TEaM INFO==================');
     console.log('==============================');
-    console.log(bot.team_info);
+    console.log(bot.resource);
     console.log('==============================');
     console.log('==============EL BOT DEL PUEBLO================');
     bot.api.team.info({}, function(err, response) {
