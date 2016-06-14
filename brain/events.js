@@ -838,7 +838,9 @@ module.exports.notify = function(controller, bot) {
     console.log(bot);
     console.log('==============================');
     console.log('==============================');
+    console.log('============TEaM INFO==================');
     console.log('==============================');
+    console.log(bot.team_info);
     console.log('==============================');
     console.log('==============EL BOT DEL PUEBLO================');
     bot.api.team.info({}, function(err, response) {
