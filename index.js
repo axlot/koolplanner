@@ -17,7 +17,7 @@ beepboop.on('add_resource', function (message) {
     var bot = beepboop.workers[id];
 
       //Cron Task
-      cron.schedule('4 * * * * *', function(){
+      cron.schedule('0 0 * * * *', function(){
           events.notify(controller, bot);
           console.log('===========================CRON EXECUTED=========================');
       });
