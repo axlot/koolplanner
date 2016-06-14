@@ -832,7 +832,8 @@ module.exports.notify = function(controller, bot) {
         tHour = date.getHours() + ':' + date.getMinutes(),
         today = month + '/' + day + '/' + year;
     //Check Team's Id
-    console.log(bot);
+    console.log(bot.team);
+    console.log('==============EL BOT DEL PUEBLO================');
     bot.api.team.info({}, function(err, response) {
         console.log(response);
         console.log('==============================');
