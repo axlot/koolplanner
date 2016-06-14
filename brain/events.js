@@ -857,4 +857,10 @@ module.exports.init = function(controller) {
             }
         });
     });
+
+    //Cron Task
+    cron.schedule('4 * * * * *', function(){
+        console.log('===========================EL CRON ESTA FUNCIONANDO=========================');
+    });
 };
+
