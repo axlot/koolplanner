@@ -823,7 +823,7 @@ module.exports.init = function(controller) {
     });
 };
 
-module.exports.notify = function(bot) {
+module.exports.notify = function(controller, bot) {
     //Get Actual Date
     var date = new Date(),
         day = date.getDate(),
@@ -832,10 +832,9 @@ module.exports.notify = function(bot) {
         tHour = date.getHours() + ':' + date.getMinutes(),
         today = month + '/' + day + '/' + year;
     //Check Team's Id
-    bot.identifyTeam(function(err,team_id) {
-        var teamID = team_id;
-        //Retrieve All Events
-        controller.storage.events.all(function(err, all_events_data) {
+    bot.api.team.info({}, function(err, response) {
+        var teamID = response.team.id;
+         controller.storage.events.all(function(err, all_events_data) {
             var length = all_events_data.length,
                 teamEvents = [];
             for(var i=0;i<length;i++) {
@@ -873,6 +872,6 @@ module.exports.notify = function(bot) {
                 }
             };
         });
-    });
+    })
 };
 
