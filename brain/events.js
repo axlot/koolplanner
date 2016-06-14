@@ -545,6 +545,7 @@ module.exports.init = function(controller) {
                             bot.reply(message, {
                                 "attachments": [
                                     {
+                                        "fallback": futureEvents[j].event_data.title,
                                         "pretext": 'Event ID: ' + futureEvents[j].id,
                                         "title": futureEvents[j].event_data.title,
                                         "color": '#3498db',
