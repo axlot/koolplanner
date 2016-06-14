@@ -1,4 +1,4 @@
-module.exports.init = function(controller) {
+module.exports.init = function(controller, cron) {
     /* === CONSTRUCTORS === */
     //Event Constructor
     var Event = function(name, description, date, time, location, mTimeStamp, mChannel, teamId, userId) {
