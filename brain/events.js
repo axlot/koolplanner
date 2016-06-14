@@ -834,18 +834,8 @@ module.exports.notify = function(controller, bot) {
         year = date.getFullYear(),
         tHour = date.getHours() + ':' + date.getMinutes(),
         today = month + '/' + day + '/' + year;
-
-        console.log('==============================');
         var teamID = bot.resource.SlackTeamID;
         bot = bot.worker;
-        console.log(bot);
-        console.log('==============================');
-        console.log('==============================');
-        console.log('==========BOOOT====================');
-        console.log('==============================');
-        console.log('==============================');
-        console.log('==============================');
-        console.log('==============================');
 
          controller.storage.events.all(function(err, all_events_data) {
             var length = all_events_data.length,

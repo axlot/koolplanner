@@ -19,7 +19,7 @@ beepboop.on('add_resource', function (message) {
       //Cron Task
       cron.schedule('4 * * * * *', function(){
           events.notify(controller, bot);
-          console.log('===========================EL CRON ESTA FUNCIONANDO=========================');
+          console.log('===========================CRON EXECUTED=========================');
       });
 
   })
