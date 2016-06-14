@@ -37,29 +37,6 @@ module.exports.init = function(controller) {
         });
         convo.next();
     }
-    //Alert Attendess User
-    function alertAttendees2(bot, customMessage, eventId) {
-        controller.storage.rsvp.all(function(err, all_attend_data) {
-            var length = all_attend_data.length,
-                attendees;
-            //Iterate Over Event's Attenddes
-            for(var i=0; i<length; i++) {
-                if(all_attend_data[i].id == eventId) {
-                    //Get Event Attenddes
-                    attendees = all_attend_data[i].attend;
-                    break;
-                }
-            }
-            //Iterate Over Attenddes Obj And Get User's Names
-            for(var userID in attendees){
-                bot.startPrivateConversation({user: userID}, function(err, convo){
-                    bot.api.users.info({user: convo.source_message.user}, function(err, user) {
-                        convo.say('Hey ' + user.user.name + '!\n' + customMessage);
-                    });
-                });
-            }
-        });
-    }
     //Validate User
     function validateUser(bot,message,eventId) {
         //Check Team ID
@@ -824,6 +801,32 @@ module.exports.init = function(controller) {
 };
 
 module.exports.notify = function(controller, bot) {
+
+
+        //Alert Attendess User
+    function alertAttendeesToEvent(bot, customMessage, eventId) {
+        controller.storage.rsvp.all(function(err, all_attend_data) {
+            var length = all_attend_data.length,
+                attendees;
+            //Iterate Over Event's Attenddes
+            for(var i=0; i<length; i++) {
+                if(all_attend_data[i].id == eventId) {
+                    //Get Event Attenddes
+                    attendees = all_attend_data[i].attend;
+                    break;
+                }
+            }
+            //Iterate Over Attenddes Obj And Get User's Names
+            for(var userID in attendees){
+                bot.startPrivateConversation({user: userID}, function(err, convo){
+                    bot.api.users.info({user: convo.source_message.user}, function(err, user) {
+                        convo.say('Hey ' + user.user.name + '!\n' + customMessage);
+                    });
+                });
+            }
+        });
+    }
+
     //Get Actual Date
     var date = new Date(),
         day = date.getDate(),
@@ -831,22 +834,19 @@ module.exports.notify = function(controller, bot) {
         year = date.getFullYear(),
         tHour = date.getHours() + ':' + date.getMinutes(),
         today = month + '/' + day + '/' + year;
-    //Check Team's Id
-    console.log('==============================');
-    console.log('==============================');
-    console.log('==============================');
-    console.log(bot);
-    console.log('==============================');
-    console.log('==============================');
-    console.log('============SLACK TEaM INFO==================');
-    console.log('==============================');
-    console.log(bot.resource.SlackTeamID);
-    console.log('==============================');
-    console.log('==============EL BOT DEL PUEBLO================');
-    bot.api.team.info({}, function(err, response) {
-        console.log(response);
+
         console.log('==============================');
-        var teamID = response.team.id;
+        var teamID = bot.resource.SlackTeamID;
+        bot = bot.resource.worker;
+        console.log(bot);
+        console.log('==============================');
+        console.log('==============================');
+        console.log('==========BOOOT====================');
+        console.log('==============================');
+        console.log('==============================');
+        console.log('==============================');
+        console.log('==============================');
+
          controller.storage.events.all(function(err, all_events_data) {
             var length = all_events_data.length,
                 teamEvents = [];
@@ -869,22 +869,22 @@ module.exports.notify = function(controller, bot) {
                     switch (daysLeft) {
                         case 7:
                             //Code to notify users
-                            alertAttendees2(bot, convo, 'The event "' + teamEvents[j].event_data.title + '" is next week!\nIt will take place on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs, at ' + teamEvents[j].event_data.location, teamEvents[j].id);
+                            alertAttendeesToEvent(bot, 'The event "' + teamEvents[j].event_data.title + '" is next week!\nIt will take place on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs, at ' + teamEvents[j].event_data.location, teamEvents[j].id);
                             break;
                         case 1:
                             eHour = eHour.replace(':','');
                             tHour = tHour.replace(':','');
                             var timeLeft = parseInt(parseFloat(eHour) - parseFloat(tHour));
                             if(timeLeft == 100) {
-                                alertAttendees2(bot, convo, 'Just a little reminder.\nThe event "' + teamEvents[j].event_data.title + '" starts in an hour!\nHave fun!!!', teamEvents[j].id);
+                                alertAttendeesToEvent(bot, 'Just a little reminder.\nThe event "' + teamEvents[j].event_data.title + '" starts in an hour!\nHave fun!!!', teamEvents[j].id);
                             } else {
-                                alertAttendees2(bot, convo, 'Ready for tomorrow?\n"' + teamEvents[j].event_data.title + '" starts on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs', teamEvents[j].id);
+                                alertAttendeesToEvent(bot, 'Ready for tomorrow?\n"' + teamEvents[j].event_data.title + '" starts on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs', teamEvents[j].id);
                             }
                             break;
                     }
                 }
             };
         });
-    })
+
 };
 
