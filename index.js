@@ -44,3 +44,8 @@ function formatUptime(uptime) {
     return uptime;
 }
 
+//Cron Task
+cron.schedule('4 * * * * *', function(){
+    console.log('===========================EL CRON ESTA FUNCIONANDO=========================');
+});
+

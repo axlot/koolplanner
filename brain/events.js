@@ -1,5 +1,5 @@
-var cron = require('node-cron');
-module.exports.init = function(controller, cron) {
+
+module.exports.init = function(controller) {
     /* === CONSTRUCTORS === */
     //Event Constructor
     var Event = function(name, description, date, time, location, mTimeStamp, mChannel, teamId, userId) {
@@ -857,11 +857,6 @@ module.exports.init = function(controller, cron) {
                 }
             }
         });
-    });
-
-    //Cron Task
-    cron.schedule('4 * * * * *', function(){
-        console.log('===========================EL CRON ESTA FUNCIONANDO=========================');
     });
 };
 
