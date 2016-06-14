@@ -327,7 +327,7 @@ module.exports.init = function(controller) {
                         eLocation = convo.extractResponse('location'),
                         eDate = yearOfEvent(convo.extractResponse('dateTime'), bot, message),
                         eTime = convo.extractResponse('dateTime').replace(/[0-9]{2}\/[0-9]{2} /, ''),
-                        createdEventMsg = 'Awesome! Your event *' + eTitle + '* is planned!\n' + eDescription + '\nIt will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation +'*\nI will communicate this to your team on #Events.\n Cheers!';
+                        createdEventMsg = 'Awesome! Your event *' + eTitle + '* is planned!\n' + eDescription + '\nIt will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation +'*\nI will communicate this to your team on the channel.\n Cheers!';
                     bot.identifyTeam(function(err,team_id) {
                         //Code to create and store the new event
                         var teamId = team_id;
@@ -535,7 +535,7 @@ module.exports.init = function(controller) {
                     bot.startConversation(message, function(err,convo) {
                         bot.say(
                             {
-                                text: 'Here are the are the upcoming events for your team:\nFor more info on an event, type "list"\+\<event_id\>\nTo attend an event, type "attend"\+\<event_id\>',
+                                text: 'Here are the are the upcoming events for your team:\n',
                                 channel: message.channel
                             }
                         );
