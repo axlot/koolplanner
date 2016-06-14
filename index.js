@@ -1,6 +1,7 @@
 
 var Botkit = require('./node_modules/botkit/lib/Botkit.js');
 var os = require('os');
+var cron = require('node-cron');
 
 firebaseStorage = require('./brain/memory.js')({firebase_uri: 'https://thekoolplanner.firebaseio.com/'});
 
@@ -42,3 +43,11 @@ function formatUptime(uptime) {
     uptime = uptime + ' ' + unit;
     return uptime;
 }
+
+//Cron
+cron.schedule('0 * * * *', function(){
+    bot.api.chat.postMessage({
+        "text": "EL CRON ESTA FUNCIONANDO",
+        "channel": '#general'
+    });
+});

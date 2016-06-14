@@ -609,8 +609,7 @@ module.exports.init = function(controller) {
                         dateFormatted =  new Date(eDate);
                     //Compare Year And Month
                     if((todayFormatted.getFullYear() == dateFormatted.getFullYear()) && (todayFormatted.getMonth()+1 == dateFormatted.getMonth()+1)) {
-                        //var daysLeft = dateFormatted.getDate() - todayFormatted.getDate();
-                        var daysLeft = 7;
+                        var daysLeft = dateFormatted.getDate() - todayFormatted.getDate();
                         //If *daysLeft results negative it means that the event already past(ex: yesterday).
                         switch (daysLeft) {
                             case 7:
@@ -620,8 +619,7 @@ module.exports.init = function(controller) {
                             case 1:
                                 eHour = eHour.replace(':','');
                                 tHour = tHour.replace(':','');
-                                //var timeLeft = parseInt(parseFloat(eHour) - parseFloat(tHour));
-                                var timeLeft = 100;
+                                var timeLeft = parseInt(parseFloat(eHour) - parseFloat(tHour));
                                 if(timeLeft == 100) {
                                     alertAttendees(bot, convo, 'Just a little reminder.\nThe event "' + teamEvents[j].event_data.title + '" starts in an hour!\nHave fun!!!', teamEvents[j].id);
                                 } else {
