@@ -46,8 +46,5 @@ function formatUptime(uptime) {
 
 //Cron
 cron.schedule('0 * * * *', function(){
-    bot.api.chat.postMessage({
-        "text": "EL CRON ESTA FUNCIONANDO",
-        "channel": '#general'
-    });
+    console.log('===========================EL CRON ESTA FUNCTIONANDO=======================================');
 });
