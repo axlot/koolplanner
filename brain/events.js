@@ -1,3 +1,4 @@
+var cron = require('node-cron');
 module.exports.init = function(controller, cron) {
     /* === CONSTRUCTORS === */
     //Event Constructor

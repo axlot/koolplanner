@@ -10,14 +10,14 @@ var controller = Botkit.slackbot({
     storage: firebaseStorage
 });
 
-var beepboop = require('beepboop-botkit').start(controller, cron);
+var beepboop = require('beepboop-botkit').start(controller);
 
 beepboop.on('add_resource', function (message) {
   Object.keys(beepboop.workers).forEach(function (id) {
     // this is an instance of a botkit worker
     var bot = beepboop.workers[id]
   })
-})
+});
 
 
 //var greetingBot = require('./brain/greetings.js');
