@@ -837,7 +837,7 @@ module.exports.notify = function(controller, bot) {
 
         console.log('==============================');
         var teamID = bot.resource.SlackTeamID;
-        bot = bot.resource;
+        bot = bot.worker;
         console.log(bot);
         console.log('==============================');
         console.log('==============================');
