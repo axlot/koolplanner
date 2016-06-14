@@ -833,6 +833,8 @@ module.exports.notify = function(controller, bot) {
         today = month + '/' + day + '/' + year;
     //Check Team's Id
     bot.api.team.info({}, function(err, response) {
+        console.log(response);
+        console.log('==============================');
         var teamID = response.team.id;
          controller.storage.events.all(function(err, all_events_data) {
             var length = all_events_data.length,
