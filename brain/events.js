@@ -823,7 +823,7 @@ module.exports.notify = function(controller, bot) {
                     //bot.api.users.info({user: convo.source_message.user}, function(err, user) {
                     //    conversation.say('Hey ' + user.user.name + '!\n' + customMessage);
                     //});
-                    console.log('==========================ESTO ES EL BOT=======================');
+                    console.log('==========================ESTO ES EL BOT======================');
                     console.dir(bot.botkit.bot);
                 });
             }
