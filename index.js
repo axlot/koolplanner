@@ -14,7 +14,7 @@ var beepboop = require('beepboop-botkit').start(controller);
 beepboop.on('add_resource', function (message) {
   Object.keys(beepboop.workers).forEach(function (id) {
     // this is an instance of a botkit worker
-    var bot = beepboop.workers[id];
+      var bot = beepboop.workers[id].worker;
 
       //Cron Task
       cron.schedule('* * * * *', function(){
