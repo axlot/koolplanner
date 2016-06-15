@@ -804,7 +804,7 @@ module.exports.notify = function(controller, bot) {
 
 
         //Alert Attendess User
-    function alertAttendeesToEvent(bot, customMessage, eventId) {
+    function alertAttendeesToEvent(bot, customMessage, eventId, controller) {
         controller.storage.rsvp.all(function(err, all_attend_data) {
             var length = all_attend_data.length,
                 attendees;
@@ -871,11 +871,11 @@ module.exports.notify = function(controller, bot) {
                         case 7:
                             console.log('ENTRO AL 7');
                             //Code to notify users
-                            alertAttendeesToEvent(bot, 'The event "' + teamEvents[j].event_data.title + '" is next week!\nIt will take place on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs, at ' + teamEvents[j].event_data.location, teamEvents[j].id);
+                            alertAttendeesToEvent(bot, 'The event "' + teamEvents[j].event_data.title + '" is next week!\nIt will take place on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs, at ' + teamEvents[j].event_data.location, teamEvents[j].id, controller);
                         break;
                         case 1:
                             console.log('ENTRO AL 1');
-                            alertAttendeesToEvent(bot, 'Ready for tomorrow?\n"' + teamEvents[j].event_data.title + '" starts on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs', teamEvents[j].id);
+                            alertAttendeesToEvent(bot, 'Ready for tomorrow?\n"' + teamEvents[j].event_data.title + '" starts on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs', teamEvents[j].id, controller);
                         break;
                         case 0:
                             console.log('ENTRO AL 0');
@@ -883,7 +883,7 @@ module.exports.notify = function(controller, bot) {
                             if (tTime > eTime) {
                                 var timeLeft = parseInt(tTime - eTime);
                                 if(timeLeft == 1) {
-                                    alertAttendeesToEvent(bot, 'Just a little reminder.\nThe event "' + teamEvents[j].event_data.title + '" starts in an hour!\nHave fun!!!', teamEvents[j].id);
+                                    alertAttendeesToEvent(bot, 'Just a little reminder.\nThe event "' + teamEvents[j].event_data.title + '" starts in an hour!\nHave fun!!!', teamEvents[j].id, controller);
                                 }
 
                             }
