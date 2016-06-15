@@ -808,15 +808,15 @@ module.exports.notify = function(controller, bot) {
         console.log('ENTRA A LA FUNCION ALERTATENDEES');
         controller.storage.rsvp.all(function(err, all_attend_data) {
             console.log('ATTENDES==================');
-            console.dir(all_attend_data);
-            var length = all_attend_data.length,
+            console.dir(all_attend_data.attend);
+            var length = all_attend_data.attend.length,
                 attendees;
             //Iterate Over Event's Attenddes
             for(var i=0; i<length; i++) {
-                console.log('EVENT ID: ' + all_attend_data[i].id);
-                if(all_attend_data[i].id == eventId) {
+                console.log('EVENT ID: ' + all_attend_data.attend[i].id);
+                if(all_attend_data.attend[i].id == eventId) {
                     //Get Event Attenddes
-                    attendees = all_attend_data[i].attend;
+                    attendees = all_attend_data.attend[i].attend;
                     break;
                 }
             }
