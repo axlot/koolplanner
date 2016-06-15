@@ -821,7 +821,7 @@ module.exports.notify = function(controller, bot) {
             console.log('===============ATTENDDES==========================');
             console.dir(attendees);
             for(var userID in attendees){
-                if(userID === true) {
+                if(userID == true) {
                     conversation.say('Hey this user is true');
                     bot.startPrivateConversation({user: userID}, function(err, conversation){
                         conversation.say('Hey');
