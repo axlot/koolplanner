@@ -803,17 +803,14 @@ module.exports.init = function(controller) {
 module.exports.notify = function(controller, bot, teamID) {
 
 
-        //Alert Attendess User
+    //Alert Attendess User
     function alertAttendeesToEvent(bot, customMessage, eventId, controller) {
-        controller.storage.attend.all(function(err, all_attend_data) {
-            var length = all_attend_data.length,
-                attendees;
-            //Iterate Over Event's Attenddes
+        controller.storage.attend.get(eventId, function(err, attend_data) {
+            var length = attend_data.length,
+                attendees = [];
             for(var i=0; i<length; i++) {
-                if(all_attend_data[i].id == eventId) {
-                    //Get Event Attenddes
-                    attendees = all_attend_data[i].attend;
-                    break;
+                if(attend_data.attend[i] == true) {
+                    attendees.push(attend_data.attend[i]);
                 }
             }
             //Iterate Over Attenddes Obj And Get User's Names
@@ -827,6 +824,29 @@ module.exports.notify = function(controller, bot, teamID) {
                 });
             }
         });
+
+        //controller.storage.attend.all(function(err, all_attend_data) {
+        //    var length = all_attend_data.length,
+        //        attendees;
+        //    //Iterate Over Event's Attenddes
+        //    for(var i=0; i<length; i++) {
+        //        if(all_attend_data[i].id == eventId) {
+        //            //Get Event Attenddes
+        //            attendees = all_attend_data[i].attend;
+        //            break;
+        //        }
+        //    }
+        //    //Iterate Over Attenddes Obj And Get User's Names
+        //    for(var userID in attendees){
+        //        bot.api.im.open({ user: userID }, function (err, response) {
+        //            if (err) {
+        //                return console.log(err)
+        //            }
+        //            var dmChannel = response.channel.id;
+        //            bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + userID + '>' + customMessage});
+        //        });
+        //    }
+        //});
     }
 
     //Get Actual Date
