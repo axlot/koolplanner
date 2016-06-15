@@ -824,7 +824,7 @@ module.exports.notify = function(controller, bot) {
                     //    conversation.say('Hey ' + user.user.name + '!\n' + customMessage);
                     //});
                     console.log('==========================ESTO ES EL BOT=======================');
-                    console.dir(bot.botkit);
+                    console.dir(bot.botkit.config);
                 });
             }
         });
