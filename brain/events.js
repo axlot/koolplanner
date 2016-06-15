@@ -818,13 +818,20 @@ module.exports.notify = function(controller, bot, teamID) {
             }
             //Iterate Over Attenddes Obj And Get User's Names
             for(var userID in attendees){
-                bot.startPrivateConversation({user: userID}, function(err, convo){
-                    console.log('=================ESTO ES CONVO======================');
-                    console.dir(convo);
-                    //bot.api.users.info({user: convo.source_message.user}, function(err, user) {
-                    //    convo.say('Hey ' + user.user.name + '!\n' + customMessage);
-                    //});
+                bot.api.im.open({ user: userID }, function (err, response) {
+                    if (err) {
+                        return console.log(err)
+                    }
+                    var dmChannel = response.channel.id;
+                    bot.say({channel: dmChannel, text: 'Hey ' + slackUserID + '!'});
                 });
+                //bot.startPrivateConversation({user: userID}, function(err, convo){
+                //    console.log('=================ESTO ES CONVO======================');
+                //    console.dir(convo);
+                //    //bot.api.users.info({user: convo.source_message.user}, function(err, user) {
+                //    //    convo.say('Hey ' + user.user.name + '!\n' + customMessage);
+                //    //});
+                //});
             }
         });
     }
