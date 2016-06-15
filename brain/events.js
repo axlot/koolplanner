@@ -819,9 +819,10 @@ module.exports.notify = function(controller, bot, teamID) {
             //Iterate Over Attenddes Obj And Get User's Names
             for(var userID in attendees){
                 bot.startPrivateConversation({user: userID}, function(err, convo){
-                    bot.api.users.info({user: convo.source_message.user}, function(err, user) {
-                        convo.say('Hey ' + user.user.name + '!\n' + customMessage);
-                    });
+                    console.dir(convo);
+                    //bot.api.users.info({user: convo.source_message.user}, function(err, user) {
+                    //    convo.say('Hey ' + user.user.name + '!\n' + customMessage);
+                    //});
                 });
             }
         });
