@@ -818,10 +818,10 @@ module.exports.notify = function(controller, bot) {
                 }
             }
             //Iterate Over Attenddes Obj And Get User's Names
+            console.log('===============ATTENDDES==========================');
+            console.dir(attendees);
             for(var userID in attendees){
                 bot.startPrivateConversation({user: userID}, function(err, convo){
-                    console.log('==============SOURCE MESSAGE=================');
-                    console.dir(convo.source_message);
                     bot.api.users.info({user: convo.source_message.user}, function(err, user) {
                         convo.say('Hey ' + user.user.name + '!\n' + customMessage);
                     });
