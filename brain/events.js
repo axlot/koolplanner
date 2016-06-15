@@ -838,7 +838,7 @@ module.exports.notify = function(controller, bot) {
         var teamID = bot.resource.SlackTeamID;
         bot = bot.worker;
 
-        console.log('Today\s date and time is:' + today );
+        console.log('Today\s date is:' + today + ' and the time is ' + tTime);
         /* Get all  the events from FireBase */
          controller.storage.events.all(function(err, all_events_data) {
             var length = all_events_data.length,
