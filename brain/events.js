@@ -823,15 +823,8 @@ module.exports.notify = function(controller, bot, teamID) {
                         return console.log(err)
                     }
                     var dmChannel = response.channel.id;
-                    bot.say({channel: dmChannel, text: 'Hey ' + slackUserID + '!'});
+                    bot.say({channel: dmChannel, text: 'Hey ' + userID + '!'});
                 });
-                //bot.startPrivateConversation({user: userID}, function(err, convo){
-                //    console.log('=================ESTO ES CONVO======================');
-                //    console.dir(convo);
-                //    //bot.api.users.info({user: convo.source_message.user}, function(err, user) {
-                //    //    convo.say('Hey ' + user.user.name + '!\n' + customMessage);
-                //    //});
-                //});
             }
         });
     }
