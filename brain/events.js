@@ -809,7 +809,7 @@ module.exports.notify = function(controller, bot) {
         controller.storage.rsvp.all(function(err, all_attend_data) {
             console.log('================ATTENDES==================');
             console.dir(all_attend_data);
-            console.log('LENGHT OF ATTEND DATA: ' + all_attend_data.length);
+            console.log('LENGHT OF ATTEND DATA: ' + all_attend_data.attend.length);
             var length = all_attend_data.length,
                 attendees;
             //Iterate Over Event's Attenddes
