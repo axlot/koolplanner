@@ -847,8 +847,8 @@ module.exports.notify = function(controller, bot) {
                 /* Get specific events by team's id */
                 if(all_events_data[i].event_data.team_id == teamID) {
                     teamEvents.push(all_events_data[i]);
-                    console.log('Event date is:' + all_events_data[i].event_data.date);
                 }
+                console.dir('Event date is:' + all_events_data[i].event_data.date);
             };
             //Get Future Events
             var upLength = teamEvents.length;
