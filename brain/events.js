@@ -818,7 +818,7 @@ module.exports.notify = function(controller, bot) {
             //    if(all_attend_data.attend[i].id == eventId) {
             //        //Get Event Attenddes
             //        attendees = all_attend_data.attend[i].attend;
-            //        break;
+            //        break;/
             //    }
             //}
             //console.log('ATTENDEES: ' + attendees);
