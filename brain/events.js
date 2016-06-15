@@ -838,7 +838,7 @@ module.exports.notify = function(controller, bot) {
         year = date.getFullYear(),
         tTime = date.getHours() + ':' + date.getMinutes(),
         today = month + '/' + day + '/' + year;
-        var teamID = bot.resource.SlackTeamID;
+        var teamID = beepboop.botByTeamId(slackTeamID);
         bot = bot.worker;
         /* Get all  the events from FireBase */
          controller.storage.events.all(function(err, all_events_data) {
