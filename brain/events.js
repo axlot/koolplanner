@@ -851,9 +851,9 @@ module.exports.notify = function(controller, bot) {
             };
             //Get Future Events
             var upLength = teamEvents.length;
-             console.dir('Los eventos del team son: ' + teamEvents.event_data);
              /* Iterate over the team event's */
             for(var j=0;j<upLength;j++) {
+                console.dir('Los eventos del team son: ' + teamEvents[j].event_data);
                 /* Here we get the time(hh/mm) and date(mm/dd) of the event */
                 var eTime = teamEvents[j].event_data.time,
                     eDate = teamEvents[j].event_data.date,
