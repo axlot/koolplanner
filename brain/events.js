@@ -869,13 +869,16 @@ module.exports.notify = function(controller, bot) {
                     /* In case 7 we are a week from the event */
                     switch (daysLeft) {
                         case 7:
+                            console.log('ENTRO AL 7');
                             //Code to notify users
                             alertAttendeesToEvent(bot, 'The event "' + teamEvents[j].event_data.title + '" is next week!\nIt will take place on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs, at ' + teamEvents[j].event_data.location, teamEvents[j].id);
                         break;
                         case 1:
+                            console.log('ENTRO AL 1');
                             alertAttendeesToEvent(bot, 'Ready for tomorrow?\n"' + teamEvents[j].event_data.title + '" starts on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs', teamEvents[j].id);
                         break;
                         case 0:
+                            console.log('ENTRO AL 0');
                             /* In case 0 this is the day of the event and now we have to compare time */
                             if (tTime > eTime) {
                                 var timeLeft = parseInt(tTime - eTime);
