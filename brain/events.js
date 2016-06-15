@@ -823,7 +823,7 @@ module.exports.notify = function(controller, bot, teamID) {
                         return console.log(err)
                     }
                     var dmChannel = response.channel.id;
-                    bot.say({channel: dmChannel, text: 'Hey ' + userID + '!'});
+                    bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + userID + '>' + customMessage});
                 });
             }
         });
