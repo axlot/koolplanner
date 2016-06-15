@@ -818,9 +818,9 @@ module.exports.notify = function(controller, bot) {
                 }
             }
             //Iterate Over Attenddes Obj And Get User's Names
-            console.log('===============ATTENDDES==========================');
-            console.dir(attendees);
             for(var userID in attendees){
+                console.log('USER:');
+                console.dir(userID);
                 if(userID == true) {
                     conversation.say('Hey this user is true');
                     bot.startPrivateConversation({user: userID}, function(err, conversation){
