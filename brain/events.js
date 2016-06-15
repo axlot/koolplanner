@@ -848,11 +848,10 @@ module.exports.notify = function(controller, bot) {
                 if(all_events_data[i].event_data.team_id == teamID) {
                     teamEvents.push(all_events_data[i]);
                 }
-                console.dir('Event date is:' + all_events_data[i].event_data.date);
             };
             //Get Future Events
             var upLength = teamEvents.length;
-             console.dir('Los eventos del team son: ' + teamEvents);
+             console.dir('Los eventos del team son: ' + teamEvents.event_data);
              /* Iterate over the team event's */
             for(var j=0;j<upLength;j++) {
                 /* Here we get the time(hh/mm) and date(mm/dd) of the event */
