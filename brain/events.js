@@ -837,6 +837,8 @@ module.exports.notify = function(controller, bot) {
         today = month + '/' + day + '/' + year;
         var teamID = bot.resource.SlackTeamID;
         bot = bot.worker;
+
+        console.log('Today\s date and time is:' + today );
         /* Get all  the events from FireBase */
          controller.storage.events.all(function(err, all_events_data) {
             var length = all_events_data.length,
@@ -849,6 +851,7 @@ module.exports.notify = function(controller, bot) {
             };
             //Get Future Events
             var upLength = teamEvents.length;
+             console.dir('Los eventos del team son: ' + teamEvents);
              /* Iterate over the team event's */
             for(var j=0;j<upLength;j++) {
                 /* Here we get the time(hh/mm) and date(mm/dd) of the event */
