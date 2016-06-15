@@ -821,11 +821,11 @@ module.exports.notify = function(controller, bot) {
             console.log('===============ATTENDDES==========================');
             console.dir(attendees);
             for(var userID in attendees){
-                bot.startPrivateConversation({user: userID}, function(err, convo){
-                    convo.say('Hey');
+                bot.startPrivateConversation({user: userID}, function(err, conversation){
+                    conversation.say('Hey');
                     //convo.say('Hey ' + user.user.name + '!\n' + customMessage);
                     //bot.api.users.info({user: convo.source_message.user}, function(err, user) {
-                    //    convo.say('Hey ' + user.user.name + '!\n' + customMessage);
+                    //    conversation.say('Hey ' + user.user.name + '!\n' + customMessage);
                     //});
                 });
             }
