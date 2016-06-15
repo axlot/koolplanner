@@ -810,27 +810,27 @@ module.exports.notify = function(controller, bot) {
             console.log('================ATTENDES==================');
             console.dir(all_attend_data);
             console.log('LENGHT OF ATTEND DATA: ' + all_attend_data.attend.length);
-            var length = all_attend_data.length,
-                attendees;
+            //var length = all_attend_data.length,
+            //    attendees;
             //Iterate Over Event's Attenddes
-            for(var i=0; i<length; i++) {
-                console.log('EVENT ID: ' + all_attend_data.attend[i].id);
-                if(all_attend_data.attend[i].id == eventId) {
-                    //Get Event Attenddes
-                    attendees = all_attend_data.attend[i].attend;
-                    break;
-                }
-            }
-            console.log('ATTENDEES: ' + attendees);
-            //Iterate Over Attenddes Obj And Get User's Names
-            for(var userID in attendees){
-                console.log('USUARIO: ' + userID);
-                bot.startPrivateConversation({user: userID}, function(err, convo){
-                    bot.api.users.info({user: convo.source_message.user}, function(err, user) {
-                        convo.say('Hey ' + user.user.name + '!\n' + customMessage);
-                    });
-                });
-            }
+            //for(var i=0; i<length; i++) {
+            //    console.log('EVENT ID: ' + all_attend_data.attend[i].id);
+            //    if(all_attend_data.attend[i].id == eventId) {
+            //        //Get Event Attenddes
+            //        attendees = all_attend_data.attend[i].attend;
+            //        break;
+            //    }
+            //}
+            //console.log('ATTENDEES: ' + attendees);
+            ////Iterate Over Attenddes Obj And Get User's Names
+            //for(var userID in attendees){
+            //    console.log('USUARIO: ' + userID);
+            //    bot.startPrivateConversation({user: userID}, function(err, convo){
+            //        bot.api.users.info({user: convo.source_message.user}, function(err, user) {
+            //            convo.say('Hey ' + user.user.name + '!\n' + customMessage);
+            //        });
+            //    });
+            //}
         });
     }
 
