@@ -296,7 +296,7 @@ module.exports.init = function(controller) {
                 convo.next();
             }, {'key': 'description'});
             //Get Event Date And Time
-            var re = '(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01]) ([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]';
+            var re = '(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01]) (0[0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]';
             convo.ask('When will take place (format: mm/dd hh:mm)?', [
                 {
                     //Test The Date Against This RegExp To Match The Format
