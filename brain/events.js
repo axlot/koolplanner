@@ -807,7 +807,7 @@ module.exports.notify = function(controller, bot) {
     function alertAttendeesToEvent(bot, customMessage, eventId, controller) {
         console.log('ENTRA A LA FUNCION ALERTATENDEES');
         controller.storage.rsvp.all(function(err, all_attend_data) {
-            console.log('================ATTENDES==================');
+            console.log('================ATTENDESSSSSS==================');
             console.dir(all_attend_data);
             console.log('LENGHT OF ATTEND DATA: ' + all_attend_data.attend.length);
             //var length = all_attend_data.length,
@@ -818,7 +818,7 @@ module.exports.notify = function(controller, bot) {
             //    if(all_attend_data.attend[i].id == eventId) {
             //        //Get Event Attenddes
             //        attendees = all_attend_data.attend[i].attend;
-            //        break;/
+            //        break;
             //    }
             //}
             //console.log('ATTENDEES: ' + attendees);
