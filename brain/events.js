@@ -811,7 +811,7 @@ module.exports.notify = function(controller, bot) {
                 attendees;
             //Iterate Over Event's Attenddes
             for(var i=0; i<length; i++) {
-                console.log('EVENT ID: ' + all_attend_data[i].id);
+                console.log('EVENT ID: ' + all_attend_data[i].attend.id);
                 if(all_attend_data[i].id == eventId) {
                     //Get Event Attenddes
                     attendees = all_attend_data[i].attend;
