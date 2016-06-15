@@ -828,49 +828,58 @@ module.exports.notify = function(controller, bot) {
     }
 
     //Get Actual Date
+    /* Here we create the actual date to compare agains the event's date's */
     var date = new Date(),
         day = date.getDate(),
         month = date.getMonth() + 1,
         year = date.getFullYear(),
-        tHour = date.getHours() + ':' + date.getMinutes(),
+        tTime = date.getHours() + ':' + date.getMinutes(),
         today = month + '/' + day + '/' + year;
         var teamID = bot.resource.SlackTeamID;
         bot = bot.worker;
-
+        /* Get all  the events from FireBase */
          controller.storage.events.all(function(err, all_events_data) {
             var length = all_events_data.length,
                 teamEvents = [];
             for(var i=0;i<length;i++) {
+                /* Get specific events by team's id */
                 if(all_events_data[i].event_data.team_id == teamID) {
                     teamEvents.push(all_events_data[i]);
                 }
             };
             //Get Future Events
             var upLength = teamEvents.length;
+             /* Iterate over the team event's */
             for(var j=0;j<upLength;j++) {
-                var eHour = teamEvents[j].event_data.time,
+                /* Here we get the time(hh/mm) and date(mm/dd) of the event */
+                var eTime = teamEvents[j].event_data.time,
                     eDate = teamEvents[j].event_data.date,
+                    /* Format the data with JS Date Obj so we can compare against actual date later */
                     todayFormatted = new Date(today),
                     dateFormatted =  new Date(eDate);
-                //Compare Year And Month
+                /* Compare Year And Month */
                 if((todayFormatted.getFullYear() == dateFormatted.getFullYear()) && (todayFormatted.getMonth()+1 == dateFormatted.getMonth()+1)) {
+                    /* Get the days remaining to event, if *daysLeft results negative it means that the event already past(ex: yesterday). */
                     var daysLeft = dateFormatted.getDate() - todayFormatted.getDate();
-                    //If *daysLeft results negative it means that the event already past(ex: yesterday).
+                    /* In case 7 we are a week from the event */
                     switch (daysLeft) {
                         case 7:
                             //Code to notify users
                             alertAttendeesToEvent(bot, 'The event "' + teamEvents[j].event_data.title + '" is next week!\nIt will take place on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs, at ' + teamEvents[j].event_data.location, teamEvents[j].id);
-                            break;
+                        break;
                         case 1:
-                            eHour = eHour.replace(':','');
-                            tHour = tHour.replace(':','');
-                            var timeLeft = parseInt(parseFloat(eHour) - parseFloat(tHour));
-                            if(timeLeft == 100) {
-                                alertAttendeesToEvent(bot, 'Just a little reminder.\nThe event "' + teamEvents[j].event_data.title + '" starts in an hour!\nHave fun!!!', teamEvents[j].id);
-                            } else {
-                                alertAttendeesToEvent(bot, 'Ready for tomorrow?\n"' + teamEvents[j].event_data.title + '" starts on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs', teamEvents[j].id);
+                            alertAttendeesToEvent(bot, 'Ready for tomorrow?\n"' + teamEvents[j].event_data.title + '" starts on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs', teamEvents[j].id);
+                        break;
+                        case 0:
+                            /* In case 0 this is the day of the event and now we have to compare time */
+                            if (tTime > eTime) {
+                                var timeLeft = parseInt(tTime - eTime);
+                                if(timeLeft == 1) {
+                                    alertAttendeesToEvent(bot, 'Just a little reminder.\nThe event "' + teamEvents[j].event_data.title + '" starts in an hour!\nHave fun!!!', teamEvents[j].id);
+                                }
+
                             }
-                            break;
+                        break;
                     }
                 }
             };
