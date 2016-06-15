@@ -800,7 +800,7 @@ module.exports.init = function(controller) {
     });
 };
 
-module.exports.notify = function(controller, bot) {
+module.exports.notify = function(controller, bot, teamID) {
 
 
         //Alert Attendess User
@@ -819,12 +819,9 @@ module.exports.notify = function(controller, bot) {
             //Iterate Over Attenddes Obj And Get User's Names
             for(var userID in attendees){
                 bot.startPrivateConversation({user: userID}, function(err, convo){
-                    //bot.botkit.bot.say('Hey ' + user.user.name + '!\n' + customMessage);
-                    //bot.api.users.info({user: convo.source_message.user}, function(err, user) {
-                    //    conversation.say('Hey ' + user.user.name + '!\n' + customMessage);
-                    //});
-                    console.log('==========================ESTO ES EL BOT======================');
-                    console.dir(bot.botkit.bot);
+                    bot.api.users.info({user: convo.source_message.user}, function(err, user) {
+                        convo.say('Hey ' + user.user.name + '!\n' + customMessage);
+                    });
                 });
             }
         });
@@ -838,8 +835,6 @@ module.exports.notify = function(controller, bot) {
         year = date.getFullYear(),
         tTime = date.getHours() + ':' + date.getMinutes(),
         today = month + '/' + day + '/' + year;
-        var teamID = beepboop.botByTeamId(slackTeamID);
-        bot = bot.worker;
         /* Get all  the events from FireBase */
          controller.storage.events.all(function(err, all_events_data) {
             var length = all_events_data.length,

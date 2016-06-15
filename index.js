@@ -15,14 +15,19 @@ beepboop.on('add_resource', function (message) {
   Object.keys(beepboop.workers).forEach(function (id) {
     // this is an instance of a botkit worker
       var bot = beepboop.workers[id].worker;
-
-      //Cron Task
-      cron.schedule('* * * * *', function(){
-          events.notify(controller, bot);
-          console.log('===========================CRON EXECUTED=========================');
-      });
-
   })
+});
+
+//Cron Task
+cron.schedule('* * * * *', function(){
+    console.log('===========================CRON EXECUTED=========================');
+    Object.keys(beepboop.workers).forEach(function (id) {
+        // this is an instance of a botkit worker
+        var bot = beepboop.workers[id].worker;
+        var teamID = bot.resource.SlackTeamID,
+            bot = beepboop.botByTeamId(teamID);
+        events.notify(controller, bot, teamID);
+    })
 });
 
 
