@@ -862,6 +862,7 @@ module.exports.notify = function(controller, bot) {
                     dateFormatted =  new Date(eDate);
                 /* Compare Year And Month */
                 if((todayFormatted.getFullYear() == dateFormatted.getFullYear()) && (todayFormatted.getMonth()+1 == dateFormatted.getMonth()+1)) {
+                    console.log('=============================ENCONTRO EVENTOS EN EL MISMO AÑO Y MES==========================');
                     /* Get the days remaining to event, if *daysLeft results negative it means that the event already past(ex: yesterday). */
                     var daysLeft = dateFormatted.getDate() - todayFormatted.getDate();
                     /* In case 7 we are a week from the event */
