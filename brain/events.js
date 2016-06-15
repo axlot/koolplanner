@@ -807,9 +807,10 @@ module.exports.notify = function(controller, bot) {
     function alertAttendeesToEvent(bot, customMessage, eventId, controller) {
         console.log('ENTRA A LA FUNCION ALERTATENDEES');
         controller.storage.rsvp.all(function(err, all_attend_data) {
-            console.log('ATTENDES==================');
-            console.dir(all_attend_data.attend.attend);
-            var length = all_attend_data.attend.attend.length,
+            console.log('================ATTENDES==================');
+            console.dir(all_attend_data);
+            console.log('LENGHT OF ATTEND DATA: ' + all_attend_data.length);
+            var length = all_attend_data.length,
                 attendees;
             //Iterate Over Event's Attenddes
             for(var i=0; i<length; i++) {
@@ -843,8 +844,6 @@ module.exports.notify = function(controller, bot) {
         today = month + '/' + day + '/' + year;
         var teamID = bot.resource.SlackTeamID;
         bot = bot.worker;
-
-        console.log('Today\s date is:' + today);
         /* Get all  the events from FireBase */
          controller.storage.events.all(function(err, all_events_data) {
             var length = all_events_data.length,
@@ -859,7 +858,6 @@ module.exports.notify = function(controller, bot) {
             var upLength = teamEvents.length;
              /* Iterate over the team event's */
             for(var j=0;j<upLength;j++) {
-                console.dir('Los eventos del team son: ' + teamEvents[j].event_data.date);
                 /* Here we get the time(hh/mm) and date(mm/dd) of the event */
                 var eTime = teamEvents[j].event_data.time,
                     eDate = teamEvents[j].event_data.date,
@@ -868,23 +866,18 @@ module.exports.notify = function(controller, bot) {
                     dateFormatted =  new Date(eDate);
                 /* Compare Year And Month */
                 if((todayFormatted.getFullYear() == dateFormatted.getFullYear()) && (todayFormatted.getMonth()+1 == dateFormatted.getMonth()+1)) {
-                    console.log('=============================ENCONTRO EVENTOS EN EL MISMO AÑO Y MES==========================');
                     /* Get the days remaining to event, if *daysLeft results negative it means that the event already past(ex: yesterday). */
                     var daysLeft = dateFormatted.getDate() - todayFormatted.getDate();
-                    console.log('Los dias que faltan para este evento son: ' + daysLeft);
                     /* In case 7 we are a week from the event */
                     switch (daysLeft) {
                         case 7:
-                            console.log('ENTRO AL 7');
                             //Code to notify users
                             alertAttendeesToEvent(bot, 'The event "' + teamEvents[j].event_data.title + '" is next week!\nIt will take place on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs, at ' + teamEvents[j].event_data.location, teamEvents[j].id, controller);
                         break;
                         case 1:
-                            console.log('ENTRO AL 1');
                             alertAttendeesToEvent(bot, 'Ready for tomorrow?\n"' + teamEvents[j].event_data.title + '" starts on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs', teamEvents[j].id, controller);
                         break;
                         case 0:
-                            console.log('ENTRO AL 0');
                             /* In case 0 this is the day of the event and now we have to compare time */
                             if (tTime > eTime) {
                                 var timeLeft = parseInt(tTime - eTime);
