@@ -822,9 +822,11 @@ module.exports.notify = function(controller, bot) {
             console.dir(attendees);
             for(var userID in attendees){
                 bot.startPrivateConversation({user: userID}, function(err, convo){
-                    bot.api.users.info({user: convo.source_message.user}, function(err, user) {
-                        convo.say('Hey ' + user.user.name + '!\n' + customMessage);
-                    });
+                    bot.say('Hey');
+                    //convo.say('Hey ' + user.user.name + '!\n' + customMessage);
+                    //bot.api.users.info({user: convo.source_message.user}, function(err, user) {
+                    //    convo.say('Hey ' + user.user.name + '!\n' + customMessage);
+                    //});
                 });
             }
         });
