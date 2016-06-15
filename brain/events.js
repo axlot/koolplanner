@@ -821,6 +821,13 @@ module.exports.notify = function(controller, bot) {
             for(var userID in attendees){
                 console.log('USER:');
                 console.dir(userID);
+                bot.startPrivateConversation({user: userID}, function(err, conversation){
+                    conversation.say('Hey');
+                    //convo.say('Hey ' + user.user.name + '!\n' + customMessage);
+                    //bot.api.users.info({user: convo.source_message.user}, function(err, user) {
+                    //    conversation.say('Hey ' + user.user.name + '!\n' + customMessage);
+                    //});
+                });
                 if(userID == true) {
                     conversation.say('Hey this user is true');
                     bot.startPrivateConversation({user: userID}, function(err, conversation){
