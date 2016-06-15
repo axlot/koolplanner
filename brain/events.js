@@ -819,16 +819,14 @@ module.exports.notify = function(controller, bot) {
             }
             //Iterate Over Attenddes Obj And Get User's Names
             for(var userID in attendees){
-                console.log('USER:');
-                console.dir(userID);
-                console.dir(bot);
-                bot.startPrivateConversation({user: userID}, function(err, convo){
-
-                    bot.bot.say('Hey ' + user.user.name + '!\n' + customMessage);
-                    //bot.api.users.info({user: convo.source_message.user}, function(err, user) {
-                    //    conversation.say('Hey ' + user.user.name + '!\n' + customMessage);
-                    //});
-                });
+                console.dir(bot.bot);
+                //bot.startPrivateConversation({user: userID}, function(err, convo){
+                //
+                //    bot.bot.say('Hey ' + user.user.name + '!\n' + customMessage);
+                //    //bot.api.users.info({user: convo.source_message.user}, function(err, user) {
+                //    //    conversation.say('Hey ' + user.user.name + '!\n' + customMessage);
+                //    //});
+                //});
             }
         });
     }
