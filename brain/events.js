@@ -818,6 +818,7 @@ module.exports.notify = function(controller, bot) {
                     break;
                 }
             }
+            console.log('ATTENDEES: ' + attendees);
             //Iterate Over Attenddes Obj And Get User's Names
             for(var userID in attendees){
                 console.log('USUARIO: ' + userID);
