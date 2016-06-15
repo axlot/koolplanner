@@ -807,24 +807,20 @@ module.exports.notify = function(controller, bot) {
     function alertAttendeesToEvent(bot, customMessage, eventId, controller) {
         console.log('ENTRA A LA FUNCION ALERTATENDEES');
         controller.storage.attend.all(function(err, all_attend_data) {
-            console.log('================ATTENDES==================');
-            console.log('LENGHT OF ATTEND DATA: ' + all_attend_data.length);
             var length = all_attend_data.length,
                 attendees;
             //Iterate Over Event's Attenddes
             for(var i=0; i<length; i++) {
-                console.log('EVENT ID: ' + all_attend_data[i].id);
                 if(all_attend_data[i].id == eventId) {
                     //Get Event Attenddes
                     attendees = all_attend_data[i].attend;
                     break;
                 }
             }
-            console.log('ATTENDEES: ' + attendees);
             //Iterate Over Attenddes Obj And Get User's Names
             for(var userID in attendees){
-                console.log('USUARIO: ' + userID);
                 bot.startPrivateConversation({user: userID}, function(err, convo){
+                    console.log(convo);
                     bot.api.users.info({user: convo.source_message.user}, function(err, user) {
                         convo.say('Hey ' + user.user.name + '!\n' + customMessage);
                     });
