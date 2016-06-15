@@ -808,8 +808,8 @@ module.exports.notify = function(controller, bot) {
         console.log('ENTRA A LA FUNCION ALERTATENDEES');
         controller.storage.rsvp.all(function(err, all_attend_data) {
             console.log('ATTENDES==================');
-            console.dir(all_attend_data.attend);
-            var length = all_attend_data.attend.length,
+            console.dir(all_attend_data.attend.attend);
+            var length = all_attend_data.attend.attend.length,
                 attendees;
             //Iterate Over Event's Attenddes
             for(var i=0; i<length; i++) {
