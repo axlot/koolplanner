@@ -805,7 +805,6 @@ module.exports.notify = function(controller, bot) {
 
         //Alert Attendess User
     function alertAttendeesToEvent(bot, customMessage, eventId, controller) {
-        console.log('ENTRA A LA FUNCION ALERTATENDEES');
         controller.storage.attend.all(function(err, all_attend_data) {
             var length = all_attend_data.length,
                 attendees;
@@ -819,15 +818,14 @@ module.exports.notify = function(controller, bot) {
             }
             //Iterate Over Attenddes Obj And Get User's Names
             for(var userID in attendees){
-                console.log('==========================ESTO ES EL BOT=======================');
-                console.dir(bot);
-                //bot.startPrivateConversation({user: userID}, function(err, convo){
-                //
-                //    bot.say('Hey ' + user.user.name + '!\n' + customMessage);
-                //    //bot.api.users.info({user: convo.source_message.user}, function(err, user) {
-                //    //    conversation.say('Hey ' + user.user.name + '!\n' + customMessage);
-                //    //});
-                //});
+                bot.startPrivateConversation({user: userID}, function(err, convo){
+                    //bot.say('Hey ' + user.user.name + '!\n' + customMessage);
+                    //bot.api.users.info({user: convo.source_message.user}, function(err, user) {
+                    //    conversation.say('Hey ' + user.user.name + '!\n' + customMessage);
+                    //});
+                    console.log('==========================ESTO ES EL BOT=======================');
+                    console.dir(bot);
+                });
             }
         });
     }
