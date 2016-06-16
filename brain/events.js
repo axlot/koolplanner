@@ -813,6 +813,7 @@ module.exports.notify = function(controller, bot, teamID) {
     function alertAttendeesToEvent(bot, customMessage, eventId, controller) {
         controller.storage.attend.get(eventId, function(err, attend_data) {
             console.log('=================ENTRO AL NOTIFY ATTENDEES=================');
+            console.log('ATEND DATA: ' + attend_data);
             //var length = attend_data.attend.length,
             //    attendees = [];
             //for(var i=0; i<length; i++) {
@@ -831,7 +832,7 @@ module.exports.notify = function(controller, bot, teamID) {
             //    });
             //}
             var length = attend_data.attend.length;
-            console.log('ATTEND DATA: ' + attend_data.attend.length);
+            console.log('ATTEND TOTAL: ' + attend_data.attend.length);
             for(var i=0; i<length; i++) {
                 console.log('EL USER ACTUAL ES: ' + attend_data.attend[i]);
                 if(attend_data.attend[i] == true) {
