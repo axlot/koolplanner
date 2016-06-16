@@ -823,8 +823,8 @@ module.exports.notify = function(controller, bot, teamID) {
             //}
 
             for (var userId in attend_data.attend){
-                if (attend_data.attend.hasOwnProperty(userId)) {
-                    console.log("Key is " + userId + ", value is" + attend_data.attend[userId]);
+                if (attend_data.attend[userId] == true) {
+                    console.log('El usuario: ' + userId + ' da TRUE.');
                 }
             }
             //var length = attend_data.attend.length,
