@@ -817,7 +817,7 @@ module.exports.notify = function(controller, bot, teamID) {
             console.dir(attend_data.attend);
             for(var userId in attend_data.attend) {
                 console.log('USUARIO: ' + userId);
-                if(userId == true) {
+                if(attend_data.attend.hasOwnProperty(userId)) {
                     console.log('El usuario: ' + userId + ' da TRUE.');
                 }
             }
