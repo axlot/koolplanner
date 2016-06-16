@@ -799,7 +799,7 @@ module.exports.init = function(controller) {
         });
     });
 };
-
+//Notify Function (Cron Task)
 module.exports.notify = function(controller, bot, teamID) {
 
 
