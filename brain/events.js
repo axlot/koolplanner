@@ -549,6 +549,7 @@ module.exports.init = function(controller) {
                                         "pretext": 'Event ID: ' + futureEvents[j].id,
                                         "title": futureEvents[j].event_data.title,
                                         "color": '#3498db',
+                                        "mrkdwn_in": ["text", "pretext", "fields"],
                                         "fields": [
                                             {
                                                 "title": 'Date',
@@ -563,6 +564,11 @@ module.exports.init = function(controller) {
                                             {
                                                 "title": 'Location',
                                                 "value": futureEvents[j].event_data.location,
+                                                "short": true
+                                            },
+                                            {
+                                                "title": 'Description',
+                                                "value": '*'+futureEvents[j].event_data.description+'*',
                                                 "short": true
                                             }
                                         ]
