@@ -825,13 +825,14 @@ module.exports.notify = function(controller, bot, teamID) {
                 }
             }
             var lengthAtt = attendees.length;
-            for(var i=0;i<lengthAtt;i++) {
-                bot.api.im.open({user: attendees[i]}, function (err, response) {
+            for(var j=0;j<lengthAtt;j++) {
+                bot.api.im.open({user: attendees[j]}, function (err, response) {
                     if (err) {
                         return console.log(err)
                     }
                     var dmChannel = response.channel.id;
-                    bot.api.users.info({user: attendees[i]}, function(err, user) {
+                    bot.api.users.info({user: attendees[j]}, function(err, user) {
+                        console.log('USER DATA');
                         console.dir(user);
                         //Get User's Name
                         //var userName = user.user.name;
