@@ -568,7 +568,7 @@ module.exports.init = function(controller) {
                                             },
                                             {
                                                 "title": 'Description',
-                                                "value": '*'+futureEvents[j].event_data.description+'*',
+                                                "value": '_'+futureEvents[j].event_data.description+'_',
                                                 "short": true
                                             }
                                         ]
