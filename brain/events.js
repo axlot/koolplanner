@@ -815,10 +815,16 @@ module.exports.notify = function(controller, bot, teamID) {
             console.log('=================ENTRO AL NOTIFY ATTENDEES=================');
             console.log('ATEND DATA: ');
             console.dir(attend_data.attend);
-            for(var userId in attend_data.attend) {
-                console.log('USUARIO: ' + userId);
-                if(attend_data.attend.hasOwnProperty(userId)) {
-                    console.log('El usuario: ' + userId + ' da TRUE.');
+            //for(var userId in attend_data.attend) {
+            //    console.log('USUARIO: ' + userId);
+            //    if(attend_data.attend.hasOwnProperty(userId)) {
+            //        console.log('El usuario: ' + userId + ' da TRUE.');
+            //    }
+            //}
+
+            for (var userId in attend_data.attend){
+                if (attend_data.attend.hasOwnProperty(userId)) {
+                    alert("Key is " + userId + ", value is" + attend_data.attend[userId]);
                 }
             }
             //var length = attend_data.attend.length,
