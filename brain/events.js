@@ -557,6 +557,11 @@ module.exports.init = function(controller) {
                                                 "short": true
                                             },
                                             {
+                                                "title": 'Description',
+                                                "value": '_'+futureEvents[j].event_data.description+'_',
+                                                "short": true
+                                            },
+                                            {
                                                 "title": 'Time',
                                                 "value": futureEvents[j].event_data.time + 'hs',
                                                 "short": true
@@ -564,11 +569,6 @@ module.exports.init = function(controller) {
                                             {
                                                 "title": 'Location',
                                                 "value": futureEvents[j].event_data.location,
-                                                "short": true
-                                            },
-                                            {
-                                                "title": 'Description',
-                                                "value": '_'+futureEvents[j].event_data.description+'_',
                                                 "short": true
                                             }
                                         ]
