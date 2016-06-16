@@ -813,7 +813,7 @@ module.exports.notify = function(controller, bot, teamID) {
             var attendees = [];
             for (var userId in attend_data.attend){
                 if (attend_data.attend[userId] == true) {
-                    attendees.push(attend_data.attend[userId]);
+                    attendees.push(userId);
                     //Get The Actual User Id
                     //bot.api.im.open({user: userId}, function (err, response) {
                     //    if (err) {
