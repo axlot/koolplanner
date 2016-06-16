@@ -832,9 +832,10 @@ module.exports.notify = function(controller, bot, teamID) {
                     }
                     var dmChannel = response.channel.id;
                     bot.api.users.info({user: attendees[i]}, function(err, user) {
+                        console.dir(user);
                         //Get User's Name
-                        var userName = user.user.name;
-                        bot.say({channel: dmChannel, text: 'Hey, ' + userName + '>. ' + customMessage});
+                        //var userName = user.user.name;
+                        //bot.say({channel: dmChannel, text: 'Hey, ' + userName + '>. ' + customMessage});
                     });
                 });
             }
