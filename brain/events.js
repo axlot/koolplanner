@@ -824,8 +824,16 @@ module.exports.notify = function(controller, bot, teamID) {
                     //});
                 }
             }
-            console.log('ATTENDEES: ');
-            console.dir(attendees);
+            var lengthAtt = attendees.length;
+            for(var i=0;i<lengthAtt;i++) {
+                bot.api.im.open({user: attendees[i]}, function (err, response) {
+                    if (err) {
+                        return console.log(err)
+                    }
+                    var dmChannel = response.channel.id;
+                    bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + attendees[i] + '>. ' + customMessage});
+                });
+            }
         });
     }
     //Get Actual Date
