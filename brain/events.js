@@ -515,6 +515,9 @@ module.exports.init = function(controller) {
                 var teamID = team_id;
                 //Get List Of Attenddes
                 controller.storage.events.all(function(err, all_events_data) {
+                    if(all_events_data == null) {
+                        bot.say('There\'s no events created for your team yet!');
+                    }
                     //Get Today's Date
                     var date = new Date(),
                         day = date.getDate(),
