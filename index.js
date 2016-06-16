@@ -19,15 +19,15 @@ beepboop.on('add_resource', function (message) {
 });
 
 //Cron Task
-//cron.schedule('* * * * *', function(){
-//    console.log('===========================CRON EXECUTED=========================');
-//    Object.keys(beepboop.workers).forEach(function (id) {
-//        // this is an instance of a botkit worker
-//        var bot = beepboop.workers[id].worker;
-//        var teamID = bot.config.SlackTeamID;
-//        events.notify(controller, bot, teamID);
-//    })
-//});
+cron.schedule('* * * * *', function(){
+    console.log('===========================CRON EXECUTED=========================');
+    Object.keys(beepboop.workers).forEach(function (id) {
+        // this is an instance of a botkit worker
+        var bot = beepboop.workers[id].worker;
+        var teamID = bot.config.SlackTeamID;
+        events.notify(controller, bot, teamID);
+    })
+});
 
 
 //var greetingBot = require('./brain/greetings.js');
