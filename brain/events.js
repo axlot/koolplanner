@@ -810,35 +810,17 @@ module.exports.notify = function(controller, bot, teamID) {
     //Alert Attendess User
     function alertAttendeesToEvent(bot, customMessage, eventId, controller) {
         controller.storage.attend.get(eventId, function(err, attend_data) {
-            var attendees = [];
             for (var userId in attend_data.attend){
                 if (attend_data.attend[userId] == true) {
-                    attendees.push(userId);
                     //Get The Actual User Id
-                    //bot.api.im.open({user: userId}, function (err, response) {
-                    //    if (err) {
-                    //        return console.log(err)
-                    //    }
-                    //    var dmChannel = response.channel.id;
-                    //    bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + userId + '>. ' + customMessage});
-                    //});
-                }
-            }
-            var lengthAtt = attendees.length;
-            for(var j=0;j<lengthAtt;j++) {
-                bot.api.im.open({user: attendees[j]}, function (err, response) {
-                    if (err) {
-                        return console.log(err)
-                    }
-                    var dmChannel = response.channel.id;
-                    bot.api.users.info({user: attendees[j]}, function(err, user) {
-                        console.log('USER DATA');
-                        console.dir(user);
-                        //Get User's Name
-                        //var userName = user.user.name;
-                        //bot.say({channel: dmChannel, text: 'Hey, ' + userName + '>. ' + customMessage});
+                    bot.api.im.open({user: userId}, function (err, response) {
+                        if (err) {
+                            return console.log(err)
+                        }
+                        var dmChannel = response.channel.id;
+                        bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + userId + '>. ' + customMessage});
                     });
-                });
+                }
             }
         });
     }
