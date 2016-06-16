@@ -14,29 +14,29 @@ module.exports.init = function(controller) {
     };
     /* === FUNCTIONS === */
     //Alert Attenddes Users
-    function alertAttendees(bot, convo, customMessage, eventId) {
-        controller.storage.rsvp.all(function(err, all_attend_data) {
-            var length = all_attend_data.length,
-                attendees;
-            //Iterate Over Event's Attenddes
-            for(var i=0; i<length; i++) {
-                if(all_attend_data[i].id == eventId) {
-                    //Get Event Attenddes
-                    attendees = all_attend_data[i].attend;
-                    break;
-                }
-            }
-            //Iterate Over Attenddes Obj And Get User's Names
-            for(var userID in attendees){
-                bot.startPrivateConversation({user: userID}, function(err, convo){
-                    bot.api.users.info({user: convo.source_message.user}, function(err, user) {
-                        convo.say('Hey ' + user.user.name + '!\n' + customMessage);
-                    });
-                });
-            }
-        });
-        convo.next();
-    }
+    //function alertAttendees(bot, convo, customMessage, eventId) {
+    //    controller.storage.rsvp.all(function(err, all_attend_data) {
+    //        var length = all_attend_data.length,
+    //            attendees;
+    //        //Iterate Over Event's Attenddes
+    //        for(var i=0; i<length; i++) {
+    //            if(all_attend_data[i].id == eventId) {
+    //                //Get Event Attenddes
+    //                attendees = all_attend_data[i].attend;
+    //                break;
+    //            }
+    //        }
+    //        //Iterate Over Attenddes Obj And Get User's Names
+    //        for(var userID in attendees){
+    //            bot.startPrivateConversation({user: userID}, function(err, convo){
+    //                bot.api.users.info({user: convo.source_message.user}, function(err, user) {
+    //                    convo.say('Hey ' + user.user.name + '!\n' + customMessage);
+    //                });
+    //            });
+    //        }
+    //    });
+    //    convo.next();
+    //}
     //Validate User
     function validateUser(bot,message,eventId) {
         //Check Team ID
@@ -515,9 +515,6 @@ module.exports.init = function(controller) {
                 var teamID = team_id;
                 //Get List Of Attenddes
                 controller.storage.events.all(function(err, all_events_data) {
-                    if(all_events_data == null) {
-                        bot.say('There\'s no events created for your team yet!');
-                    }
                     //Get Today's Date
                     var date = new Date(),
                         day = date.getDate(),
@@ -822,7 +819,7 @@ module.exports.notify = function(controller, bot, teamID) {
                             return console.log(err)
                         }
                         var dmChannel = response.channel.id;
-                        bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + capturedUserId + '>. ' + customMessage});
+                        bot.say({channel: dmChannel, text: 'Hey, ' + capturedUserId + '<@' + capturedUserId + '>. ' + customMessage});
                     });
                 }
             }
