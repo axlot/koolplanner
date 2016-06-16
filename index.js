@@ -19,7 +19,7 @@ beepboop.on('add_resource', function (message) {
 });
 
 //Cron Task
-cron.schedule('* * * * *', function(){
+cron.schedule('0 0 * * * *', function(){
     console.log('===========================CRON EXECUTED=========================');
     Object.keys(beepboop.workers).forEach(function (id) {
         // this is an instance of a botkit worker
