@@ -812,15 +812,15 @@ module.exports.notify = function(controller, bot, teamID) {
         controller.storage.attend.get(eventId, function(err, attend_data) {
             for (var userId in attend_data.attend){
                 if (attend_data.attend[userId] == true) {
-                    var capturedUserId = userId;
                     //Get The Actual User Id
-                    bot.api.im.open({user: capturedUserId}, function (err, response) {
+                    bot.api.im.open({user: userId}, function (err, response) {
+                        var capturedUserId = userId;
                         if (err) {
                             return console.log(err)
                         }
                         var dmChannel = response.channel.id;
-                        //bot.say({channel: dmChannel, text: 'Hey, ' + response.channel.user + '<@' + capturedUserId + '>. ' + customMessage});
-                        bot.say({channel: dmChannel, text: 'Hey, ' +  '<@' + response.channel.user + '>. ' + customMessage});
+                        bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + capturedUserId + '>. ' + customMessage});
+                        //bot.say({channel: dmChannel, text: 'Hey, ' +  '<@' + response.channel.user + '>. ' + customMessage});
                     });
                 }
             }
