@@ -814,11 +814,7 @@ module.exports.notify = function(controller, bot, teamID) {
                 if (attend_data.attend[userId] == true) {
                     var capturedUserId = userId;
                     //Get The Actual User Id
-                    console.log('==============USER ID====================');
-                    console.log(capturedUserId);
                     bot.api.im.open({user: capturedUserId}, function (err, response) {
-                        console.log('================BOT API=========================');
-                        console.dir(response);
                         if (err) {
                             return console.log(err)
                         }
