@@ -876,7 +876,7 @@ module.exports.notify = function(controller, bot, teamID) {
                     switch (daysLeft) {
                         case 7:
                             //Code to notify users
-                            alertAttendeesToEvent(bot, 'The event "' + teamEvents[j].event_data.title + '" is next week!\nIt will take place on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs in ' + teamEvents[j].event_data.location, teamEvents[j].id, controller);
+                            alertAttendeesToEvent(bot, 'The event "' + teamEvents[j].event_data.title + '" is next week!\nIt will take place on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs in ' + teamEvents[j].event_data.location + '.', teamEvents[j].id, controller);
                         break;
                         case 1:
                             alertAttendeesToEvent(bot, 'Ready for tomorrow?\n"' + teamEvents[j].event_data.title + '" starts on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs', teamEvents[j].id, controller);
