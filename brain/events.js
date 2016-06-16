@@ -807,6 +807,8 @@ module.exports.init = function(controller) {
 };
 //Notify Function (Cron Task)
 module.exports.notify = function(controller, bot, teamID) {
+
+
     //Alert Attendess User
     function alertAttendeesToEvent(bot, customMessage, eventId, controller) {
         controller.storage.attend.get(eventId, function(err, attend_data) {
@@ -814,16 +816,21 @@ module.exports.notify = function(controller, bot, teamID) {
                 if (attend_data.attend[userId] == true) {
                     //Get The Actual User Id
                     bot.api.im.open({user: userId}, function (err, response) {
-                        if (err) {
-                            return console.log(err)
-                        }
-                        var dmChannel = response.channel.id;
-                        bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + userId + '>. ' + customMessage});
+                        console.log('================BOT API=========================');
+                        console.dir(response);
+                        //if (err) {
+                        //    return console.log(err)
+                        //}
+                        //var dmChannel = response.channel.id;
+                        //bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + userId + '>. ' + customMessage});
                     });
                 }
             }
         });
     }
+
+
+
     //Get Actual Date
     /* Here we create the actual date to compare agains the event's date's */
     var date = new Date(),
