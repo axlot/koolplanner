@@ -807,15 +807,9 @@ module.exports.init = function(controller) {
 };
 //Notify Function (Cron Task)
 module.exports.notify = function(controller, bot, teamID) {
-
-
     //Alert Attendess User
     function alertAttendeesToEvent(bot, customMessage, eventId, controller) {
         controller.storage.attend.get(eventId, function(err, attend_data) {
-            console.log('=================ENTRO AL NOTIFY ATTENDEES=================');
-            console.log('ATEND DATA: ');
-            console.dir(attend_data.attend);
-
             for (var userId in attend_data.attend){
                 if (attend_data.attend[userId] == true) {
                     bot.api.im.open({ user: userId }, function (err, response) {
@@ -827,39 +821,6 @@ module.exports.notify = function(controller, bot, teamID) {
                     });
                 }
             }
-            //var length = attend_data.attend.length,
-            //    attendees = [];
-            //for(var i=0; i<length; i++) {
-            //    if(attend_data.attend[i] == true) {
-            //        attendees.push(attend_data.attend[i]);
-            //    }
-            //}
-            ////Iterate Over Attenddes Obj And Get User's Names
-            //for(var userID in attendees){
-            //    bot.api.im.open({ user: userID }, function (err, response) {
-            //        if (err) {
-            //            return console.log(err)
-            //        }
-            //        var dmChannel = response.channel.id;
-            //        bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + userID + '>' + customMessage});
-            //    });
-            //}
-            //var length = attend_data.attend.length;
-            //console.log('ATTEND TOTAL: ' + attend_data.attend.length);
-            //for(var i=0; i<length; i++) {
-            //    console.log('EL USER ACTUAL ES: ' + attend_data.attend[i]);
-            //    if(attend_data.attend[i] == true) {
-            //        console.log('ENTRO AL IF EN ESTE CASO');
-            //        bot.api.im.open({ user: attend_data.attend[i] }, function (err, response) {
-            //            console.log('ABRIO LA CONEXION PRIVADA');
-            //            if (err) {
-            //                return console.log(err)
-            //            }
-            //            var dmChannel = response.channel.id;
-            //            bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + userID + '>' + customMessage});
-            //        });
-            //    }
-            //}
         });
     }
     //Get Actual Date
