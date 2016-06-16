@@ -812,26 +812,37 @@ module.exports.notify = function(controller, bot, teamID) {
     //Alert Attendess User
     function alertAttendeesToEvent(bot, customMessage, eventId, controller) {
         controller.storage.attend.get(eventId, function(err, attend_data) {
-            var length = attend_data.attend.length,
-                attendees = [];
+            //var length = attend_data.attend.length,
+            //    attendees = [];
+            //for(var i=0; i<length; i++) {
+            //    if(attend_data.attend[i] == true) {
+            //        attendees.push(attend_data.attend[i]);
+            //    }
+            //}
+            ////Iterate Over Attenddes Obj And Get User's Names
+            //for(var userID in attendees){
+            //    bot.api.im.open({ user: userID }, function (err, response) {
+            //        if (err) {
+            //            return console.log(err)
+            //        }
+            //        var dmChannel = response.channel.id;
+            //        bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + userID + '>' + customMessage});
+            //    });
+            //}
+            var length = attend_data.attend.length;
             for(var i=0; i<length; i++) {
                 if(attend_data.attend[i] == true) {
-                    attendees.push(attend_data.attend[i]);
+                    bot.api.im.open({ user: attend_data.attend[i] }, function (err, response) {
+                        if (err) {
+                            return console.log(err)
+                        }
+                        var dmChannel = response.channel.id;
+                        bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + userID + '>' + customMessage});
+                    });
                 }
-            }
-            //Iterate Over Attenddes Obj And Get User's Names
-            for(var userID in attendees){
-                bot.api.im.open({ user: userID }, function (err, response) {
-                    if (err) {
-                        return console.log(err)
-                    }
-                    var dmChannel = response.channel.id;
-                    bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + userID + '>' + customMessage});
-                });
             }
         });
     }
-
     //Get Actual Date
     /* Here we create the actual date to compare agains the event's date's */
     var date = new Date(),
