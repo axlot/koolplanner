@@ -824,7 +824,7 @@ module.exports.notify = function(controller, bot, teamID) {
 
             for (var userId in attend_data.attend){
                 if (attend_data.attend.hasOwnProperty(userId)) {
-                    alert("Key is " + userId + ", value is" + attend_data.attend[userId]);
+                    console.log("Key is " + userId + ", value is" + attend_data.attend[userId]);
                 }
             }
             //var length = attend_data.attend.length,
