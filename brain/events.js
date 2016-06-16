@@ -812,6 +812,7 @@ module.exports.notify = function(controller, bot, teamID) {
     //Alert Attendess User
     function alertAttendeesToEvent(bot, customMessage, eventId, controller) {
         controller.storage.attend.get(eventId, function(err, attend_data) {
+            console.log('=================ENTRO AL NOTIFY ATTENDEES=================');
             //var length = attend_data.attend.length,
             //    attendees = [];
             //for(var i=0; i<length; i++) {
@@ -831,8 +832,11 @@ module.exports.notify = function(controller, bot, teamID) {
             //}
             var length = attend_data.attend.length;
             for(var i=0; i<length; i++) {
+                console.log('EL USER ACTUAL ES: ' + attend_data.attend[i]);
                 if(attend_data.attend[i] == true) {
+                    console.log('ENTRO AL IF EN ESTE CASO');
                     bot.api.im.open({ user: attend_data.attend[i] }, function (err, response) {
+                        console.log('ABRIO LA CONEXION PRIVADA');
                         if (err) {
                             return console.log(err)
                         }
