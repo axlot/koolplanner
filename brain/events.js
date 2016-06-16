@@ -831,6 +831,7 @@ module.exports.notify = function(controller, bot, teamID) {
             //    });
             //}
             var length = attend_data.attend.length;
+            console.log('ATTEND DATA: ' + attend_data.attend.length);
             for(var i=0; i<length; i++) {
                 console.log('EL USER ACTUAL ES: ' + attend_data.attend[i]);
                 if(attend_data.attend[i] == true) {
