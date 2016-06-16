@@ -810,23 +810,22 @@ module.exports.notify = function(controller, bot, teamID) {
     //Alert Attendess User
     function alertAttendeesToEvent(bot, customMessage, eventId, controller) {
         controller.storage.attend.get(eventId, function(err, attend_data) {
+            var attendees = [];
             for (var userId in attend_data.attend){
                 if (attend_data.attend[userId] == true) {
+                    attendees.push(attend_data.attend[userId]);
                     //Get The Actual User Id
-                    bot.api.im.open({ user: userId }, function (err, response) {
-                        if (err) {
-                            return console.log(err)
-                        }
-                        var dmChannel = response.channel.id;
-                        bot.api.users.info({user: userId}, function(err, user) {
-                            //Get User's Name
-                            var userName = user.user.name;
-                            //Call To Check User's RSVP Last Action
-                            bot.say({channel: dmChannel, text: 'Hey, ' + userName + customMessage});
-                        });
-                    });
+                    //bot.api.im.open({user: userId}, function (err, response) {
+                    //    if (err) {
+                    //        return console.log(err)
+                    //    }
+                    //    var dmChannel = response.channel.id;
+                    //    bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + userId + '>. ' + customMessage});
+                    //});
                 }
             }
+            console.log('ATTENDEES: ');
+            console.dir(attendees);
         });
     }
     //Get Actual Date
@@ -865,7 +864,7 @@ module.exports.notify = function(controller, bot, teamID) {
                     switch (daysLeft) {
                         case 7:
                             //Code to notify users
-                            alertAttendeesToEvent(bot, 'The event "' + teamEvents[j].event_data.title + '" is next week!\nIt will take place on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs, at ' + teamEvents[j].event_data.location, teamEvents[j].id, controller);
+                            alertAttendeesToEvent(bot, 'The event "' + teamEvents[j].event_data.title + '" is next week!\nIt will take place on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs in ' + teamEvents[j].event_data.location, teamEvents[j].id, controller);
                         break;
                         case 1:
                             alertAttendeesToEvent(bot, 'Ready for tomorrow?\n"' + teamEvents[j].event_data.title + '" starts on ' + teamEvents[j].event_data.date + ' ' + teamEvents[j].event_data.time + 'hs', teamEvents[j].id, controller);
@@ -877,7 +876,6 @@ module.exports.notify = function(controller, bot, teamID) {
                                 if(timeLeft == 1) {
                                     alertAttendeesToEvent(bot, 'Just a little reminder.\nThe event "' + teamEvents[j].event_data.title + '" starts in an hour!\nHave fun!!!', teamEvents[j].id, controller);
                                 }
-
                             }
                         break;
                     }
