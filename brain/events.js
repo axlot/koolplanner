@@ -819,7 +819,7 @@ module.exports.notify = function(controller, bot, teamID) {
                             return console.log(err)
                         }
                         var dmChannel = response.channel.id;
-                        bot.say({channel: dmChannel, text: 'Hey, ' + capturedUserId + '<@' + capturedUserId + '>. ' + customMessage});
+                        bot.say({channel: dmChannel, text: 'Hey, ' + response.channel.user + '<@' + capturedUserId + '>. ' + customMessage});
                     });
                 }
             }
