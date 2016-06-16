@@ -815,16 +815,16 @@ module.exports.notify = function(controller, bot, teamID) {
             console.log('=================ENTRO AL NOTIFY ATTENDEES=================');
             console.log('ATEND DATA: ');
             console.dir(attend_data.attend);
-            //for(var userId in attend_data.attend) {
-            //    console.log('USUARIO: ' + userId);
-            //    if(attend_data.attend.hasOwnProperty(userId)) {
-            //        console.log('El usuario: ' + userId + ' da TRUE.');
-            //    }
-            //}
 
             for (var userId in attend_data.attend){
                 if (attend_data.attend[userId] == true) {
-                    console.log('El usuario: ' + userId + ' da TRUE.');
+                    bot.api.im.open({ user: userId }, function (err, response) {
+                        if (err) {
+                            return console.log(err)
+                        }
+                        var dmChannel = response.channel.id;
+                        bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + userId + '>' + customMessage});
+                    });
                 }
             }
             //var length = attend_data.attend.length,
