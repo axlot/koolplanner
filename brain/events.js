@@ -815,6 +815,9 @@ module.exports.notify = function(controller, bot, teamID) {
             console.log('=================ENTRO AL NOTIFY ATTENDEES=================');
             console.log('ATEND DATA: ');
             console.dir(attend_data.attend);
+            for(var userId in attend_data.attend) {
+                console.log('USUARIO: ' + userId);
+            }
             //var length = attend_data.attend.length,
             //    attendees = [];
             //for(var i=0; i<length; i++) {
