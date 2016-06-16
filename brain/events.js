@@ -826,6 +826,7 @@ module.exports.notify = function(controller, bot, teamID) {
                         }
                         var dmChannel = response.channel.id;
                         bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + capturedUserId + '>. ' + customMessage});
+                        break;
                     });
                 }
             }
