@@ -831,7 +831,11 @@ module.exports.notify = function(controller, bot, teamID) {
                         return console.log(err)
                     }
                     var dmChannel = response.channel.id;
-                    bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + attendees[i] + '>. ' + customMessage});
+                    bot.api.users.info({user: attendees[i]}, function(err, user) {
+                        //Get User's Name
+                        var userName = user.user.name;
+                        bot.say({channel: dmChannel, text: 'Hey, ' + userName + '>. ' + customMessage});
+                    });
                 });
             }
         });
