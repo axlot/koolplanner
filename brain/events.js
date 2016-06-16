@@ -814,7 +814,7 @@ module.exports.notify = function(controller, bot, teamID) {
         controller.storage.attend.get(eventId, function(err, attend_data) {
             console.log('=================ENTRO AL NOTIFY ATTENDEES=================');
             console.log('ATEND DATA: ');
-            console.dir(attend_data);
+            console.dir(attend_data.attend);
             //var length = attend_data.attend.length,
             //    attendees = [];
             //for(var i=0; i<length; i++) {
