@@ -819,8 +819,8 @@ module.exports.notify = function(controller, bot, teamID) {
                             return console.log(err)
                         }
                         var dmChannel = response.channel.id;
-                        console.log('================ACA EL RESPONSE========================');
-                        console.dir(response.channel);
+                        console.log('================ACA EL RESPONSE Y EL USER========================');
+                        console.dir(response.channel.user);
                         //bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + capturedUserId + '>. ' + customMessage});
                         //bot.say({channel: dmChannel, text: 'Hey, ' +  '<@' + response.channel.user + '>. ' + customMessage});
                     });
