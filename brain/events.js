@@ -835,22 +835,22 @@ module.exports.notify = function(controller, bot, teamID) {
             //        bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + userID + '>' + customMessage});
             //    });
             //}
-            var length = attend_data.attend.length;
-            console.log('ATTEND TOTAL: ' + attend_data.attend.length);
-            for(var i=0; i<length; i++) {
-                console.log('EL USER ACTUAL ES: ' + attend_data.attend[i]);
-                if(attend_data.attend[i] == true) {
-                    console.log('ENTRO AL IF EN ESTE CASO');
-                    bot.api.im.open({ user: attend_data.attend[i] }, function (err, response) {
-                        console.log('ABRIO LA CONEXION PRIVADA');
-                        if (err) {
-                            return console.log(err)
-                        }
-                        var dmChannel = response.channel.id;
-                        bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + userID + '>' + customMessage});
-                    });
-                }
-            }
+            //var length = attend_data.attend.length;
+            //console.log('ATTEND TOTAL: ' + attend_data.attend.length);
+            //for(var i=0; i<length; i++) {
+            //    console.log('EL USER ACTUAL ES: ' + attend_data.attend[i]);
+            //    if(attend_data.attend[i] == true) {
+            //        console.log('ENTRO AL IF EN ESTE CASO');
+            //        bot.api.im.open({ user: attend_data.attend[i] }, function (err, response) {
+            //            console.log('ABRIO LA CONEXION PRIVADA');
+            //            if (err) {
+            //                return console.log(err)
+            //            }
+            //            var dmChannel = response.channel.id;
+            //            bot.say({channel: dmChannel, text: 'Hey, ' + '<@' + userID + '>' + customMessage});
+            //        });
+            //    }
+            //}
         });
     }
     //Get Actual Date
