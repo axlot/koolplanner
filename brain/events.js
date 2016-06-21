@@ -755,7 +755,7 @@ module.exports.init = function(controller) {
         });
     });
     //Event "JOIN"
-    controller.on('channel_joined',function(bot,message) {
+    controller.on('team_join',function(bot,message) {
         //Onboarding Message Here
         bot.api.chat.postMessage({
             "text": "Hey there!:wave: I’m your KoolPlanner, your event planning assistant. I’m here to help you plan events without hassle. :spiral_calendar_pad:",
