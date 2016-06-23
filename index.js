@@ -18,6 +18,21 @@ beepboop.on('add_resource', function (message) {
   })
 });
 
+beepboop.on('botkit.rtm.started', function (bot, resource, meta) {
+    var slackUserId = resource.SlackUserID;
+
+    if (meta.isNew && slackUserId) {
+        bot.api.im.open({ user: slackUserId }, function (err, response) {
+            if (err) {
+                return console.log(err)
+            }
+            var dmChannel = response.channel.id;
+            bot.say({channel: dmChannel, text: 'I am honored you added me to your team'})
+            bot.say({channel: dmChannel, text: '/invite me to any channel in need of my humble brilliance.'})
+        })
+    }
+});
+
 //Cron Task
 cron.schedule('0 0 * * * *', function(){
     console.log('===========================CRON EXECUTED=========================');
