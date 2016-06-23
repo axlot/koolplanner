@@ -1,5 +1,7 @@
 module.exports.init = function(controller) {
     /* === CONSTRUCTORS === */
+    //Bot Channel To Broadcast
+    botChannel= '';
     //Event Constructor
     var Event = function(name, description, date, time, location, mTimeStamp, mChannel, teamId, userId) {
         this.title = name;
@@ -348,7 +350,7 @@ module.exports.init = function(controller) {
                                             "text": 'Hey there! the user _' + userName + '_ has planned a new event: *' + eTitle +'*!\n' + '_<< ' + eDescription + ' >>_\n' + 'It will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation + '*\nTo answer, click on the good emoji below.\n You may only *choose one option*.',
                                             "mrkdwn_in": ["text", "pretext"]
                                         }],
-                                        channel: '#general'
+                                        channel: botChannel
                                     }, function(err, message) {
                                         bot.api.reactions.add({
                                             timestamp: message.ts,
@@ -392,7 +394,7 @@ module.exports.init = function(controller) {
                                             "text": 'Hey there! the user _' + userName + '_ has *edited* the event: *' + eTitle +'*!\n' + '_<< ' + eDescription + ' >>_\n' + 'It will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation + '*\nTo answer, click on the good emoji below.\n You may only *choose one option*.',
                                             "mrkdwn_in": ["text", "pretext"]
                                         }],
-                                        channel: '#general'
+                                        channel: botChannel
                                     }, function(err, message) {
                                         bot.api.reactions.add({
                                             timestamp: message.ts,
@@ -784,6 +786,7 @@ module.exports.init = function(controller) {
             ],
             "channel": message.channel.id
         });
+        botChannel = message.channel.id;
     });
     //User Reactions To Events
     controller.on('reaction_added', function(bot, message) {
