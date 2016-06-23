@@ -48,6 +48,16 @@ module.exports.init = function(controller) {
             }
         });
     };
+    //Get Bot Channel
+    function getBotChannel(teamId) {
+        controller.storage.teams.get(teamId, function(err, team_data){
+            if(team_data != null && team_data.channel != null) {
+                return team_data.channel;
+            } else {
+                return '#general';
+            }
+        });
+    }
     //Year Of Event
     function yearOfEvent(data, bot, message) {
         //Set Present And Event Date Time
@@ -348,7 +358,7 @@ module.exports.init = function(controller) {
                                             "text": 'Hey there! the user _' + userName + '_ has planned a new event: *' + eTitle +'*!\n' + '_<< ' + eDescription + ' >>_\n' + 'It will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation + '*\nTo answer, click on the good emoji below.\n You may only *choose one option*.',
                                             "mrkdwn_in": ["text", "pretext"]
                                         }],
-                                        channel: '#general'
+                                        channel: getBotChannel(teamId)
                                     }, function(err, message) {
                                         bot.api.reactions.add({
                                             timestamp: message.ts,
@@ -392,7 +402,7 @@ module.exports.init = function(controller) {
                                             "text": 'Hey there! the user _' + userName + '_ has *edited* the event: *' + eTitle +'*!\n' + '_<< ' + eDescription + ' >>_\n' + 'It will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation + '*\nTo answer, click on the good emoji below.\n You may only *choose one option*.',
                                             "mrkdwn_in": ["text", "pretext"]
                                         }],
-                                        channel: '#general'
+                                        channel: getBotChannel(teamId)
                                     }, function(err, message) {
                                         bot.api.reactions.add({
                                             timestamp: message.ts,

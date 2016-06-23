@@ -19,13 +19,10 @@ beepboop.on('add_resource', function (message) {
 });
 
 beepboop.on('botkit.rtm.started', function (bot, resource, meta) {
-    console.log('//////////////////RESOURCE//////////////');
-    console.dir(resource);
     var slackUserId = resource.SlackUserID;
     if (meta.isNew && slackUserId) {
         //Save The Channel Where The Bot Was Added
         controller.storage.teams.get(resource.SlackTeamID, function(err, team_data){
-            console.dir(team_data);
             team_data.channel = resource.SlackIncomingWebhookChannel;
             controller.storage.teams.save(team_data, function(err) {});
         });
