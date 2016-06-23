@@ -55,8 +55,8 @@ module.exports.init = function(controller) {
             if(team_data != null && team_data.channel != null) {
                 console.log('////////////////////////////ENTRA AL IF/////////////////////////////');
                 botChannel = team_data.channel;
-            } else {
-                console.log('////////////////////////////ENTRA AL ELSE////////////////////////////');
+                console.log('//////////////////////////////CHANNEL///////////////////////////////');
+                console.log(botChannel);
             }
         });
         return botChannel;
