@@ -48,27 +48,6 @@ module.exports.init = function(controller) {
             }
         });
     };
-    //Get Bot Channel
-    function getBotChannel(teamId) {
-        function getFromStorage() {
-            controller.storage.teams.get(teamId, function(err, team_data){
-                if(team_data != null && team_data.channel != null) {
-                    return team_data.channel;
-                }
-            });
-        }
-        function assignValue() {
-            return getFromStorage();
-
-        }
-        return assignValue();
-        //controller.storage.teams.get(teamId, function(err, team_data){
-        //    var botChannel = '#general';
-        //    if(team_data != null && team_data.channel != null) {
-        //        return team_data.channel;
-        //    }
-        //});
-    }
     //Year Of Event
     function yearOfEvent(data, bot, message) {
         //Set Present And Event Date Time
@@ -353,6 +332,12 @@ module.exports.init = function(controller) {
                         //Code to create and store the new event
                         var teamId = team_id;
                         controller.storage.events.all(function(err, all_team_data) {
+                            var botChannel = '#general';
+                            controller.storage.teams.get(teamId, function(err, team_data){
+                                if(team_data != null && team_data.channel != null) {
+                                    botChannel = team_data.channel;
+                                }
+                            });
                             //Botkit Method To Storage
                             if(!eventId) {
                                 //New Event Message
@@ -369,7 +354,7 @@ module.exports.init = function(controller) {
                                             "text": 'Hey there! the user _' + userName + '_ has planned a new event: *' + eTitle +'*!\n' + '_<< ' + eDescription + ' >>_\n' + 'It will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation + '*\nTo answer, click on the good emoji below.\n You may only *choose one option*.',
                                             "mrkdwn_in": ["text", "pretext"]
                                         }],
-                                        channel: getBotChannel(teamId)
+                                        channel: botChannel
                                     }, function(err, message) {
                                         bot.api.reactions.add({
                                             timestamp: message.ts,
@@ -413,7 +398,7 @@ module.exports.init = function(controller) {
                                             "text": 'Hey there! the user _' + userName + '_ has *edited* the event: *' + eTitle +'*!\n' + '_<< ' + eDescription + ' >>_\n' + 'It will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation + '*\nTo answer, click on the good emoji below.\n You may only *choose one option*.',
                                             "mrkdwn_in": ["text", "pretext"]
                                         }],
-                                        channel: getBotChannel(teamId)
+                                        channel: botChannel
                                     }, function(err, message) {
                                         bot.api.reactions.add({
                                             timestamp: message.ts,
