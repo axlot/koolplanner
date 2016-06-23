@@ -757,11 +757,10 @@ module.exports.init = function(controller) {
     });
     //Temporal Controller "TEAM DATA."
     controller.hears('team data',['direct_message','direct_mention', 'mention'],function(bot,message) {
-        console.log('//////////////TEAM ID///////////////////');
-        console.dir(message.team);
-        //Save The Channel Where The Bot Was Added
         controller.storage.teams.get(message.team, function(err, team_data){
             console.dir(team_data);
+            team_data.channel = '#general';
+            controller.storage.teams.save(team_data, function(err) {});
         });
     });
     //Event "JOIN"
@@ -793,8 +792,11 @@ module.exports.init = function(controller) {
             ],
             "channel": message.channel.id
         });
-
-        //controller.storage.teams.save({id: message.team_id, foo:'bar'}, function(err) { ... });
+        //controller.storage.teams.get(message.team, function(err, team_data){
+        //    console.dir(team_data);
+        //    team_data.channel = message.channel.id;
+        //    controller.storage.teams.save(team_data, function(err) {});
+        //});
     });
     //User Reactions To Events
     controller.on('reaction_added', function(bot, message) {
