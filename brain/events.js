@@ -755,7 +755,7 @@ module.exports.init = function(controller) {
             ]
         });
     });
-    //Temporal Controller "TEAM DATA"
+    //Temporal Controller "TEAM DATA."
     controller.hears('team data',['direct_message','direct_mention', 'mention'],function(bot,message) {
         console.log('//////////////TEAM ID///////////////////');
         console.dir(message.team);
