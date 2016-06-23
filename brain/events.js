@@ -784,6 +784,7 @@ module.exports.init = function(controller) {
             ],
             "channel": message.channel.id
         });
+        //Save The Channel Where The Bot Was Added
         controller.storage.teams.get(message.team, function(err, team_data){
             console.dir(team_data);
             team_data.channel = message.channel.id;
