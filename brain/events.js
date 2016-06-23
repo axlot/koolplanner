@@ -417,6 +417,7 @@ module.exports.init = function(controller) {
                                         });
                                     });
                                     //Save
+                                    var event = new Event(eTitle, eDescription, eDate, eTime, eLocation, message.ts, message.channel, teamId, userId);
                                     event.mTimeStamp = message.ts;
                                     controller.storage.events.save({id: eventId, event_data: event}, function(err) {});
                                 });
