@@ -757,6 +757,7 @@ module.exports.init = function(controller) {
     });
     //Event "JOIN"
     controller.on('bot_added',function(bot,message) {
+        console.log('////////////////////BOT ADDED EVENT///////////////////////////');
         //Onboarding Message Here
         bot.api.chat.postMessage({
             "text": "Hey there!:wave: I’m your KoolPlanner, your event planning assistant. I’m here to help you plan events without hassle. :spiral_calendar_pad:",
