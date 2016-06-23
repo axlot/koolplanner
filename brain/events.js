@@ -50,16 +50,13 @@ module.exports.init = function(controller) {
     };
     //Get Bot Channel
     function getBotChannel(teamId) {
+        var botChannel = '#general';
         controller.storage.teams.get(teamId, function(err, team_data){
-            console.log('////////////ACA ESTA TEAM DATA!!!////////////');
-            console.log(teamId);
-            console.dir(team_data);
             if(team_data != null && team_data.channel != null) {
-                return team_data.channel;
-            } else {
-                return '#general';
+                botChannel = team_data.channel;
             }
         });
+        return botChannel;
     }
     //Year Of Event
     function yearOfEvent(data, bot, message) {
