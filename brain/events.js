@@ -53,7 +53,10 @@ module.exports.init = function(controller) {
         var botChannel = '#general';
         controller.storage.teams.get(teamId, function(err, team_data){
             if(team_data != null && team_data.channel != null) {
+                console.log('////////////////////////////ENTRA AL IF/////////////////////////////');
                 botChannel = team_data.channel;
+            } else {
+                console.log('////////////////////////////ENTRA AL ELSE////////////////////////////');
             }
         });
         return botChannel;
