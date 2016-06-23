@@ -348,7 +348,7 @@ module.exports.init = function(controller) {
                                             "text": 'Hey there! the user _' + userName + '_ has planned a new event: *' + eTitle +'*!\n' + '_<< ' + eDescription + ' >>_\n' + 'It will take place on *' + eDate + '* at *' + eTime + '* in *' + eLocation + '*\nTo answer, click on the good emoji below.\n You may only *choose one option*.',
                                             "mrkdwn_in": ["text", "pretext"]
                                         }],
-                                        channel: '#general'
+                                        channel: message.channel.id//'#general'
                                     }, function(err, message) {
                                         bot.api.reactions.add({
                                             timestamp: message.ts,
