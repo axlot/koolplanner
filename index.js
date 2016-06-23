@@ -20,12 +20,12 @@ beepboop.on('add_resource', function (message) {
 
 beepboop.on('botkit.rtm.started', function (bot, resource, meta) {
     var slackUserId = resource.SlackUserID;
+    //Save The Channel Where The Bot Was Added
+    controller.storage.teams.get(resource.SlackTeamID, function(err, team_data){
+        team_data.channel = resource.SlackIncomingWebhookChannel;
+        controller.storage.teams.save(team_data, function(err) {});
+    });
     if (meta.isNew && slackUserId) {
-        //Save The Channel Where The Bot Was Added
-        controller.storage.teams.get(resource.SlackTeamID, function(err, team_data){
-            team_data.channel = resource.SlackIncomingWebhookChannel;
-            controller.storage.teams.save(team_data, function(err) {});
-        });
         //Broadcast Message
         bot.api.chat.postMessage({
             "text": "Hey there!:wave: I’m your KoolPlanner, your event planning assistant. I’m here to help you plan events without hassle. :spiral_calendar_pad:",

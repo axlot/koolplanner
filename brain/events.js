@@ -51,6 +51,8 @@ module.exports.init = function(controller) {
     //Get Bot Channel
     function getBotChannel(teamId) {
         controller.storage.teams.get(teamId, function(err, team_data){
+            console.log('////////////ENTRA A LA FUNCION GET BOT CHANEL////////////');
+            console.log(teamId);
             if(team_data != null && team_data.channel != null) {
                 return team_data.channel;
             } else {
