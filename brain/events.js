@@ -755,43 +755,6 @@ module.exports.init = function(controller) {
             ]
         });
     });
-    //Event "JOIN"
-    controller.on('bot_channel_join',function(bot,message) {
-        console.log('/////////////////////BOT EVENT ADDED///////////////////');
-        //Onboarding Message Here
-        bot.api.chat.postMessage({
-            "text": "Hey there!:wave: I’m your KoolPlanner, your event planning assistant. I’m here to help you plan events without hassle. :spiral_calendar_pad:",
-            "attachments": [
-                {
-                    "fallback": "Hey there! I'm KoolPlanner.",
-                    "color": "#36a64f",
-                    "text": "To create an event, type `new event` in ​*Direct Message* with me​ (click on Direct Message on the Slack sidebar then find me ​*@KoolPlanner* and hit ​*Go*​!).",
-                    "mrkdwn_in": ["text", "pretext"]
-                },
-                {
-                    "fallback": "Required plain-text summary of the attachment.",
-                    "color": "#e8a723",
-                    "pretext": "*Tip*: Use the :date: _*emoji*_  to view all upcoming events from your team.",
-                    "text": ":warning: To read more about KoolPlanner, type `@KoolPlanner details` below, or `details` in a *Direct Message*.",
-                    "mrkdwn_in": ["text", "pretext"]
-                },
-                {
-                    "fallback": "Required plain-text summary of the attachment.",
-                    "color": "#e8a723",
-                    "pretext": ":tada::spiral_calendar_pad::calendar:Start planning awesome events!:calendar::spiral_calendar_pad::tada:",
-                    "text": "",
-                    "mrkdwn_in": ["text", "pretext"]
-                }
-            ],
-            "channel": message.channel.id
-        });
-        //Save The Channel Where The Bot Was Added
-        controller.storage.teams.get(message.team, function(err, team_data){
-            console.dir(team_data);
-            team_data.channel = message.channel.id;
-            controller.storage.teams.save(team_data, function(err) {});
-        });
-    });
     //User Reactions To Events
     controller.on('reaction_added', function(bot, message) {
         //Look For Events With Correct Time Stamp
