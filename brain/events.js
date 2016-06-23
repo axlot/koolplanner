@@ -755,6 +755,13 @@ module.exports.init = function(controller) {
             ]
         });
     });
+    //Temporal Controller "TEAM DATA"
+    controller.hears('team data',['direct_message','direct_mention', 'mention'],function(bot,message) {
+        //Save The Channel Where The Bot Was Added
+        controller.storage.teams.get({id: message.team_id}, function(err,response) {
+            console.log(response);
+        });
+    });
     //Event "JOIN"
     controller.on('team_join',function(bot,message) {
         //Onboarding Message Here
@@ -784,6 +791,8 @@ module.exports.init = function(controller) {
             ],
             "channel": message.channel.id
         });
+
+        //controller.storage.teams.save({id: message.team_id, foo:'bar'}, function(err) { ... });
     });
     //User Reactions To Events
     controller.on('reaction_added', function(bot, message) {
