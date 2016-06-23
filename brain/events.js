@@ -758,9 +758,9 @@ module.exports.init = function(controller) {
     //Temporal Controller "TEAM DATA"
     controller.hears('team data',['direct_message','direct_mention', 'mention'],function(bot,message) {
         console.log('//////////////TEAM ID///////////////////');
-        console.dir(message);
+        console.dir(message.team);
         //Save The Channel Where The Bot Was Added
-        controller.storage.teams.get(message.team_id, function(err, team_data){
+        controller.storage.teams.get(message.team, function(err, team_data){
             console.dir(team_data);
         });
     });
