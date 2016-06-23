@@ -50,16 +50,24 @@ module.exports.init = function(controller) {
     };
     //Get Bot Channel
     function getBotChannel(teamId) {
-        var botChannel = '#general';
-        controller.storage.teams.get(teamId, function(err, team_data){
-            if(team_data != null && team_data.channel != null) {
-                console.log('////////////////////////////ENTRA AL IF/////////////////////////////');
-                botChannel = team_data.channel;
-                console.log('//////////////////////////////CHANNEL///////////////////////////////');
-                console.log(botChannel);
-            }
-        });
-        return botChannel;
+        function getFromStorage() {
+            controller.storage.teams.get(teamId, function(err, team_data){
+                if(team_data != null && team_data.channel != null) {
+                    return team_data.channel;
+                }
+            });
+        }
+        function assignValue() {
+            return getFromStorage();
+
+        }
+        return assignValue();
+        //controller.storage.teams.get(teamId, function(err, team_data){
+        //    var botChannel = '#general';
+        //    if(team_data != null && team_data.channel != null) {
+        //        return team_data.channel;
+        //    }
+        //});
     }
     //Year Of Event
     function yearOfEvent(data, bot, message) {
