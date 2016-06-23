@@ -755,14 +755,6 @@ module.exports.init = function(controller) {
             ]
         });
     });
-    //Temporal Controller "TEAM DATA."
-    controller.hears('team data',['direct_message','direct_mention', 'mention'],function(bot,message) {
-        controller.storage.teams.get(message.team, function(err, team_data){
-            console.dir(team_data);
-            team_data.channel = '#general';
-            controller.storage.teams.save(team_data, function(err) {});
-        });
-    });
     //Event "JOIN"
     controller.on('team_join',function(bot,message) {
         //Onboarding Message Here
@@ -792,11 +784,11 @@ module.exports.init = function(controller) {
             ],
             "channel": message.channel.id
         });
-        //controller.storage.teams.get(message.team, function(err, team_data){
-        //    console.dir(team_data);
-        //    team_data.channel = message.channel.id;
-        //    controller.storage.teams.save(team_data, function(err) {});
-        //});
+        controller.storage.teams.get(message.team, function(err, team_data){
+            console.dir(team_data);
+            team_data.channel = message.channel.id;
+            controller.storage.teams.save(team_data, function(err) {});
+        });
     });
     //User Reactions To Events
     controller.on('reaction_added', function(bot, message) {
